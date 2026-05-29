@@ -490,6 +490,50 @@ nav.scrolled { border-color: var(--rule-dark); }
 .stat-n em { color: var(--accent); font-style: normal; }
 .stat-l { font-size: 0.7rem; color: rgba(245,242,236,0.28); font-weight: 300; line-height: 1.4; }
 .card-rule { height: 1px; background: var(--rule-dark); margin-bottom: 1rem; }
+
+/* WAYPOINT CTA in hero card */
+.waypoint-cta {
+  display: flex; align-items: center; gap: 0.9rem;
+  background: rgba(200,80,42,0.08);
+  border: 1px solid rgba(200,80,42,0.3);
+  border-radius: 6px;
+  padding: 0.9rem 1rem;
+  margin: 1rem 0;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+.waypoint-cta:hover { background: rgba(200,80,42,0.15); border-color: rgba(200,80,42,0.5); }
+.waypoint-cta:hover .waypoint-needle { animation: needle-spin 1.5s ease-in-out; }
+.waypoint-cta-text { flex: 1; }
+.waypoint-cta-label {
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 0.2rem;
+}
+.waypoint-cta-name {
+  font-family: var(--serif); font-size: 1.1rem;
+  font-weight: 900; color: var(--text);
+  letter-spacing: -0.01em; line-height: 1.1;
+  margin-bottom: 0.15rem;
+}
+.waypoint-cta-desc {
+  font-size: 0.68rem; color: rgba(245,242,236,0.45);
+  line-height: 1.4; font-weight: 300;
+}
+.waypoint-cta-arrow {
+  font-size: 1rem; color: var(--accent);
+  transition: transform 0.2s; flex-shrink: 0;
+}
+.waypoint-cta:hover .waypoint-cta-arrow { transform: translateX(4px); }
+
+@keyframes needle-spin {
+  0% { transform: rotate(0deg); }
+  30% { transform: rotate(-45deg); }
+  60% { transform: rotate(25deg); }
+  80% { transform: rotate(-10deg); }
+  100% { transform: rotate(0deg); }
+}
 .card-pedigree {
   font-family: var(--mono);
   font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase;
@@ -1092,7 +1136,7 @@ footer {
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="/waypoint.html" style="color:var(--accent);">Waypoint ↗</a></li>
+    <li><a href="/waypoint.html" style="color:var(--text);background:rgba(200,80,42,0.15);border:1px solid rgba(200,80,42,0.4);padding:0.3rem 0.8rem;border-radius:3px;transition:background 0.2s;" onmouseover="this.style.background='rgba(200,80,42,0.3)'" onmouseout="this.style.background='rgba(200,80,42,0.15)'">Waypoint ↗</a></li>
   </ul>
   <a class="nav-cta" href="mailto:kevin@openroadanalytics.ai">Let's Talk</a>
   <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -1158,14 +1202,37 @@ footer {
           <div class="stat-l">Real-time visibility into what's working — so you make decisions in hours, not at end of quarter</div>
         </div>
         <div>
-          <div class="stat-n" style="font-size:1.4rem; font-style:normal; font-weight:700;">Search & AI Visibility</div>
-          <div class="stat-l">Be found on Google. Be cited by ChatGPT. Half of buyers now start on AI — is your brand showing up? <a href="/waypoint.html" style="color:var(--accent);text-decoration:none;">Check with Waypoint →</a></div>
+          <div class="stat-n" style="font-size:1.4rem; font-style:normal; font-weight:700;"><a href="/waypoint.html" style="color:#f5f2ec;text-decoration:none;">Search & AI Visibility</a></div>
+          <div class="stat-l">Be found on Google. Be cited by ChatGPT. Half of buyers now start on AI — is your brand showing up?</div>
         </div>
       </div>
+
+      <!-- WAYPOINT CTA -->
+      <a href="/waypoint.html" class="waypoint-cta">
+        <svg width="36" height="36" viewBox="0 0 36 36" style="flex-shrink:0;">
+          <circle cx="18" cy="18" r="16" fill="none" stroke="rgba(200,80,42,0.6)" stroke-width="1.2"/>
+          <circle cx="18" cy="18" r="11" fill="none" stroke="rgba(245,242,236,0.15)" stroke-width="0.8"/>
+          <line x1="18" y1="2" x2="18" y2="5" stroke="rgba(245,242,236,0.7)" stroke-width="1.5"/>
+          <line x1="18" y1="31" x2="18" y2="34" stroke="rgba(245,242,236,0.25)" stroke-width="1"/>
+          <line x1="2" y1="18" x2="5" y2="18" stroke="rgba(245,242,236,0.25)" stroke-width="1"/>
+          <line x1="31" y1="18" x2="34" y2="18" stroke="rgba(245,242,236,0.25)" stroke-width="1"/>
+          <text x="18" y="8" text-anchor="middle" font-family="DM Mono,monospace" font-size="4" fill="rgba(245,242,236,0.8)">N</text>
+          <text x="18" y="31" text-anchor="middle" font-family="DM Mono,monospace" font-size="4" fill="rgba(245,242,236,0.3)">S</text>
+          <text x="30" y="19" text-anchor="middle" font-family="DM Mono,monospace" font-size="4" fill="rgba(245,242,236,0.3)">E</text>
+          <text x="6" y="19" text-anchor="middle" font-family="DM Mono,monospace" font-size="4" fill="rgba(245,242,236,0.3)">W</text>
+          <g class="waypoint-needle" transform="rotate(0,18,18)">
+            <polygon points="18,5 16.5,18 18,20 19.5,18" fill="#c8502a"/>
+            <polygon points="18,20 16.5,18 18,30 19.5,18" fill="rgba(245,242,236,0.2)"/>
+          </g>
+          <circle cx="18" cy="18" r="2" fill="#0e0d0b" stroke="rgba(245,242,236,0.4)" stroke-width="0.8"/>
+        </svg>
+        <div class="waypoint-cta-text">
+          <div class="waypoint-cta-name">Try Waypoint</div>
+          <div class="waypoint-cta-desc">Free AI search visibility scan — see how your brand compares</div>
+        </div>
+        <div class="waypoint-cta-arrow">→</div>
+      </a>
       <div class="card-rule"></div>
-      <div class="card-pedigree">
-        <strong>Power BI</strong> &nbsp;·&nbsp; <strong>GA4</strong> &nbsp;·&nbsp; <strong>Marketo</strong> &nbsp;·&nbsp; <strong>Salesforce</strong> &nbsp;·&nbsp; <strong>Domo</strong> &nbsp;·&nbsp; <strong>DemandBase</strong> &nbsp;·&nbsp; <strong>6Sense</strong>
-      </div>
     </div>
   </div>
 </section>

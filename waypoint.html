@@ -9,8 +9,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;}
-.shell{width:100%;max-width:480px;background:#141310;border-radius:12px;position:relative;border:1px solid rgba(245,242,236,0.18);}
+body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-height:100vh;}
+
+/* TOP NAV */
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(14,13,11,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(245,242,236,0.08);}
+.top-nav-logo{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#f5f2ec;text-decoration:none;}
+.top-nav-logo span{color:#c8502a;}
+.top-nav-back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.45);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.2s;}
+.top-nav-back:hover{color:#f5f2ec;}
+.top-nav-back::before{content:'←';}
+
+/* PAGE LAYOUT */
+.page-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:5rem 2rem 2rem;}
+
+.shell{width:100%;max-width:560px;background:#141310;border-radius:12px;position:relative;border:1px solid rgba(245,242,236,0.18);}
 .shell::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:#c8502a;border-radius:12px 12px 0 0;}
 .hdr{padding:1.2rem 1.6rem 0;display:flex;justify-content:space-between;align-items:center;}
 .wm{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(245,242,236,0.55);}
@@ -107,6 +119,11 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
 </style>
 </head>
 <body>
+<nav class="top-nav">
+  <a href="/" class="top-nav-logo">Open Road<span>.</span>Analytics</a>
+  <a href="/" class="top-nav-back">Back to Site</a>
+</nav>
+<div class="page-wrap">
 <div class="shell">
   <div class="hdr">
     <div class="wm">Waypoint <span>·</span> Open Road Analytics</div>
@@ -496,5 +513,6 @@ function resetScan(){
   document.getElementById('needle-b').setAttribute('transform','rotate(180,48,48)');
 }
 </script>
+</div>
 </body>
 </html>

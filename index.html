@@ -505,6 +505,29 @@ nav.scrolled { border-color: var(--rule-dark); }
 .card-rule { height: 1px; background: var(--rule-dark); margin-bottom: 1rem; }
 
 /* HERO Waypoint CTA — above eyebrow */
+.hero-waypoint-mobile {
+  display: none;
+  align-items: center; gap: 0.8rem;
+  margin-top: 1.2rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(200,80,42,0.35);
+  border-radius: 4px;
+  background: rgba(200,80,42,0.08);
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+.hero-waypoint-mobile:hover { background: rgba(200,80,42,0.15); border-color: rgba(200,80,42,0.6); }
+.hero-waypoint-mobile-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.2rem; font-weight: 900; font-style: italic;
+  color: #f5f2ec; letter-spacing: -0.02em; line-height: 1;
+  margin-bottom: 2px;
+}
+.hero-waypoint-mobile-sub {
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #c8502a;
+}
 .hero-waypoint-cta {
   display: inline-flex; align-items: center; gap: 0.6rem;
   text-decoration: none; margin-bottom: 1.2rem;
@@ -1163,6 +1186,7 @@ footer {
   .hero-sub { font-size: 0.9rem; }
   .hero-ctas { flex-direction: column; }
   .btn-filled, .btn-outline { text-align: center; justify-content: center; }
+  .hero-waypoint-mobile { display: flex; }
 
   .section-h { font-size: clamp(1.8rem, 8vw, 2.4rem); }
 
@@ -1219,24 +1243,6 @@ footer {
 <section id="hero" aria-label="Hero">
   <div class="hero-inner">
     <div>
-      <!-- WAYPOINT CTA — above eyebrow -->
-      <a href="/waypoint.html" class="hero-waypoint-cta">
-        <svg width="22" height="22" viewBox="0 0 22 22" style="flex-shrink:0;">
-          <circle cx="11" cy="11" r="10" fill="none" stroke="rgba(200,80,42,0.8)" stroke-width="1.2"/>
-          <circle cx="11" cy="11" r="7.5" fill="none" stroke="rgba(245,242,236,0.12)" stroke-width="0.6"/>
-          <line x1="11" y1="1" x2="11" y2="4" stroke="rgba(245,242,236,0.7)" stroke-width="1.5"/>
-          <line x1="11" y1="18" x2="11" y2="21" stroke="rgba(245,242,236,0.25)" stroke-width="1"/>
-          <line x1="1" y1="11" x2="4" y2="11" stroke="rgba(245,242,236,0.25)" stroke-width="1"/>
-          <line x1="18" y1="11" x2="21" y2="11" stroke="rgba(245,242,236,0.25)" stroke-width="1"/>
-          <text x="11" y="7.5" text-anchor="middle" font-family="DM Mono,monospace" font-size="3.5" fill="rgba(245,242,236,0.7)">N</text>
-          <polygon points="11,3 9.8,11 11,12.5 12.2,11" fill="#c8502a"/>
-          <polygon points="11,12.5 9.8,11 11,19 12.2,11" fill="rgba(245,242,236,0.2)"/>
-          <circle cx="11" cy="11" r="1.8" fill="#0e0d0b" stroke="rgba(245,242,236,0.4)" stroke-width="0.8"/>
-        </svg>
-        <span class="hero-waypoint-text">Waypoint</span>
-        <span class="hero-waypoint-sub">Free AI Visibility Scan →</span>
-      </a>
-
       <div class="hero-eyebrow">Marketing & AI Analytics · Principal Consultant · NY · NJ · CT</div>
 
       <!-- H1 — visually dominant AND keyword-rich -->
@@ -1261,6 +1267,24 @@ footer {
         <a href="#work" class="btn-filled">See the Work</a>
         <a href="mailto:kevin@openroadanalytics.ai" class="btn-outline">Start a Conversation</a>
       </div>
+
+      <!-- WAYPOINT — mobile only, below hero CTAs -->
+      <a href="/waypoint.html" class="hero-waypoint-mobile">
+        <svg width="20" height="20" viewBox="0 0 20 20" style="flex-shrink:0;">
+          <circle cx="10" cy="10" r="9" fill="none" stroke="rgba(200,80,42,0.8)" stroke-width="1.2"/>
+          <line x1="10" y1="1" x2="10" y2="4" stroke="rgba(245,242,236,0.7)" stroke-width="1.5"/>
+          <line x1="10" y1="16" x2="10" y2="19" stroke="rgba(245,242,236,0.25)" stroke-width="1"/>
+          <line x1="1" y1="10" x2="4" y2="10" stroke="rgba(245,242,236,0.25)" stroke-width="1"/>
+          <line x1="16" y1="10" x2="19" y2="10" stroke="rgba(245,242,236,0.25)" stroke-width="1"/>
+          <polygon points="10,3 8.8,10 10,11.5 11.2,10" fill="#c8502a"/>
+          <polygon points="10,11.5 8.8,10 10,17 11.2,10" fill="rgba(245,242,236,0.2)"/>
+          <circle cx="10" cy="10" r="1.8" fill="#0e0d0b" stroke="rgba(245,242,236,0.4)" stroke-width="0.8"/>
+        </svg>
+        <div>
+          <div class="hero-waypoint-mobile-name">Try Waypoint</div>
+          <div class="hero-waypoint-mobile-sub">Free AI search visibility scan →</div>
+        </div>
+      </a>
     </div>
 
     <div class="hero-card" aria-hidden="true">
@@ -1527,8 +1551,8 @@ footer {
       <div class="pricing-card reveal">
         <div class="pricing-tier">Phase 1 · Entry Point</div>
         <div class="pricing-name">Marketing Analytics Audit</div>
-        <div class="pricing-price">$25,000</div>
-        <div class="pricing-price-label">Fixed fee · 6-week engagement</div>
+        <div class="pricing-price">Starting from $25K</div>
+        <div class="pricing-price-label">Fixed fee · 6-week engagement · Scoped to the problem</div>
         <div class="pricing-rule"></div>
         <div class="pricing-includes">Deliverables include</div>
         <ul class="pricing-list">
@@ -1699,7 +1723,7 @@ footer {
         </details>
         <details>
           <summary>How much does a marketing analytics audit cost?</summary>
-          <p>A Marketing Analytics Audit from Open Road Analytics starts at $25,000 — fixed fee, no hourly billing, 6-week engagement. The audit covers 7 areas including measurement architecture, attribution, data infrastructure, reporting, technology stack, team and process, and AI/AEO readiness. Deliverables include a written findings report, gap analysis, 90-day roadmap, tech stack recommendations, and a CMO-ready executive presentation deck.</p>
+          <p>A Marketing Analytics Audit from Open Road Analytics starts from $25,000 — fixed fee, no hourly billing, 6-week engagement. The audit covers 7 areas including measurement architecture, attribution, data infrastructure, reporting, technology stack, team and process, and AI/AEO readiness. Deliverables include a written findings report, gap analysis, 90-day roadmap, tech stack recommendations, and a CMO-ready executive presentation deck. Every engagement is scoped to the specific problem — the conversation about investment happens after we understand what needs to be solved.</p>
         </details>
         <details>
           <summary>Do you work with B2C consumer brands or only B2B?</summary>

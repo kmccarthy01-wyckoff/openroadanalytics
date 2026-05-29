@@ -102,9 +102,10 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
 .bar-a{position:absolute;left:0;top:0;height:100%;background:#c8502a;border-radius:2px;transition:width 1.2s cubic-bezier(0.4,0,0.2,1);}
 .finding{background:rgba(200,80,42,0.1);border:1px solid rgba(200,80,42,0.3);border-radius:6px;padding:0.9rem;margin-bottom:0.9rem;position:relative;}
 .finding::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:#c8502a;border-radius:2px 0 0 2px;}
-.finding-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c8502a;margin-bottom:5px;}
-.finding-txt{font-size:12px;color:rgba(245,242,236,0.85);line-height:1.75;}
-.finding-txt strong{color:#f5f2ec;font-weight:500;}
+.finding-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c8502a;margin-bottom:8px;}
+.verdict{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;font-style:italic;color:#f5f2ec;line-height:1.4;margin-bottom:0.5rem;}
+.gap-txt{font-size:11px;color:rgba(245,242,236,0.55);line-height:1.7;}
+.dim-insight{font-size:10px;color:rgba(245,242,236,0.45);line-height:1.5;margin-top:5px;font-style:italic;}
 .tease{position:relative;margin-bottom:0.9rem;border:1px solid rgba(245,242,236,0.12);border-radius:6px;padding:0.75rem;overflow:hidden;}
 .tease-blur{filter:blur(4px);opacity:0.5;font-size:11px;color:rgba(245,242,236,0.7);line-height:1.6;user-select:none;pointer-events:none;}
 .tease-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(14,13,11,0.65);}
@@ -290,8 +291,9 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
     <div class="dims" id="r-dims"></div>
 
     <div class="finding">
-      <div class="finding-lbl">// Key Finding</div>
-      <div class="finding-txt" id="r-finding">—</div>
+      <div class="finding-lbl">// Waypoint Verdict</div>
+      <div class="verdict" id="r-verdict">—</div>
+      <div class="gap-txt" id="r-gap">—</div>
     </div>
 
     <div class="tease">
@@ -398,24 +400,18 @@ async function runScan(){
 
 Score each company 0-100 across three dimensions:
 - Brand Awareness: accuracy and completeness when AI describes them unprompted
-- Category Search: visibility when buyers search for top vendors/solutions in the category
+- Category Search: visibility when buyers search for top vendors/solutions
 - Thought Leadership: frequency cited as expert in industry trend/best practice queries
-
-THE MOST CRITICAL PART — write ONE key finding that:
-1. Identifies the SPECIFIC STRUCTURAL REASON one company outperforms the other in AI search visibility
-2. Names the exact mechanism: content structure, entity recognition, FAQ format, schema markup, citation patterns, topical authority signals, or structured data
-3. Is specific enough to feel genuinely expert — not generic
-4. Creates professional alarm and curiosity — specific enough to feel real, not enough to solve without help
-5. Is exactly 2-3 sentences. Professional tone. No fluff.
 
 Return ONLY valid JSON, no markdown, no other text:
 {
   "company_total": <integer 0-100>,
   "competitor_total": <integer 0-100>,
-  "brand": {"a": <0-100>, "b": <0-100>},
-  "category": {"a": <0-100>, "b": <0-100>},
-  "thought": {"a": <0-100>, "b": <0-100>},
-  "finding": "<2-3 sentences>"
+  "brand": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension and why>"},
+  "category": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension and why>"},
+  "thought": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension and why>"},
+  "verdict": "<One bold sentence. The single most important thing to know about this comparison. Punchy. No fluff.>",
+  "gap": "<One intriguing sentence that hints at the structural reason behind the gap — specific enough to feel expert, not enough to fix without help. End with an implicit question.>"
 }`;
 
   try{
@@ -468,6 +464,7 @@ function renderResults(data,co,comp){
     const a=Math.round(data[d.id]?.a||0);
     const b=Math.round(data[d.id]?.b||0);
     const max=Math.max(a,b,1);
+    const insight=data[d.id]?.insight||'';
     const el=document.createElement('div');
     el.className='dim';
     el.innerHTML=`
@@ -482,7 +479,8 @@ function renderResults(data,co,comp){
       <div class="track">
         <div class="bar-b" id="bb-${d.id}" style="width:0%"></div>
         <div class="bar-a" id="ba-${d.id}" style="width:0%"></div>
-      </div>`;
+      </div>
+      ${insight ? `<div class="dim-insight">${insight}</div>` : ''}`;
     container.appendChild(el);
     setTimeout(()=>{
       document.getElementById('ba-'+d.id).style.width=(a/max*100)+'%';
@@ -490,12 +488,13 @@ function renderResults(data,co,comp){
     },300);
   });
 
-  // Highlight keywords in finding
-  const finding=data.finding||'';
-  document.getElementById('r-finding').innerHTML=finding.replace(
-    /\b(because|specifically|structure|content|entity|schema|citation|format|topical|authority|structured|FAQ|markup)\b/gi,
-    m=>`<strong>${m}</strong>`
-  );
+  // Verdict
+  const verdict=data.verdict||'';
+  document.getElementById('r-verdict').textContent=verdict;
+
+  // Gap tease
+  const gap=data.gap||'';
+  document.getElementById('r-gap').textContent=gap;
 
   show('s-results');
 }

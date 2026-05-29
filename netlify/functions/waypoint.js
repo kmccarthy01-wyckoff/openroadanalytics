@@ -1,16 +1,12 @@
 const https = require('https');
 
-function callAPI(hostname, path, headers, payload) {
+function callAPI(hostname, path, apiHeaders, payload) {
   return new Promise((resolve, reject) => {
     const options = {
       hostname,
       path,
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(payload),
-        ...headers
-      }
+      headers: apiHeaders
     };
     const req = https.request(options, (res) => {
       let data = '';
@@ -30,4 +26,62 @@ exports.handler = async (event) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Content-Type': 'application/json'
+  };
+
+  if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers, body: '' };
+  if (event.httpMethod !== 'POST') return { statusCode: 405, headers, body: 'Method Not Allowed' };
+
+  try {
+    const body = JSON.parse(event.body);
+    const anthropicKey = process.env.ANTHROPIC_API_KEY;
+    const openaiKey = process.env.OPENAI_API_KEY;
+
+    const anthropicPayload = JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1500,
+      messages: body.messages
+    });
+
+    const openaiPayload = JSON.stringify({
+      model: 'gpt-4o-mini',
+      max_tokens: 1500,
+      messages: [{ role: 'user', content: body.openaiMessage }]
+    });
+
+    const anthropicHeaders = {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(anthropicPayload),
+      'x-api-key': anthropicKey,
+      'anthropic-version': '2023-06-01'
+    };
+
+    const openaiHeaders = {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(openaiPayload),
+      'Authorization': 'Bearer ' + openaiKey
+    };
+
+    const [claudeRes, openaiRes] = await Promise.all([
+      callAPI('api.anthropic.com', '/v1/messages', anthropicHeaders, anthropicPayload),
+      callAPI('api.openai.com', '/v1/chat/completions', openaiHeaders, openaiPayload)
+    ]);
+
+    const claudeText = claudeRes.content && claudeRes.content[0] ? claudeRes.content[0].text : '';
+    const openaiText = openaiRes.choices && openaiRes.choices[0] ? openaiRes.choices[0].message.content : '';
+
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify({ claudeText, openaiText })
+    };
+
+  } catch (error) {
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ error: error.message })
+    };
+  }
+};

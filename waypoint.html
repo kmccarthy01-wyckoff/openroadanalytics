@@ -12,12 +12,21 @@
 body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-height:100vh;}
 
 /* TOP NAV */
-.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(14,13,11,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(245,242,236,0.08);}
-.top-nav-logo{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#f5f2ec;text-decoration:none;}
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;background:rgba(14,13,11,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(245,242,236,0.1);}
+.top-nav-logo{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#f5f2ec;text-decoration:none;display:flex;flex-direction:column;gap:1px;}
+.top-nav-logo .wp-name{font-size:11px;letter-spacing:3px;color:#f5f2ec;}
+.top-nav-logo .wp-by{font-size:7px;letter-spacing:2px;color:rgba(245,242,236,0.35);}
 .top-nav-logo span{color:#c8502a;}
 .top-nav-back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.45);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.2s;}
 .top-nav-back:hover{color:#f5f2ec;}
 .top-nav-back::before{content:'←';}
+
+@media(max-width:480px){
+  .top-nav{padding:0 1rem;}
+  .top-nav-logo .wp-name{font-size:10px;letter-spacing:2px;}
+  .top-nav-back{font-size:8px;letter-spacing:1px;}
+  .page-wrap{padding:4.5rem 1rem 1.5rem;}
+}
 
 /* PAGE LAYOUT */
 .page-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:5rem 2rem 2rem;}
@@ -148,7 +157,10 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
 </head>
 <body>
 <nav class="top-nav">
-  <a href="/" class="top-nav-logo">Open Road<span>.</span>Analytics</a>
+  <a href="/" class="top-nav-logo">
+    <span class="wp-name">Waypoint</span>
+    <span class="wp-by">by Open Road<span> Analytics</span></span>
+  </a>
   <a href="/" class="top-nav-back">Back to Site</a>
 </nav>
 <div class="page-wrap">
@@ -340,6 +352,24 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
       </div>
     </div>
 
+    <!-- CHATGPT VISIBILITY -->
+    <div class="section-block" id="r-chatgpt" style="display:none;">
+      <div class="section-lbl">ChatGPT Visibility</div>
+      <div class="citation-grid">
+        <div class="citation-card a">
+          <div class="citation-name" id="r-cit-co-name2"></div>
+          <div class="citation-rate" id="r-chatgpt-co-score">—</div>
+          <div class="citation-context" id="r-chatgpt-co-ctx">—</div>
+        </div>
+        <div class="citation-card b">
+          <div class="citation-name" id="r-cit-comp-name2"></div>
+          <div class="citation-rate" id="r-chatgpt-comp-score">—</div>
+          <div class="citation-context" id="r-chatgpt-comp-ctx">—</div>
+        </div>
+      </div>
+      <div class="dim-insight" id="r-chatgpt-insight" style="margin-top:6px;font-style:normal;color:rgba(245,242,236,0.55);"></div>
+    </div>
+
     <!-- SEO SIGNALS -->
     <div class="section-block">
       <div class="section-lbl">SEO Visibility Signals</div>
@@ -457,53 +487,76 @@ async function runScan(){
     },s.delay);
   });
 
-  const prompt=`You are an expert AI search visibility analyst. Analyze how "${co}" and "${comp}" appear in AI search engines (ChatGPT, Perplexity, Google AI Overviews) in the "${ind}" industry.
+  const claudePrompt=`You are an expert AI search visibility analyst. Analyze how "${co}" and "${comp}" appear in AI search engines in the "${ind}" industry.
 
 Return ONLY valid JSON, no markdown, no other text:
 {
   "company_total": <integer 0-100>,
   "competitor_total": <integer 0-100>,
-  "brand": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension and the specific reason why>"},
-  "category": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension and the specific reason why>"},
-  "thought": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension and the specific reason why>"},
+  "brand": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins and why>"},
+  "category": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins and why>"},
+  "thought": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins and why>"},
   "prompts": [
-    "<Actual query a buyer would type to find a vendor in this category — e.g. 'best CRM software for enterprise B2B'>",
-    "<Actual query about brand reputation — e.g. 'is Salesforce good for mid-market companies'>",
-    "<Actual thought leadership query — e.g. 'CRM trends 2025 what experts say'>"
+    "<buyer category search query>",
+    "<brand reputation query>",
+    "<thought leadership query>"
   ],
   "citations": {
-    "company_citation_rate": "<estimated % of relevant AI responses that mention ${co} — e.g. '~65%'>",
-    "competitor_citation_rate": "<estimated % of relevant AI responses that mention ${comp} — e.g. '~82%'>",
-    "company_mention_context": "<how AI typically frames ${co} when it does appear — positive/neutral/qualified>",
-    "competitor_mention_context": "<how AI typically frames ${comp} when it does appear>"
+    "company_citation_rate": "<estimated % e.g. '~65%'>",
+    "competitor_citation_rate": "<estimated % e.g. '~82%'>",
+    "company_mention_context": "<how Claude typically frames ${co}>",
+    "competitor_mention_context": "<how Claude typically frames ${comp}>"
   },
   "seo": {
-    "company_signal": "<one sentence on ${co}'s estimated organic search presence in this category>",
-    "competitor_signal": "<one sentence on ${comp}'s estimated organic search presence in this category>",
-    "keyword_gap": "<the most important keyword/topic area where there is a visibility gap between the two>"
+    "company_signal": "<one sentence on ${co} organic search presence>",
+    "competitor_signal": "<one sentence on ${comp} organic search presence>",
+    "keyword_gap": "<most important keyword gap between the two>"
   },
   "recommendations": [
-    "<specific, actionable recommendation #1 — directional, not a complete solution>",
-    "<specific, actionable recommendation #2>",
-    "<specific, actionable recommendation #3>"
+    "<specific actionable recommendation #1>",
+    "<specific actionable recommendation #2>",
+    "<specific actionable recommendation #3>"
   ],
-  "verdict": "<One bold declarative sentence. The single most important strategic implication of this comparison. Specific to these two brands. No hedging.>",
-  "gap": "<One sentence in the style of expert analyst commentary. Name a specific structural, historical, or strategic reason for the visibility gap — reference real brand dynamics, market events, content architecture, or AI training data implications. Must feel like insider analysis. End with an implicit question about whether it can be fixed.>"
+  "verdict": "<One bold declarative sentence. Most important strategic implication. No hedging.>",
+  "gap": "<One sentence of expert analyst commentary. Specific structural or strategic reason for the gap. Feels like insider analysis. Ends with an implicit question.>"
+}`;
+
+  const openaiPrompt=`You are an AI search visibility analyst. In the "${ind}" industry, when users search on ChatGPT or Perplexity, how does "${co}" compare to "${comp}"?
+
+Return ONLY valid JSON, no markdown:
+{
+  "chatgpt_company_visibility": <integer 0-100>,
+  "chatgpt_competitor_visibility": <integer 0-100>,
+  "company_chatgpt_context": "<how ChatGPT typically describes ${co} in ${ind} queries>",
+  "competitor_chatgpt_context": "<how ChatGPT typically describes ${comp} in ${ind} queries>",
+  "chatgpt_insight": "<one sharp sentence about the ChatGPT visibility gap between the two brands>"
 }`;
 
   try{
-    const [raw]=await Promise.all([
+    const [response]=await Promise.all([
       fetch('/.netlify/functions/waypoint',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
-          messages:[{role:'user',content:prompt}]
+          messages:[{role:'user',content:claudePrompt}],
+          openaiMessage: openaiPrompt
         })
-      }).then(r=>r.json()).then(d=>d.text||''),
+      }).then(r=>r.json()),
       new Promise(r=>setTimeout(r,5800))
     ]);
 
+    const raw = response.claudeText || '';
+    const openaiRaw = response.openaiText || '';
+
     const data=JSON.parse(raw.replace(/```json|```/g,'').replace(/^[^{]*/,'').replace(/[^}]*$/,'').trim());
+
+    let openaiData = null;
+    try {
+      openaiData = JSON.parse(openaiRaw.replace(/```json|```/g,'').replace(/^[^{]*/,'').replace(/[^}]*$/,'').trim());
+    } catch(e) { /* openai data optional */ }
+
+    if (openaiData) data.openai = openaiData;
+
     stopSpin();
     setProgress(100);
     await new Promise(r=>setTimeout(r,400));
@@ -513,7 +566,7 @@ Return ONLY valid JSON, no markdown, no other text:
     stopSpin();
     show('s-entry');
     document.getElementById('run-btn').disabled=false;
-    document.getElementById('err-msg').textContent='Error: '+e.message+' | Raw: '+(typeof raw!=='undefined'?raw.substring(0,200):'no response');
+    document.getElementById('err-msg').textContent='Error: '+e.message+' | Raw: no response';
     document.getElementById('err-msg').style.display='block';
   }
 }
@@ -583,6 +636,22 @@ function renderResults(data,co,comp){
   document.getElementById('r-cit-comp-rate').textContent=data.citations?.competitor_citation_rate||'—';
   document.getElementById('r-cit-co-ctx').textContent=data.citations?.company_mention_context||'—';
   document.getElementById('r-cit-comp-ctx').textContent=data.citations?.competitor_mention_context||'—';
+
+  // ChatGPT data from OpenAI
+  const chatgptEl=document.getElementById('r-chatgpt');
+  if(chatgptEl){
+    if(data.openai){
+      const o=data.openai;
+      chatgptEl.style.display='block';
+      document.getElementById('r-cit-co-name2').textContent=co;
+      document.getElementById('r-cit-comp-name2').textContent=comp;
+      document.getElementById('r-chatgpt-co-score').textContent=Math.round(o.chatgpt_company_visibility||0);
+      document.getElementById('r-chatgpt-comp-score').textContent=Math.round(o.chatgpt_competitor_visibility||0);
+      document.getElementById('r-chatgpt-co-ctx').textContent=o.company_chatgpt_context||'—';
+      document.getElementById('r-chatgpt-comp-ctx').textContent=o.competitor_chatgpt_context||'—';
+      document.getElementById('r-chatgpt-insight').textContent=o.chatgpt_insight||'—';
+    }
+  }
 
   // SEO
   document.getElementById('r-seo-co').textContent=co+': '+( data.seo?.company_signal||'—');

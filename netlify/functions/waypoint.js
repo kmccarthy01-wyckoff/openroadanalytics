@@ -11,9 +11,7 @@ export default async (req, context) => {
   }
 
   try {
-    console.log('KEY:', !!process.env.ANTHROPIC_API_KEY);
     const body = await req.json();
-    console.log('BODY:', JSON.stringify(body).substring(0, 100));
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -23,21 +21,18 @@ export default async (req, context) => {
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20251001',
+        model: 'claude-sonnet-4-6',
         max_tokens: 1000,
         messages: body.messages
       })
     });
 
-    console.log('ANTHROPIC STATUS:', response.status);
     const data = await response.json();
-    console.log('ANTHROPIC RESPONSE:', JSON.stringify(data).substring(0, 200));
     const text = data.content?.[0]?.text || '';
 
     return new Response(JSON.stringify({ text }), { status: 200, headers });
 
   } catch (error) {
-    console.log('ERROR:', error.message);
     return new Response(JSON.stringify({ error: error.message }), { status: 500, headers });
   }
 };

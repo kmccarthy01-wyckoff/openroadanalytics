@@ -329,6 +329,19 @@ nav.scrolled { border-color: var(--rule-dark); }
 }
 .nav-cta:hover { background: var(--accent-hov); }
 
+/* Waypoint mobile nav button — hidden on desktop, visible on mobile */
+.nav-waypoint-mobile {
+  display: none;
+  align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: #f5f2ec; text-decoration: none;
+  background: rgba(200,80,42,0.15);
+  border: 1px solid rgba(200,80,42,0.5);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
 /* Hamburger button — hidden on desktop */
 .nav-hamburger {
   display: none;
@@ -491,6 +504,28 @@ nav.scrolled { border-color: var(--rule-dark); }
 .stat-l { font-size: 0.7rem; color: rgba(245,242,236,0.28); font-weight: 300; line-height: 1.4; }
 .card-rule { height: 1px; background: var(--rule-dark); margin-bottom: 1rem; }
 
+/* HERO Waypoint CTA — above eyebrow */
+.hero-waypoint-cta {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  text-decoration: none; margin-bottom: 1.2rem;
+  padding: 0.5rem 1rem 0.5rem 0.6rem;
+  border: 1px solid rgba(200,80,42,0.35);
+  border-radius: 4px;
+  background: rgba(200,80,42,0.08);
+  transition: background 0.2s, border-color 0.2s;
+}
+.hero-waypoint-cta:hover { background: rgba(200,80,42,0.15); border-color: rgba(200,80,42,0.6); }
+.hero-waypoint-text {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.4rem; font-weight: 900; font-style: italic;
+  color: #f5f2ec; letter-spacing: -0.02em; line-height: 1;
+}
+.hero-waypoint-sub {
+  font-family: var(--mono); font-size: 0.65rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #c8502a;
+}
+
 /* WAYPOINT CTA in hero card */
 .waypoint-cta {
   display: flex; align-items: center; gap: 0.9rem;
@@ -543,19 +578,40 @@ nav.scrolled { border-color: var(--rule-dark); }
 
 /* ─── CREDENTIAL STRIP ─── */
 .cred-strip {
-  background: var(--ink-mid);
-  border-top: 1px solid var(--rule-dark);
-  padding: 0.9rem 3rem;
+  background: var(--ink);
+  border-top: 1px solid rgba(200,80,42,0.2);
+  border-bottom: 1px solid rgba(200,80,42,0.2);
+  padding: 3rem 3rem;
+  text-align: center;
+}
+.cred-manifesto {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  font-weight: 900; letter-spacing: -0.02em;
+  line-height: 1.1; color: #f5f2ec;
   display: flex; align-items: center; justify-content: center;
-  gap: 2.5rem; flex-wrap: wrap;
+  flex-wrap: wrap; gap: 0 0.6em;
 }
-.cred-item {
+.cred-manifesto-phrase { white-space: nowrap; }
+.cred-manifesto-dot {
+  display: inline-block; width: 8px; height: 8px;
+  border-radius: 50%; background: #c8502a;
+  margin: 0 0.1em; flex-shrink: 0;
+  position: relative; top: -2px;
+}
+.cred-sub {
   font-family: var(--mono);
-  font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(245,242,236,0.28);
-  display: flex; align-items: center; gap: 0.45rem;
+  font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(245,242,236,0.3); margin-top: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.8rem; flex-wrap: wrap;
 }
-.cred-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); opacity: 0.55; }
+.cred-sub-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(245,242,236,0.2); }
+
+@media(max-width:600px){
+  .cred-strip { padding: 2rem 1.5rem; }
+  .cred-manifesto { font-size: clamp(1.3rem, 6vw, 1.8rem); }
+}
 
 /* ─── SHARED SECTION ATOMS ─── */
 .eyebrow {
@@ -1013,6 +1069,12 @@ details p {
   text-decoration: none; transition: background 0.2s, transform 0.18s;
 }
 .btn-contact:hover { background: var(--accent-hov); transform: translateY(-2px); }
+.contact-detail {
+  margin-top: 1.2rem;
+  font-family: var(--mono); font-size: 0.65rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(245,242,236,0.3);
+}
 
 /* ─── FOOTER ─── */
 footer {
@@ -1052,6 +1114,7 @@ footer {
   nav { padding: 0 1.5rem; }
   .nav-links { display: none; }
   .nav-cta { display: none; }
+  .nav-waypoint-mobile { display: flex; }
   .nav-hamburger { display: flex; }
   .nav-mobile { display: flex; }
 
@@ -1084,7 +1147,7 @@ footer {
   .mid-cta { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
 
   footer { flex-direction: column; text-align: center; padding: 1.4rem; }
-  .cred-strip { padding: 0.9rem 1.5rem; gap: 1.5rem; }
+  .cred-strip { padding: 0.9rem 1.5rem; }
 }
 
 /* Mobile only — under 600px */
@@ -1106,9 +1169,6 @@ footer {
   .problems-grid { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: 1fr; }
   .svc-featured { grid-column: span 1; }
-
-  .cred-strip { gap: 1rem; flex-wrap: wrap; justify-content: flex-start; padding: 1rem 1.2rem; }
-  .cred-item { font-size: 0.54rem; }
 
   .case { grid-template-columns: 2.5rem 1fr; gap: 1rem; }
   .case-desc { font-size: 0.78rem; }
@@ -1136,7 +1196,6 @@ footer {
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="/waypoint.html" style="color:var(--text);background:rgba(200,80,42,0.15);border:1px solid rgba(200,80,42,0.4);padding:0.3rem 0.8rem;border-radius:3px;transition:background 0.2s;" onmouseover="this.style.background='rgba(200,80,42,0.3)'" onmouseout="this.style.background='rgba(200,80,42,0.15)'">Waypoint ↗</a></li>
   </ul>
   <a class="nav-cta" href="mailto:kevin@openroadanalytics.ai">Let's Talk</a>
   <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -1160,6 +1219,24 @@ footer {
 <section id="hero" aria-label="Hero">
   <div class="hero-inner">
     <div>
+      <!-- WAYPOINT CTA — above eyebrow -->
+      <a href="/waypoint.html" class="hero-waypoint-cta">
+        <svg width="22" height="22" viewBox="0 0 22 22" style="flex-shrink:0;">
+          <circle cx="11" cy="11" r="10" fill="none" stroke="rgba(200,80,42,0.8)" stroke-width="1.2"/>
+          <circle cx="11" cy="11" r="7.5" fill="none" stroke="rgba(245,242,236,0.12)" stroke-width="0.6"/>
+          <line x1="11" y1="1" x2="11" y2="4" stroke="rgba(245,242,236,0.7)" stroke-width="1.5"/>
+          <line x1="11" y1="18" x2="11" y2="21" stroke="rgba(245,242,236,0.25)" stroke-width="1"/>
+          <line x1="1" y1="11" x2="4" y2="11" stroke="rgba(245,242,236,0.25)" stroke-width="1"/>
+          <line x1="18" y1="11" x2="21" y2="11" stroke="rgba(245,242,236,0.25)" stroke-width="1"/>
+          <text x="11" y="7.5" text-anchor="middle" font-family="DM Mono,monospace" font-size="3.5" fill="rgba(245,242,236,0.7)">N</text>
+          <polygon points="11,3 9.8,11 11,12.5 12.2,11" fill="#c8502a"/>
+          <polygon points="11,12.5 9.8,11 11,19 12.2,11" fill="rgba(245,242,236,0.2)"/>
+          <circle cx="11" cy="11" r="1.8" fill="#0e0d0b" stroke="rgba(245,242,236,0.4)" stroke-width="0.8"/>
+        </svg>
+        <span class="hero-waypoint-text">Waypoint</span>
+        <span class="hero-waypoint-sub">Free AI Visibility Scan →</span>
+      </a>
+
       <div class="hero-eyebrow">Marketing & AI Analytics · Principal Consultant · NY · NJ · CT</div>
 
       <!-- H1 — visually dominant AND keyword-rich -->
@@ -1173,7 +1250,7 @@ footer {
       <p class="hero-diff">
         Expert analytics experience across Fortune 50 technology,<br>
         global financial services, and America's most recognized<br>
-        consumer brands. B2B and B2C. Few consultants bring both.
+        consumer brands. B2B and B2C.
       </p>
 
       <p class="hero-sub">
@@ -1202,7 +1279,7 @@ footer {
           <div class="stat-l">Real-time visibility into what's working — so you make decisions in hours, not at end of quarter</div>
         </div>
         <div>
-          <div class="stat-n" style="font-size:1.4rem; font-style:normal; font-weight:700;"><a href="/waypoint.html" style="color:#f5f2ec;text-decoration:none;">Search & AI Visibility</a></div>
+          <div class="stat-n" style="font-size:1.4rem; font-style:normal; font-weight:700;">Search & AI Visibility</div>
           <div class="stat-l">Be found on Google. Be cited by ChatGPT. Half of buyers now start on AI — is your brand showing up?</div>
         </div>
       </div>
@@ -1238,13 +1315,17 @@ footer {
 </section>
 
 <!-- CREDENTIAL STRIP -->
-<div class="cred-strip" role="complementary" aria-label="Client industries served">
-  <div class="cred-item"><div class="cred-dot"></div>Global Financial Services</div>
-  <div class="cred-item"><div class="cred-dot"></div>Fortune 50 Technology</div>
-  <div class="cred-item"><div class="cred-dot"></div>Leading Consumer Brands</div>
-  <div class="cred-item"><div class="cred-dot"></div>Global Media Networks</div>
-  <div class="cred-item"><div class="cred-dot"></div>NY · NJ · CT</div>
-  <div class="cred-item"><div class="cred-dot"></div>Remote Nationwide</div>
+<div class="cred-strip" role="complementary" aria-label="Track record">
+  <div class="cred-manifesto">
+    <span class="cred-manifesto-phrase">Seen it.</span>
+    <span class="cred-manifesto-dot"></span>
+    <span class="cred-manifesto-phrase">Built it.</span>
+    <span class="cred-manifesto-dot"></span>
+    <span class="cred-manifesto-phrase">Fixed it.</span>
+  </div>
+  <div class="cred-sub">
+    Analytics leadership that delivers measurable outcomes.
+  </div>
 </div>
 
 <!-- PROBLEMS WE SOLVE -->
@@ -1254,10 +1335,10 @@ footer {
       <div>
         <div class="eyebrow">Problems We Solve</div>
         <h2 class="section-h" id="problems-heading">
-          If this sounds familiar,<br>we should <em>talk.</em>
+          If this sounds familiar,<br>time to <em>talk.</em>
         </h2>
       </div>
-      <p class="problems-intro">These are the questions that keep marketing leaders up at night. They're also the ones we've spent a career answering.</p>
+      <p class="problems-intro">These are the questions that keep marketing leaders up at night. They're also the ones Open Road Analytics has spent a career answering.</p>
     </div>
     <div class="problems-grid" role="list">
 
@@ -1319,7 +1400,7 @@ footer {
         <div class="step-num">1</div>
         <div class="step-phase">Phase One</div>
         <div class="step-name">The Audit</div>
-        <p class="step-desc">A comprehensive 6-week diagnostic across 7 areas of marketing measurement. We map what exists, identify what's broken, and prioritize what to fix. You receive a written findings report, gap analysis, 90-day roadmap, and executive presentation deck — everything needed to act.</p>
+        <p class="step-desc">A comprehensive 6-week diagnostic across 7 areas of marketing measurement. Maps what exists, identifies what's broken, and prioritizes what to fix. You receive a written findings report, gap analysis, 90-day roadmap, and executive presentation deck — everything needed to act.</p>
         <div class="step-detail">Fixed Fee · Starting at $25,000 · 6 Weeks</div>
       </div>
 
@@ -1327,7 +1408,7 @@ footer {
         <div class="step-num">2</div>
         <div class="step-phase">Phase Two</div>
         <div class="step-name">The Build</div>
-        <p class="step-desc">We implement the roadmap. KPI architecture, attribution modeling, data infrastructure, dashboard delivery, CRM and marketing automation integration. The measurement system that should have existed. Built to last. Not bolted on.</p>
+        <p class="step-desc">Open Road Analytics implements the roadmap. KPI architecture, attribution modeling, data infrastructure, dashboard delivery, CRM and marketing automation integration. The measurement system that should have existed. Built to last. Not bolted on.</p>
         <div class="step-detail">Fixed Fee · Scoped on Engagement · 6–8 Weeks</div>
       </div>
 
@@ -1398,7 +1479,7 @@ footer {
       <article class="svc reveal" role="listitem">
         <div class="svc-n">06</div>
         <h3 class="svc-name">SEO / AEO Intelligence</h3>
-        <p class="svc-desc">Search analytics beyond Google — measuring how AI engines including ChatGPT, Perplexity, and Google AI Overviews discover, cite, and recommend your brand. <a href="/waypoint.html" style="color:var(--accent);font-weight:500;text-decoration:none;">Try Waypoint — our free AI visibility tool →</a></p>
+        <p class="svc-desc">Search analytics beyond Google — measuring how AI engines including ChatGPT, Perplexity, and Google AI Overviews discover, cite, and recommend your brand.</p>
       </article>
 
       <article class="svc reveal" role="listitem">
@@ -1421,7 +1502,7 @@ footer {
 <div class="mid-cta" role="complementary">
   <div class="mid-cta-text">
     <strong>Most engagements begin with a 30-minute conversation.</strong>
-    <span>No pitch. A direct discussion about what's broken and whether there's a fit. If there is, we scope from there.</span>
+    <span>No pitch. A direct discussion about what's broken and whether there's a fit. If there is, scope and timeline follow from there.</span>
   </div>
   <a href="mailto:kevin@openroadanalytics.ai" class="btn-mid">Schedule a Conversation</a>
 </div>
@@ -1622,7 +1703,7 @@ footer {
         </details>
         <details>
           <summary>Do you work with B2C consumer brands or only B2B?</summary>
-          <p>Both. Open Road Analytics has deep experience serving major B2C consumer brands across attribution modeling, marketing mix modeling, media optimization, and competitive intelligence — as well as B2B organizations including global financial services and Fortune 50 technology companies. The breadth across both disciplines is rare and a genuine differentiator.</p>
+          <p>Both. Open Road Analytics has deep experience serving major B2C consumer brands across attribution modeling, marketing mix modeling, media optimization, and competitive intelligence — as well as B2B organizations including global financial services and Fortune 50 technology companies.</p>
         </details>
         <details>
           <summary>What is ABM analytics and why does it matter?</summary>
@@ -1646,13 +1727,14 @@ footer {
   <div class="contact-inner">
     <div class="contact-eyebrow">Ready when you are</div>
     <h2 class="contact-h" id="contact-heading">
-      Let's build something<br><em>worth measuring.</em>
+      Let's find out if<br>there's a <em>fit.</em>
     </h2>
     <p class="contact-sub">
-      A 30-minute conversation is all it takes to know if there's a fit.<br>
-      No pitch. No proposal. A direct discussion about what's broken.
+      A 30-minute conversation is all it takes.<br>
+      No pitch. No proposal. Just an honest discussion about what's broken.
     </p>
-    <a href="mailto:kevin@openroadanalytics.ai" class="btn-contact">Get in Touch</a>
+    <a href="mailto:kevin@openroadanalytics.ai" class="btn-contact">Start the Conversation</a>
+    <div class="contact-detail">kevin@openroadanalytics.ai · NY · NJ · CT · Remote Nationwide</div>
   </div>
 </section>
 </main>
@@ -1660,7 +1742,7 @@ footer {
 <!-- FOOTER -->
 <footer role="contentinfo">
   <div class="footer-brand">Open Road<span>.</span>Analytics — Kevin McCarthy · Principal</div>
-  <div class="footer-note">© 2026 · NY · NJ · CT · <a href="mailto:kevin@openroadanalytics.ai" style="color:inherit;text-decoration:none;">kevin@openroadanalytics.ai</a> · <a href="/waypoint.html" style="color:var(--accent);text-decoration:none;">Waypoint</a></div>
+  <div class="footer-note">© 2026 · NY · NJ · CT · <a href="mailto:kevin@openroadanalytics.ai" style="color:inherit;text-decoration:none;">kevin@openroadanalytics.ai</a></div>
 </footer>
 
 <script>

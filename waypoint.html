@@ -106,6 +106,33 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
 .verdict{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;font-style:italic;color:#f5f2ec;line-height:1.4;margin-bottom:0.5rem;}
 .gap-txt{font-size:11px;color:rgba(245,242,236,0.55);line-height:1.7;}
 .dim-insight{font-size:10px;color:rgba(245,242,236,0.45);line-height:1.5;margin-top:5px;font-style:italic;}
+
+/* Section blocks */
+.section-block{background:rgba(245,242,236,0.03);border:1px solid rgba(245,242,236,0.1);border-radius:6px;padding:0.8rem 1rem;margin-bottom:0.7rem;}
+.section-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.4);margin-bottom:0.6rem;display:flex;align-items:center;gap:6px;}
+.section-lbl::before{content:'';display:block;width:12px;height:1px;background:#c8502a;}
+
+/* Prompts */
+.prompt-list{display:flex;flex-direction:column;gap:4px;}
+.prompt-item{font-size:10px;color:rgba(245,242,236,0.55);line-height:1.5;padding:4px 8px;background:rgba(245,242,236,0.04);border-radius:3px;border-left:1px solid rgba(200,80,42,0.3);font-family:'DM Mono',monospace;letter-spacing:0.01em;}
+
+/* Citations */
+.citation-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px;}
+.citation-card{background:rgba(245,242,236,0.04);border-radius:4px;padding:6px 8px;}
+.citation-rate{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;font-style:italic;line-height:1;margin-bottom:2px;}
+.citation-card.a .citation-rate{color:#c8502a;}
+.citation-card.b .citation-rate{color:rgba(245,242,236,0.4);}
+.citation-name{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;text-transform:uppercase;color:rgba(245,242,236,0.3);margin-bottom:3px;}
+.citation-context{font-size:9px;color:rgba(245,242,236,0.4);line-height:1.4;font-style:italic;}
+
+/* SEO */
+.seo-row{font-size:10px;color:rgba(245,242,236,0.5);line-height:1.6;margin-bottom:3px;}
+.seo-gap{font-size:10px;color:rgba(200,80,42,0.8);font-style:italic;margin-top:4px;}
+
+/* Recommendations */
+.rec-list{display:flex;flex-direction:column;gap:5px;}
+.rec-item{display:flex;gap:8px;font-size:10px;color:rgba(245,242,236,0.55);line-height:1.5;}
+.rec-num{font-family:'DM Mono',monospace;font-size:8px;color:#c8502a;flex-shrink:0;margin-top:1px;}
 .tease{position:relative;margin-bottom:0.9rem;border:1px solid rgba(245,242,236,0.12);border-radius:6px;padding:0.75rem;overflow:hidden;}
 .tease-blur{filter:blur(4px);opacity:0.5;font-size:11px;color:rgba(245,242,236,0.7);line-height:1.6;user-select:none;pointer-events:none;}
 .tease-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(14,13,11,0.65);}
@@ -290,16 +317,50 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
 
     <div class="dims" id="r-dims"></div>
 
+    <!-- PROMPTS USED -->
+    <div class="section-block">
+      <div class="section-lbl">Prompts Simulated</div>
+      <div class="prompt-list" id="r-prompts"></div>
+    </div>
+
+    <!-- CITATIONS -->
+    <div class="section-block">
+      <div class="section-lbl">AI Citation Signals</div>
+      <div class="citation-grid">
+        <div class="citation-card a">
+          <div class="citation-name" id="r-cit-co-name">—</div>
+          <div class="citation-rate" id="r-cit-co-rate">—</div>
+          <div class="citation-context" id="r-cit-co-ctx">—</div>
+        </div>
+        <div class="citation-card b">
+          <div class="citation-name" id="r-cit-comp-name">—</div>
+          <div class="citation-rate" id="r-cit-comp-rate">—</div>
+          <div class="citation-context" id="r-cit-comp-ctx">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO SIGNALS -->
+    <div class="section-block">
+      <div class="section-lbl">SEO Visibility Signals</div>
+      <div class="seo-row" id="r-seo-co">—</div>
+      <div class="seo-row" id="r-seo-comp">—</div>
+      <div class="seo-gap" id="r-seo-gap">—</div>
+    </div>
+
+    <!-- VERDICT -->
     <div class="finding">
       <div class="finding-lbl">// Waypoint Verdict</div>
       <div class="verdict" id="r-verdict">—</div>
       <div class="gap-txt" id="r-gap">—</div>
     </div>
 
-    <div class="tease">
-      <div class="tease-blur">Your brand has 3 structural content gaps preventing AI citation in category searches. The fix requires changes to 2 pages and one content format that ChatGPT prioritizes above all others. Your competitor implemented this pattern months ago — it explains the gap you're seeing.</div>
-      <div class="tease-ov">
-        <div class="tease-lk">⚿ Full report · Talk to Open Road Analytics</div>
+    <!-- RECOMMENDATIONS — partially blurred -->
+    <div class="section-block" style="position:relative;overflow:hidden;">
+      <div class="section-lbl">Where to Focus</div>
+      <div class="rec-list" id="r-recs"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(to bottom,transparent,rgba(14,13,11,0.97));display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;">
+        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.35);">⚿ Full roadmap · Talk to Open Road Analytics</div>
       </div>
     </div>
 
@@ -398,20 +459,36 @@ async function runScan(){
 
   const prompt=`You are an expert AI search visibility analyst. Analyze how "${co}" and "${comp}" appear in AI search engines (ChatGPT, Perplexity, Google AI Overviews) in the "${ind}" industry.
 
-Score each company 0-100 across three dimensions:
-- Brand Awareness: accuracy and completeness when AI describes them unprompted
-- Category Search: visibility when buyers search for top vendors/solutions
-- Thought Leadership: frequency cited as expert in industry trend/best practice queries
-
 Return ONLY valid JSON, no markdown, no other text:
 {
   "company_total": <integer 0-100>,
   "competitor_total": <integer 0-100>,
-  "brand": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension and why>"},
-  "category": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension and why>"},
-  "thought": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension and why>"},
+  "brand": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension and the specific reason why>"},
+  "category": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension and the specific reason why>"},
+  "thought": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension and the specific reason why>"},
+  "prompts": [
+    "<Actual query a buyer would type to find a vendor in this category — e.g. 'best CRM software for enterprise B2B'>",
+    "<Actual query about brand reputation — e.g. 'is Salesforce good for mid-market companies'>",
+    "<Actual thought leadership query — e.g. 'CRM trends 2025 what experts say'>"
+  ],
+  "citations": {
+    "company_citation_rate": "<estimated % of relevant AI responses that mention ${co} — e.g. '~65%'>",
+    "competitor_citation_rate": "<estimated % of relevant AI responses that mention ${comp} — e.g. '~82%'>",
+    "company_mention_context": "<how AI typically frames ${co} when it does appear — positive/neutral/qualified>",
+    "competitor_mention_context": "<how AI typically frames ${comp} when it does appear>"
+  },
+  "seo": {
+    "company_signal": "<one sentence on ${co}'s estimated organic search presence in this category>",
+    "competitor_signal": "<one sentence on ${comp}'s estimated organic search presence in this category>",
+    "keyword_gap": "<the most important keyword/topic area where there is a visibility gap between the two>"
+  },
+  "recommendations": [
+    "<specific, actionable recommendation #1 — directional, not a complete solution>",
+    "<specific, actionable recommendation #2>",
+    "<specific, actionable recommendation #3>"
+  ],
   "verdict": "<One bold declarative sentence. The single most important strategic implication of this comparison. Specific to these two brands. No hedging.>",
-  "gap": "<One sentence. Name a specific structural, historical, or strategic reason for the visibility gap — reference real brand dynamics, market events, content architecture, or training data implications. Must feel like insider analysis, not generic observation. End with an implicit question about whether it can be fixed.>"
+  "gap": "<One sentence in the style of expert analyst commentary. Name a specific structural, historical, or strategic reason for the visibility gap — reference real brand dynamics, market events, content architecture, or AI training data implications. Must feel like insider analysis. End with an implicit question about whether it can be fixed.>"
 }`;
 
   try{
@@ -453,6 +530,7 @@ function renderResults(data,co,comp){
   animNeedle('needle-a',0,angleA,48,48,1800);
   setTimeout(()=>animNeedle('needle-b',180,angleB,48,48,1500),500);
 
+  // Dimensions
   const dims=[
     {id:'brand',label:'Brand Awareness'},
     {id:'category',label:'Category Search'},
@@ -480,7 +558,7 @@ function renderResults(data,co,comp){
         <div class="bar-b" id="bb-${d.id}" style="width:0%"></div>
         <div class="bar-a" id="ba-${d.id}" style="width:0%"></div>
       </div>
-      ${insight ? `<div class="dim-insight">${insight}</div>` : ''}`;
+      ${insight?`<div class="dim-insight">${insight}</div>`:''}`;
     container.appendChild(el);
     setTimeout(()=>{
       document.getElementById('ba-'+d.id).style.width=(a/max*100)+'%';
@@ -488,13 +566,42 @@ function renderResults(data,co,comp){
     },300);
   });
 
-  // Verdict
-  const verdict=data.verdict||'';
-  document.getElementById('r-verdict').textContent=verdict;
+  // Prompts
+  const promptsEl=document.getElementById('r-prompts');
+  promptsEl.innerHTML='';
+  (data.prompts||[]).forEach(p=>{
+    const el=document.createElement('div');
+    el.className='prompt-item';
+    el.textContent='"'+p+'"';
+    promptsEl.appendChild(el);
+  });
 
-  // Gap tease
-  const gap=data.gap||'';
-  document.getElementById('r-gap').textContent=gap;
+  // Citations
+  document.getElementById('r-cit-co-name').textContent=co;
+  document.getElementById('r-cit-comp-name').textContent=comp;
+  document.getElementById('r-cit-co-rate').textContent=data.citations?.company_citation_rate||'—';
+  document.getElementById('r-cit-comp-rate').textContent=data.citations?.competitor_citation_rate||'—';
+  document.getElementById('r-cit-co-ctx').textContent=data.citations?.company_mention_context||'—';
+  document.getElementById('r-cit-comp-ctx').textContent=data.citations?.competitor_mention_context||'—';
+
+  // SEO
+  document.getElementById('r-seo-co').textContent=co+': '+( data.seo?.company_signal||'—');
+  document.getElementById('r-seo-comp').textContent=comp+': '+(data.seo?.competitor_signal||'—');
+  document.getElementById('r-seo-gap').textContent='Key gap: '+(data.seo?.keyword_gap||'—');
+
+  // Verdict & gap
+  document.getElementById('r-verdict').textContent=data.verdict||'—';
+  document.getElementById('r-gap').textContent=data.gap||'—';
+
+  // Recommendations
+  const recsEl=document.getElementById('r-recs');
+  recsEl.innerHTML='';
+  (data.recommendations||[]).forEach((r,i)=>{
+    const el=document.createElement('div');
+    el.className='rec-item';
+    el.innerHTML=`<span class="rec-num">0${i+1}</span><span>${r}</span>`;
+    recsEl.appendChild(el);
+  });
 
   show('s-results');
 }

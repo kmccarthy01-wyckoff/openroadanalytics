@@ -23,7 +23,7 @@ export default async (req, context) => {
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-20251001',
         max_tokens: 1000,
         messages: body.messages
       })

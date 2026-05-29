@@ -1,38 +1,33 @@
-export default async (req, context) => {
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Content-Type': 'application/json'
-  };
+const https = require('https');
 
-  if (req.method === 'OPTIONS') {
-    return new Response('', { status: 200, headers });
-  }
-
-  try {
-    const body = await req.json();
-
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+function callAPI(hostname, path, headers, payload) {
+  return new Promise((resolve, reject) => {
+    const options = {
+      hostname,
+      path,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01'
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 1000,
-        messages: body.messages
-      })
+        'Content-Length': Buffer.byteLength(payload),
+        ...headers
+      }
+    };
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        try { resolve(JSON.parse(data)); }
+        catch(e) { reject(new Error('Parse error: ' + data.substring(0, 200))); }
+      });
     });
+    req.on('error', reject);
+    req.write(payload);
+    req.end();
+  });
+}
 
-    const data = await response.json();
-    const text = data.content?.[0]?.text || '';
-
-    return new Response(JSON.stringify({ text }), { status: 200, headers });
-
-  } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500, headers });
-  }
-};
+exports.handler = async (event) => {
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST,

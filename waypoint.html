@@ -234,9 +234,15 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
         <input class="inp" id="inp-comp" placeholder="e.g. HubSpot" type="text"/>
       </div>
     </div>
-    <div class="field">
-      <div class="lbl">Industry</div>
-      <input class="inp" id="inp-ind" placeholder="e.g. B2B SaaS, Financial Services, Retail" type="text"/>
+    <div class="row">
+      <div class="field">
+        <div class="lbl">Industry</div>
+        <input class="inp" id="inp-ind" placeholder="e.g. B2B SaaS, Financial Services, Retail" type="text"/>
+      </div>
+      <div class="field">
+        <div class="lbl">Market</div>
+        <input class="inp" id="inp-market" placeholder="e.g. United States" type="text" value="United States"/>
+      </div>
     </div>
     <button class="btn" id="run-btn" onclick="runScan()">Run Waypoint Scan →</button>
     <div class="err" id="err-msg">Please fill in all three fields to run your scan.</div>
@@ -462,6 +468,7 @@ async function runScan(){
   const co=document.getElementById('inp-co').value.trim();
   const comp=document.getElementById('inp-comp').value.trim();
   const ind=document.getElementById('inp-ind').value.trim();
+  const market=document.getElementById('inp-market').value.trim()||'United States';
   const err=document.getElementById('err-msg');
 
   if(!co||!comp||!ind){ err.style.display='block'; return; }
@@ -489,7 +496,7 @@ async function runScan(){
     },s.delay);
   });
 
-  const claudePrompt=`You are an expert AI search visibility analyst. Analyze how "${co}" and "${comp}" appear in AI search engines including Claude, ChatGPT, and Perplexity in the "${ind}" industry.
+  const claudePrompt=`You are an expert AI search visibility analyst. Analyze how "${co}" and "${comp}" appear in AI search engines including Claude, ChatGPT, and Perplexity in the "${ind}" industry in the "${market}" market.
 
 Score each company 0-100 across three discoverability dimensions:
 
@@ -514,7 +521,7 @@ Return ONLY valid JSON, no markdown, no other text:
   "gap": "<One sentence of expert analyst commentary. Name the specific structural, linguistic, or strategic reason one brand outperforms the other in AI discoverability. Reference real brand dynamics or content patterns. Must feel like insider analysis. End with an implicit question about whether the gap can be closed.>"
 }`;
 
-  const openaiPrompt=`You are an expert AI search visibility analyst representing ChatGPT's perspective. Analyze how "${co}" and "${comp}" appear when users query ChatGPT in the "${ind}" industry.
+  const openaiPrompt=`You are an expert AI search visibility analyst representing ChatGPT's perspective. Analyze how "${co}" and "${comp}" appear when users query ChatGPT in the "${ind}" industry in the "${market}" market.
 
 Score each company 0-100 across three discoverability dimensions:
 
@@ -568,7 +575,7 @@ Return ONLY valid JSON, no markdown, no other text:
     stopSpin();
     setProgress(100);
     await new Promise(r=>setTimeout(r,400));
-    renderResults(data,co,comp,openaiData);
+    renderResults(data,co,comp,openaiData,market);
 
   }catch(e){
     stopSpin();
@@ -658,8 +665,8 @@ function renderDiagnostic(data, co, comp) {
   });
 }
 
-function renderResults(data,co,comp,openaiData){
-  document.getElementById('r-names').textContent=co+' vs '+comp;
+function renderResults(data,co,comp,openaiData,market){
+  document.getElementById('r-names').textContent=co+' vs '+comp+' · '+market;
   document.getElementById('r-co-name').textContent=co;
   document.getElementById('r-comp-name').textContent=comp;
   document.getElementById('r-score-a').textContent=data.company_total_avg||Math.round(data.company_total);
@@ -752,6 +759,7 @@ function resetScan(){
   document.getElementById('inp-co').value='';
   document.getElementById('inp-comp').value='';
   document.getElementById('inp-ind').value='';
+  document.getElementById('inp-market').value='United States';
   document.getElementById('run-btn').disabled=false;
   document.getElementById('prog').style.width='0%';
   ['brand','cat','thought','comp'].forEach(id=>setQ(id,'idle'));

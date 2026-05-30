@@ -100,21 +100,27 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
 .c-den{font-family:'DM Mono',monospace;font-size:8px;color:rgba(245,242,236,0.3);letter-spacing:1px;}
 .dims{display:flex;flex-direction:column;gap:5px;margin-bottom:1rem;}
 .dim{background:rgba(245,242,236,0.04);border:1px solid rgba(245,242,236,0.12);border-radius:4px;padding:8px 10px;}
-.dim-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.dim-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
 .dim-nm{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.5);}
-.dim-sc{display:flex;gap:4px;font-family:'DM Mono',monospace;font-size:9px;}
-.dim-sc-a{color:#c8502a;}
-.dim-sc-sep{color:rgba(245,242,236,0.25);}
-.dim-sc-b{color:rgba(245,242,236,0.45);}
-.track{height:4px;background:rgba(245,242,236,0.08);border-radius:2px;position:relative;}
-.bar-b{position:absolute;left:0;top:0;height:100%;background:rgba(245,242,236,0.35);border-radius:2px;transition:width 1.2s cubic-bezier(0.4,0,0.2,1);}
+.dim-avg{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;font-style:italic;color:#f5f2ec;line-height:1;}
+.dim-avg-label{font-family:'DM Mono',monospace;font-size:7px;font-style:normal;color:rgba(245,242,236,0.2);letter-spacing:1px;margin-left:3px;}
+.dim-bars{display:flex;flex-direction:column;gap:4px;margin-bottom:4px;}
+.dim-bar-row{display:flex;align-items:center;gap:6px;}
+.dim-engine{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;text-transform:uppercase;width:40px;flex-shrink:0;}
+.dim-engine.claude{color:#c8502a;}
+.dim-engine.gpt{color:rgba(245,242,236,0.3);}
+.track{flex:1;height:3px;background:rgba(245,242,236,0.06);border-radius:2px;position:relative;}
+.bar-b{position:absolute;left:0;top:0;height:100%;background:rgba(245,242,236,0.3);border-radius:2px;transition:width 1.2s cubic-bezier(0.4,0,0.2,1);}
 .bar-a{position:absolute;left:0;top:0;height:100%;background:#c8502a;border-radius:2px;transition:width 1.2s cubic-bezier(0.4,0,0.2,1);}
+.dim-score{font-family:'DM Mono',monospace;font-size:8px;width:20px;text-align:right;flex-shrink:0;}
+.dim-score.a{color:#c8502a;}
+.dim-score.b{color:rgba(245,242,236,0.3);}
+.dim-insight{font-size:10px;color:rgba(245,242,236,0.4);line-height:1.5;margin-top:5px;font-style:italic;padding-top:4px;border-top:1px solid rgba(245,242,236,0.05);}
 .finding{background:rgba(200,80,42,0.1);border:1px solid rgba(200,80,42,0.3);border-radius:6px;padding:0.9rem;margin-bottom:0.9rem;position:relative;}
 .finding::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:#c8502a;border-radius:2px 0 0 2px;}
 .finding-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c8502a;margin-bottom:8px;}
 .verdict{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;font-style:italic;color:#f5f2ec;line-height:1.4;margin-bottom:0.5rem;}
 .gap-txt{font-size:11px;color:rgba(245,242,236,0.55);line-height:1.7;}
-.dim-insight{font-size:10px;color:rgba(245,242,236,0.45);line-height:1.5;margin-top:5px;font-style:italic;}
 
 /* Section blocks */
 .section-block{background:rgba(245,242,236,0.03);border:1px solid rgba(245,242,236,0.1);border-radius:6px;padding:0.8rem 1rem;margin-bottom:0.7rem;}
@@ -138,10 +144,30 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
 .seo-row{font-size:10px;color:rgba(245,242,236,0.5);line-height:1.6;margin-bottom:3px;}
 .seo-gap{font-size:10px;color:rgba(200,80,42,0.8);font-style:italic;margin-top:4px;}
 
-/* Recommendations */
-.rec-list{display:flex;flex-direction:column;gap:5px;}
-.rec-item{display:flex;gap:8px;font-size:10px;color:rgba(245,242,236,0.55);line-height:1.5;}
-.rec-num{font-family:'DM Mono',monospace;font-size:8px;color:#c8502a;flex-shrink:0;margin-top:1px;}
+/* DIAGNOSTIC FRAMEWORK */
+.diag-block{background:rgba(200,80,42,0.06);border:1px solid rgba(200,80,42,0.25);border-radius:8px;padding:1rem;margin-bottom:0.7rem;}
+.diag-header{margin-bottom:0.9rem;padding-bottom:0.8rem;border-bottom:1px solid rgba(200,80,42,0.15);}
+.diag-bucket-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c8502a;margin-bottom:3px;display:flex;align-items:center;gap:6px;}
+.diag-bucket-label::before{content:'';display:block;width:12px;height:1px;background:#c8502a;}
+.diag-bucket-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:#f5f2ec;margin-bottom:4px;letter-spacing:-0.01em;}
+.diag-bucket-desc{font-size:11px;color:rgba(245,242,236,0.5);line-height:1.5;font-style:italic;}
+.diag-actions{display:flex;flex-direction:column;gap:6px;margin-bottom:0.9rem;}
+.diag-action{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;background:rgba(245,242,236,0.04);border-radius:4px;border-left:2px solid rgba(200,80,42,0.4);}
+.diag-action-num{font-family:'DM Mono',monospace;font-size:9px;color:#c8502a;flex-shrink:0;margin-top:1px;letter-spacing:1px;}
+.diag-action-text{font-size:11px;color:rgba(245,242,236,0.7);line-height:1.6;}
+.diag-action-text strong{color:#f5f2ec;font-weight:500;}
+.diag-measure{background:rgba(245,242,236,0.03);border-radius:4px;padding:8px 10px;border:1px solid rgba(245,242,236,0.08);}
+.diag-measure-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.3);margin-bottom:4px;}
+.diag-measure-text{font-size:11px;color:rgba(245,242,236,0.6);line-height:1.5;margin-bottom:4px;}
+.diag-baseline{font-family:'DM Mono',monospace;font-size:8px;color:rgba(245,242,236,0.25);letter-spacing:1px;}
+
+/* TEASE BLOCK */
+.tease-block{position:relative;background:rgba(245,242,236,0.02);border:1px solid rgba(245,242,236,0.08);border-radius:6px;padding:0.8rem;margin-bottom:0.9rem;overflow:hidden;min-height:80px;}
+.tease-block-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.25);margin-bottom:8px;}
+.tease-blur-content{display:flex;flex-direction:column;gap:5px;filter:blur(3px);opacity:0.4;user-select:none;pointer-events:none;}
+.tease-blur-item{font-size:11px;color:rgba(245,242,236,0.6);padding:4px 8px;background:rgba(245,242,236,0.04);border-radius:3px;border-left:2px solid rgba(200,80,42,0.3);}
+.tease-block-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(14,13,11,0.6);}
+.tease-block-lock{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.4);}
 .tease{position:relative;margin-bottom:0.9rem;border:1px solid rgba(245,242,236,0.12);border-radius:6px;padding:0.75rem;overflow:hidden;}
 .tease-blur{filter:blur(4px);opacity:0.5;font-size:11px;color:rgba(245,242,236,0.7);line-height:1.6;user-select:none;pointer-events:none;}
 .tease-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(14,13,11,0.65);}
@@ -385,12 +411,31 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
       <div class="gap-txt" id="r-gap">—</div>
     </div>
 
-    <!-- RECOMMENDATIONS — partially blurred -->
-    <div class="section-block" style="position:relative;overflow:hidden;">
-      <div class="section-lbl">Where to Focus</div>
-      <div class="rec-list" id="r-recs"></div>
-      <div style="position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(to bottom,transparent,rgba(14,13,11,0.97));display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;">
-        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.35);">⚿ Full roadmap · Talk to Open Road Analytics</div>
+    <!-- DIAGNOSTIC FRAMEWORK -->
+    <div class="diag-block" id="r-diag">
+      <div class="diag-header">
+        <div class="diag-bucket-label" id="r-bucket-label">—</div>
+        <div class="diag-bucket-name" id="r-bucket-name">—</div>
+        <div class="diag-bucket-desc" id="r-bucket-desc">—</div>
+      </div>
+      <div class="diag-actions" id="r-diag-actions"></div>
+      <div class="diag-measure">
+        <div class="diag-measure-label">// How to measure progress</div>
+        <div class="diag-measure-text" id="r-measure-text">—</div>
+        <div class="diag-baseline">Baseline set: <span id="r-baseline-date">—</span> · Re-scan in 30 days</div>
+      </div>
+    </div>
+
+    <!-- TEASE — additional buckets blurred -->
+    <div class="tease-block">
+      <div class="tease-block-label">// Additional Focus Areas</div>
+      <div class="tease-blur-content">
+        <div class="tease-blur-item">Content Structure · 3 actions</div>
+        <div class="tease-blur-item">Citation Gap Analysis · 3 actions</div>
+        <div class="tease-blur-item">90-Day Measurement Roadmap</div>
+      </div>
+      <div class="tease-block-overlay">
+        <div class="tease-block-lock">⚿ Full diagnostic · Talk to Open Road Analytics</div>
       </div>
     </div>
 
@@ -487,23 +532,28 @@ async function runScan(){
     },s.delay);
   });
 
-  const claudePrompt=`You are an expert AI search visibility analyst. Analyze how "${co}" and "${comp}" appear in AI search engines in the "${ind}" industry.
+  const claudePrompt=`You are an expert AI search visibility analyst representing Claude/Anthropic's perspective. Analyze how "${co}" and "${comp}" appear when users query Claude and similar AI assistants in the "${ind}" industry.
+
+Score each company 0-100 across three dimensions based on how Claude perceives and would cite them:
+- Brand Awareness: how accurately and completely Claude describes each company unprompted
+- Category Search: how often Claude would cite each company when buyers ask for top vendors
+- Thought Leadership: how often Claude cites each as an expert in industry trends
 
 Return ONLY valid JSON, no markdown, no other text:
 {
   "company_total": <integer 0-100>,
   "competitor_total": <integer 0-100>,
-  "brand": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins and why>"},
-  "category": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins and why>"},
-  "thought": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins and why>"},
+  "brand": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension in Claude and why>"},
+  "category": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension in Claude and why>"},
+  "thought": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension in Claude and why>"},
   "prompts": [
     "<buyer category search query>",
     "<brand reputation query>",
     "<thought leadership query>"
   ],
   "citations": {
-    "company_citation_rate": "<estimated % e.g. '~65%'>",
-    "competitor_citation_rate": "<estimated % e.g. '~82%'>",
+    "company_citation_rate": "<estimated % of Claude responses that cite ${co}>",
+    "competitor_citation_rate": "<estimated % of Claude responses that cite ${comp}>",
     "company_mention_context": "<how Claude typically frames ${co}>",
     "competitor_mention_context": "<how Claude typically frames ${comp}>"
   },
@@ -512,24 +562,25 @@ Return ONLY valid JSON, no markdown, no other text:
     "competitor_signal": "<one sentence on ${comp} organic search presence>",
     "keyword_gap": "<most important keyword gap between the two>"
   },
-  "recommendations": [
-    "<specific actionable recommendation #1>",
-    "<specific actionable recommendation #2>",
-    "<specific actionable recommendation #3>"
-  ],
   "verdict": "<One bold declarative sentence. Most important strategic implication. No hedging.>",
   "gap": "<One sentence of expert analyst commentary. Specific structural or strategic reason for the gap. Feels like insider analysis. Ends with an implicit question.>"
 }`;
 
-  const openaiPrompt=`You are an AI search visibility analyst. In the "${ind}" industry, when users search on ChatGPT or Perplexity, how does "${co}" compare to "${comp}"?
+  const openaiPrompt=`You are an expert AI search visibility analyst representing ChatGPT/OpenAI's perspective. Analyze how "${co}" and "${comp}" appear when users query ChatGPT and similar OpenAI-powered assistants in the "${ind}" industry.
 
-Return ONLY valid JSON, no markdown:
+Score each company 0-100 across three dimensions based on how ChatGPT perceives and would cite them:
+- Brand Awareness: how accurately and completely ChatGPT describes each company unprompted
+- Category Search: how often ChatGPT would cite each company when buyers ask for top vendors
+- Thought Leadership: how often ChatGPT cites each as an expert in industry trends
+
+Return ONLY valid JSON, no markdown, no other text:
 {
-  "chatgpt_company_visibility": <integer 0-100>,
-  "chatgpt_competitor_visibility": <integer 0-100>,
-  "company_chatgpt_context": "<how ChatGPT typically describes ${co} in ${ind} queries>",
-  "competitor_chatgpt_context": "<how ChatGPT typically describes ${comp} in ${ind} queries>",
-  "chatgpt_insight": "<one sharp sentence about the ChatGPT visibility gap between the two brands>"
+  "company_total": <integer 0-100>,
+  "competitor_total": <integer 0-100>,
+  "brand": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension in ChatGPT and why>"},
+  "category": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension in ChatGPT and why>"},
+  "thought": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension in ChatGPT and why>"},
+  "chatgpt_insight": "<one sharp sentence summarizing the most important ChatGPT visibility difference between the two brands>"
 }`;
 
   try{
@@ -553,14 +604,22 @@ Return ONLY valid JSON, no markdown:
     let openaiData = null;
     try {
       openaiData = JSON.parse(openaiRaw.replace(/```json|```/g,'').replace(/^[^{]*/,'').replace(/[^}]*$/,'').trim());
-    } catch(e) { /* openai data optional */ }
+    } catch(e) { /* openai optional */ }
 
-    if (openaiData) data.openai = openaiData;
+    // Average the totals if both engines returned data
+    if(openaiData){
+      data.company_total_avg = Math.round((data.company_total + (openaiData.company_total||0)) / 2);
+      data.competitor_total_avg = Math.round((data.competitor_total + (openaiData.competitor_total||0)) / 2);
+      data.openai = openaiData;
+    } else {
+      data.company_total_avg = data.company_total;
+      data.competitor_total_avg = data.competitor_total;
+    }
 
     stopSpin();
     setProgress(100);
     await new Promise(r=>setTimeout(r,400));
-    renderResults(data,co,comp);
+    renderResults(data,co,comp,openaiData);
 
   }catch(e){
     stopSpin();
@@ -571,51 +630,164 @@ Return ONLY valid JSON, no markdown:
   }
 }
 
-function renderResults(data,co,comp){
+// ── DIAGNOSTIC FRAMEWORK ─────────────────────────────────────────────────────
+const BUCKETS = {
+  entity: {
+    label: 'Primary Gap · Entity Recognition',
+    name: 'AI doesn\'t know you well enough to cite you',
+    desc: 'Your brand lacks the consistent, authoritative signals AI engines need to reference you with confidence.',
+    actions: [
+      { text: '<strong>Audit your brand presence</strong> across G2, Capterra, LinkedIn, Crunchbase, and your top 3 industry directories. Fill every gap with identical language — same brand name, category, and one-line description across all platforms.' },
+      { text: '<strong>Standardize your brand entity</strong> — ensure your company description, founding date, and category are consistent everywhere AI engines index. Inconsistency creates uncertainty and reduces citation confidence.' },
+      { text: '<strong>Secure one authoritative third-party mention</strong> — a press release, industry publication feature, or analyst reference — within 30 days. AI engines weight external corroboration heavily when deciding who to cite.' }
+    ],
+    measure: 'Re-run your Waypoint scan in 30 days. Target: +10 points on Brand Awareness.',
+    threshold: 'brand'
+  },
+  content: {
+    label: 'Primary Gap · Content Structure',
+    name: 'Your content isn\'t structured for AI extraction',
+    desc: 'AI engines cite content that directly answers questions. Your current structure doesn\'t match the format AI engines prioritize.',
+    actions: [
+      { text: '<strong>Build a FAQ page</strong> targeting the 5 most common buyer questions in your category. Use explicit question-and-answer format — the exact phrasing buyers use when asking AI assistants.' },
+      { text: '<strong>Add FAQPage schema markup</strong> to your highest-traffic pages. This signals to AI engines that your content is structured for direct extraction and increases citation probability significantly.' },
+      { text: '<strong>Create a "What is [your category]" definition page</strong> — 600-800 words, clear H1 and H2/H3 hierarchy, written to answer a direct question. Definition pages are among the most-cited content formats in AI responses.' }
+    ],
+    measure: 'Re-run your Waypoint scan in 30 days. Target: +10-15 points on Category Search.',
+    threshold: 'category'
+  },
+  authority: {
+    label: 'Primary Gap · Topical Authority',
+    name: 'AI engines don\'t recognize you as an expert voice',
+    desc: 'Your competitor is being cited as an authority because they have more depth on the topics buyers are asking about.',
+    actions: [
+      { text: '<strong>Identify the top 3 topics your competitor is being cited for</strong> and create deeper, more specific content on each. AI engines favor breadth and depth over recency — more content on a topic signals authority.' },
+      { text: '<strong>Publish one piece of original data or research</strong> — a survey, benchmark, or proprietary analysis. AI engines disproportionately cite original data because it can\'t be found elsewhere.' },
+      { text: '<strong>Build a content cluster</strong> — 5-7 related articles around your core topic that interlink. Topical clusters signal domain expertise and dramatically increase the likelihood of AI citation across multiple query types.' }
+    ],
+    measure: 'Re-run your Waypoint scan in 60 days. Topical authority takes longer to build. Target: +10 points on Thought Leadership.',
+    threshold: 'thought'
+  },
+  citation: {
+    label: 'Primary Gap · Citation Sources',
+    name: 'Your competitor has citation patterns you haven\'t established',
+    desc: 'AI engines cite your competitor from third-party sources you\'re not appearing in. This is a structural gap that requires external action.',
+    actions: [
+      { text: '<strong>Identify which third-party publications are citing your competitor</strong> — industry media, analyst reports, review sites. These are the sources AI engines trust most. Target them for coverage in the next 60 days.' },
+      { text: '<strong>Analyze your competitor\'s top-cited content</strong> — the format, length, and structure AI engines are extracting from. Reverse-engineer what\'s working and create a superior version.' },
+      { text: '<strong>Submit to 3 industry directories or publications</strong> your competitor appears in that you don\'t. Being indexed in trusted sources is one of the fastest ways to improve AI citation rates.' }
+    ],
+    measure: 'Re-run your Waypoint scan in 90 days. Citation gaps take the longest to close. Target: narrow the overall gap by 15+ points.',
+    threshold: 'overall'
+  }
+};
+
+function selectBucket(data) {
+  const brand = data.company_total_avg ? Math.round((data.brand?.a||0 + (data.openai?.brand?.a||data.brand?.a||0)) / (data.openai?2:1)) : Math.round(data.brand?.a || 0);
+  const category = data.company_total_avg ? Math.round((data.category?.a||0 + (data.openai?.category?.a||data.category?.a||0)) / (data.openai?2:1)) : Math.round(data.category?.a || 0);
+  const thought = data.company_total_avg ? Math.round((data.thought?.a||0 + (data.openai?.thought?.a||data.thought?.a||0)) / (data.openai?2:1)) : Math.round(data.thought?.a || 0);
+  const compTotal = Math.round(data.competitor_total_avg || data.competitor_total || 0);
+  const myTotal = Math.round(data.company_total_avg || data.company_total || 0);
+  const gap = compTotal - myTotal;
+
+  // Find weakest dimension
+  const dims = [
+    { key: 'entity', score: brand },
+    { key: 'content', score: category },
+    { key: 'authority', score: thought }
+  ];
+  dims.sort((a, b) => a.score - b.score);
+  const weakest = dims[0];
+
+  // If competitor gap is very large and weakest score is above 50, show citation bucket
+  if (gap >= 20 && weakest.score >= 50) return BUCKETS.citation;
+
+  return BUCKETS[weakest.key];
+}
+
+function renderDiagnostic(data, co, comp) {
+  const bucket = selectBucket(data);
+
+  document.getElementById('r-bucket-label').textContent = bucket.label;
+  document.getElementById('r-bucket-name').textContent = bucket.name;
+  document.getElementById('r-bucket-desc').textContent = bucket.desc;
+  document.getElementById('r-measure-text').textContent = bucket.measure;
+  document.getElementById('r-baseline-date').textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+  const actionsEl = document.getElementById('r-diag-actions');
+  actionsEl.innerHTML = '';
+  bucket.actions.forEach((a, i) => {
+    const el = document.createElement('div');
+    el.className = 'diag-action';
+    el.innerHTML = `<span class="diag-action-num">0${i+1}</span><span class="diag-action-text">${a.text}</span>`;
+    actionsEl.appendChild(el);
+  });
+}
+
+function renderResults(data,co,comp,openaiData){
   document.getElementById('r-names').textContent=co+' vs '+comp;
   document.getElementById('r-co-name').textContent=co;
   document.getElementById('r-comp-name').textContent=comp;
-  document.getElementById('r-score-a').textContent=Math.round(data.company_total);
-  document.getElementById('r-score-b').textContent=Math.round(data.competitor_total);
+  document.getElementById('r-score-a').textContent=data.company_total_avg||Math.round(data.company_total);
+  document.getElementById('r-score-b').textContent=data.competitor_total_avg||Math.round(data.competitor_total);
 
-  const angleA=-data.company_total*3.6;
-  const angleB=-data.competitor_total*3.6;
+  const angleA=-(data.company_total_avg||data.company_total)*3.6;
+  const angleB=-(data.competitor_total_avg||data.competitor_total)*3.6;
   animNeedle('needle-a',0,angleA,48,48,1800);
   setTimeout(()=>animNeedle('needle-b',180,angleB,48,48,1500),500);
 
   // Dimensions
-  const dims=[
+  // Dimensions — dual bar (Claude + GPT)
+  const DIMS=[
     {id:'brand',label:'Brand Awareness'},
     {id:'category',label:'Category Search'},
     {id:'thought',label:'Thought Leadership'}
   ];
   const container=document.getElementById('r-dims');
   container.innerHTML='';
-  dims.forEach(d=>{
-    const a=Math.round(data[d.id]?.a||0);
-    const b=Math.round(data[d.id]?.b||0);
-    const max=Math.max(a,b,1);
+  DIMS.forEach(d=>{
+    const claudeA=Math.round(data[d.id]?.a||0);
+    const claudeB=Math.round(data[d.id]?.b||0);
+    const gptA=openaiData?Math.round(openaiData[d.id]?.a||0):null;
+    const gptB=openaiData?Math.round(openaiData[d.id]?.b||0):null;
+    const avgA=gptA!==null?Math.round((claudeA+gptA)/2):claudeA;
+    const avgB=gptB!==null?Math.round((claudeB+gptB)/2):claudeB;
+    const maxA=Math.max(claudeA,gptA||0,1);
+    const maxB=Math.max(claudeB,gptB||0,1);
     const insight=data[d.id]?.insight||'';
+    const gptInsight=openaiData?openaiData[d.id]?.insight:'';
+
     const el=document.createElement('div');
     el.className='dim';
     el.innerHTML=`
       <div class="dim-hd">
         <span class="dim-nm">${d.label}</span>
-        <div class="dim-sc">
-          <span class="dim-sc-a">${a}</span>
-          <span class="dim-sc-sep">/</span>
-          <span class="dim-sc-b">${b}</span>
+        <span class="dim-avg">${avgA}<span class="dim-avg-label">avg</span></span>
+      </div>
+      <div class="dim-bars">
+        <div class="dim-bar-row">
+          <span class="dim-engine claude">Claude</span>
+          <div class="track">
+            <div class="bar-a" id="ca-${d.id}" style="width:0%"></div>
+          </div>
+          <span class="dim-score a">${claudeA}</span>
         </div>
+        ${gptA!==null?`
+        <div class="dim-bar-row">
+          <span class="dim-engine gpt">GPT</span>
+          <div class="track">
+            <div class="bar-b" id="ga-${d.id}" style="width:0%"></div>
+          </div>
+          <span class="dim-score b">${gptA}</span>
+        </div>`:''}
       </div>
-      <div class="track">
-        <div class="bar-b" id="bb-${d.id}" style="width:0%"></div>
-        <div class="bar-a" id="ba-${d.id}" style="width:0%"></div>
-      </div>
-      ${insight?`<div class="dim-insight">${insight}</div>`:''}`;
+      ${insight?`<div class="dim-insight">Claude: ${insight}${gptInsight?' · GPT: '+gptInsight:''}</div>`:''}`;
     container.appendChild(el);
     setTimeout(()=>{
-      document.getElementById('ba-'+d.id).style.width=(a/max*100)+'%';
-      document.getElementById('bb-'+d.id).style.width=(b/max*100)+'%';
+      const caEl=document.getElementById('ca-'+d.id);
+      const gaEl=document.getElementById('ga-'+d.id);
+      if(caEl) caEl.style.width=(claudeA/Math.max(claudeA,gptA||claudeA,1)*100)+'%';
+      if(gaEl&&gptA!==null) gaEl.style.width=(gptA/Math.max(claudeA,gptA,1)*100)+'%';
     },300);
   });
 
@@ -662,15 +834,8 @@ function renderResults(data,co,comp){
   document.getElementById('r-verdict').textContent=data.verdict||'—';
   document.getElementById('r-gap').textContent=data.gap||'—';
 
-  // Recommendations
-  const recsEl=document.getElementById('r-recs');
-  recsEl.innerHTML='';
-  (data.recommendations||[]).forEach((r,i)=>{
-    const el=document.createElement('div');
-    el.className='rec-item';
-    el.innerHTML=`<span class="rec-num">0${i+1}</span><span>${r}</span>`;
-    recsEl.appendChild(el);
-  });
+  // Diagnostic framework
+  renderDiagnostic(data, co, comp);
 
   show('s-results');
 }

@@ -102,6 +102,7 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
 .dim{background:rgba(245,242,236,0.04);border:1px solid rgba(245,242,236,0.12);border-radius:4px;padding:8px 10px;}
 .dim-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
 .dim-nm{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.5);}
+.dim-desc{font-size:9px;color:rgba(245,242,236,0.25);margin-top:2px;font-style:italic;}
 .dim-avg{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;font-style:italic;color:#f5f2ec;line-height:1;}
 .dim-avg-label{font-family:'DM Mono',monospace;font-size:7px;font-style:normal;color:rgba(245,242,236,0.2);letter-spacing:1px;margin-left:3px;}
 .dim-bars{display:flex;flex-direction:column;gap:4px;margin-bottom:4px;}
@@ -355,59 +356,15 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
 
     <div class="dims" id="r-dims"></div>
 
-    <!-- PROMPTS USED -->
+    <!-- TOP PROMPTS -->
     <div class="section-block">
-      <div class="section-lbl">Prompts Simulated</div>
+      <div class="section-lbl">Top Buyer Prompts in This Category</div>
       <div class="prompt-list" id="r-prompts"></div>
     </div>
 
-    <!-- CITATIONS -->
-    <div class="section-block">
-      <div class="section-lbl">AI Citation Signals</div>
-      <div class="citation-grid">
-        <div class="citation-card a">
-          <div class="citation-name" id="r-cit-co-name">—</div>
-          <div class="citation-rate" id="r-cit-co-rate">—</div>
-          <div class="citation-context" id="r-cit-co-ctx">—</div>
-        </div>
-        <div class="citation-card b">
-          <div class="citation-name" id="r-cit-comp-name">—</div>
-          <div class="citation-rate" id="r-cit-comp-rate">—</div>
-          <div class="citation-context" id="r-cit-comp-ctx">—</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CHATGPT VISIBILITY -->
-    <div class="section-block" id="r-chatgpt" style="display:none;">
-      <div class="section-lbl">ChatGPT Visibility</div>
-      <div class="citation-grid">
-        <div class="citation-card a">
-          <div class="citation-name" id="r-cit-co-name2"></div>
-          <div class="citation-rate" id="r-chatgpt-co-score">—</div>
-          <div class="citation-context" id="r-chatgpt-co-ctx">—</div>
-        </div>
-        <div class="citation-card b">
-          <div class="citation-name" id="r-cit-comp-name2"></div>
-          <div class="citation-rate" id="r-chatgpt-comp-score">—</div>
-          <div class="citation-context" id="r-chatgpt-comp-ctx">—</div>
-        </div>
-      </div>
-      <div class="dim-insight" id="r-chatgpt-insight" style="margin-top:6px;font-style:normal;color:rgba(245,242,236,0.55);"></div>
-    </div>
-
-    <!-- SEO SIGNALS -->
-    <div class="section-block">
-      <div class="section-lbl">SEO Visibility Signals</div>
-      <div class="seo-row" id="r-seo-co">—</div>
-      <div class="seo-row" id="r-seo-comp">—</div>
-      <div class="seo-gap" id="r-seo-gap">—</div>
-    </div>
-
-    <!-- VERDICT -->
+    <!-- GAP INSIGHT -->
     <div class="finding">
-      <div class="finding-lbl">// Waypoint Verdict</div>
-      <div class="verdict" id="r-verdict">—</div>
+      <div class="finding-lbl">// Discoverability Gap</div>
       <div class="gap-txt" id="r-gap">—</div>
     </div>
 
@@ -532,55 +489,47 @@ async function runScan(){
     },s.delay);
   });
 
-  const claudePrompt=`You are an expert AI search visibility analyst representing Claude/Anthropic's perspective. Analyze how "${co}" and "${comp}" appear when users query Claude and similar AI assistants in the "${ind}" industry.
+  const claudePrompt=`You are an expert AI search visibility analyst. Analyze how "${co}" and "${comp}" appear in AI search engines including Claude, ChatGPT, and Perplexity in the "${ind}" industry.
 
-Score each company 0-100 across three dimensions based on how Claude perceives and would cite them:
-- Brand Awareness: how accurately and completely Claude describes each company unprompted
-- Category Search: how often Claude would cite each company when buyers ask for top vendors
-- Thought Leadership: how often Claude cites each as an expert in industry trends
+Score each company 0-100 across three discoverability dimensions:
+
+1. PROMPT ALIGNMENT: How well does the brand's language, positioning and content match the actual queries buyers type into AI engines in this category? High score = the brand's vocabulary closely matches buyer intent signals AI engines have learned to associate with this industry.
+
+2. CITATION PRESENCE: How frequently and from how many independent third-party sources do AI engines reference this brand? High score = strong coverage from industry publications, review platforms, analyst mentions, and directories — not just the brand's own site.
+
+3. ANSWER READINESS: How well is the brand's content structured for AI extraction? High score = strong FAQ format, schema markup, direct answer formatting, question-based headings, and structured data that AI engines can confidently cite.
 
 Return ONLY valid JSON, no markdown, no other text:
 {
   "company_total": <integer 0-100>,
   "competitor_total": <integer 0-100>,
-  "brand": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension in Claude and why>"},
-  "category": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension in Claude and why>"},
-  "thought": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension in Claude and why>"},
-  "prompts": [
-    "<buyer category search query>",
-    "<brand reputation query>",
-    "<thought leadership query>"
+  "prompt_alignment": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence: which brand wins this dimension and the specific reason why — based on vocabulary alignment, content language, or buyer intent matching>"},
+  "citation_presence": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence: which brand wins and why — based on third-party coverage, review presence, analyst mentions, or directory listings>"},
+  "answer_readiness": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence: which brand wins and why — based on content structure, schema usage, FAQ presence, or direct answer formatting>"},
+  "top_prompts": [
+    "<the most common buyer query in this category that AI engines answer — e.g. 'best [category] software for enterprise'>",
+    "<a comparison query buyers use — e.g. 'vs [competitor]' or 'alternatives to [brand]'>",
+    "<a problem-based query — e.g. 'how to solve [key pain point] in [industry]'>"
   ],
-  "citations": {
-    "company_citation_rate": "<estimated % of Claude responses that cite ${co}>",
-    "competitor_citation_rate": "<estimated % of Claude responses that cite ${comp}>",
-    "company_mention_context": "<how Claude typically frames ${co}>",
-    "competitor_mention_context": "<how Claude typically frames ${comp}>"
-  },
-  "seo": {
-    "company_signal": "<one sentence on ${co} organic search presence>",
-    "competitor_signal": "<one sentence on ${comp} organic search presence>",
-    "keyword_gap": "<most important keyword gap between the two>"
-  },
-  "verdict": "<One bold declarative sentence. Most important strategic implication. No hedging.>",
-  "gap": "<One sentence of expert analyst commentary. Specific structural or strategic reason for the gap. Feels like insider analysis. Ends with an implicit question.>"
+  "gap": "<One sentence of expert analyst commentary. Name the specific structural, linguistic, or strategic reason one brand outperforms the other in AI discoverability. Reference real brand dynamics or content patterns. Must feel like insider analysis. End with an implicit question about whether the gap can be closed.>"
 }`;
 
-  const openaiPrompt=`You are an expert AI search visibility analyst representing ChatGPT/OpenAI's perspective. Analyze how "${co}" and "${comp}" appear when users query ChatGPT and similar OpenAI-powered assistants in the "${ind}" industry.
+  const openaiPrompt=`You are an expert AI search visibility analyst representing ChatGPT's perspective. Analyze how "${co}" and "${comp}" appear when users query ChatGPT in the "${ind}" industry.
 
-Score each company 0-100 across three dimensions based on how ChatGPT perceives and would cite them:
-- Brand Awareness: how accurately and completely ChatGPT describes each company unprompted
-- Category Search: how often ChatGPT would cite each company when buyers ask for top vendors
-- Thought Leadership: how often ChatGPT cites each as an expert in industry trends
+Score each company 0-100 across three discoverability dimensions:
+
+1. PROMPT ALIGNMENT: How well does the brand's language match actual buyer queries in ChatGPT for this category?
+2. CITATION PRESENCE: How often does ChatGPT reference this brand from third-party sources?
+3. ANSWER READINESS: How well is the brand's content structured for ChatGPT to extract and cite?
 
 Return ONLY valid JSON, no markdown, no other text:
 {
   "company_total": <integer 0-100>,
   "competitor_total": <integer 0-100>,
-  "brand": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension in ChatGPT and why>"},
-  "category": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension in ChatGPT and why>"},
-  "thought": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins this dimension in ChatGPT and why>"},
-  "chatgpt_insight": "<one sharp sentence summarizing the most important ChatGPT visibility difference between the two brands>"
+  "prompt_alignment": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins in ChatGPT and why>"},
+  "citation_presence": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins in ChatGPT and why>"},
+  "answer_readiness": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins in ChatGPT and why>"},
+  "chatgpt_summary": "<one sentence on the most important ChatGPT discoverability difference between the two brands>"
 }`;
 
   try{
@@ -632,76 +581,61 @@ Return ONLY valid JSON, no markdown, no other text:
 
 // ── DIAGNOSTIC FRAMEWORK ─────────────────────────────────────────────────────
 const BUCKETS = {
-  entity: {
-    label: 'Primary Gap · Entity Recognition',
-    name: 'AI doesn\'t know you well enough to cite you',
-    desc: 'Your brand lacks the consistent, authoritative signals AI engines need to reference you with confidence.',
+  prompt: {
+    label: 'Primary Gap · Prompt Alignment',
+    name: 'Your brand isn\'t speaking the language buyers use',
+    desc: 'AI engines aren\'t connecting your brand to the queries buyers actually type. There\'s a vocabulary gap between how you describe yourself and how buyers search.',
     actions: [
-      { text: '<strong>Audit your brand presence</strong> across G2, Capterra, LinkedIn, Crunchbase, and your top 3 industry directories. Fill every gap with identical language — same brand name, category, and one-line description across all platforms.' },
-      { text: '<strong>Standardize your brand entity</strong> — ensure your company description, founding date, and category are consistent everywhere AI engines index. Inconsistency creates uncertainty and reduces citation confidence.' },
-      { text: '<strong>Secure one authoritative third-party mention</strong> — a press release, industry publication feature, or analyst reference — within 30 days. AI engines weight external corroboration heavily when deciding who to cite.' }
+      { text: '<strong>Map the top 10 queries buyers use in your category</strong> — ask ChatGPT and Perplexity "what are the most common questions people ask about [category]?" Then audit whether your website and content actually uses that language.' },
+      { text: '<strong>Rewrite your homepage and key landing pages</strong> to lead with buyer language, not brand language. If buyers ask "how do I fix [problem]" and your site talks about "delivering solutions," there\'s a gap AI engines can\'t bridge.' },
+      { text: '<strong>Create content that mirrors the exact phrasing of the top 3 buyer queries</strong> — use those queries as H1 headings, article titles, and FAQ questions. AI engines learn to cite sources that match the vocabulary of the question.' }
     ],
-    measure: 'Re-run your Waypoint scan in 30 days. Target: +10 points on Brand Awareness.',
-    threshold: 'brand'
-  },
-  content: {
-    label: 'Primary Gap · Content Structure',
-    name: 'Your content isn\'t structured for AI extraction',
-    desc: 'AI engines cite content that directly answers questions. Your current structure doesn\'t match the format AI engines prioritize.',
-    actions: [
-      { text: '<strong>Build a FAQ page</strong> targeting the 5 most common buyer questions in your category. Use explicit question-and-answer format — the exact phrasing buyers use when asking AI assistants.' },
-      { text: '<strong>Add FAQPage schema markup</strong> to your highest-traffic pages. This signals to AI engines that your content is structured for direct extraction and increases citation probability significantly.' },
-      { text: '<strong>Create a "What is [your category]" definition page</strong> — 600-800 words, clear H1 and H2/H3 hierarchy, written to answer a direct question. Definition pages are among the most-cited content formats in AI responses.' }
-    ],
-    measure: 'Re-run your Waypoint scan in 30 days. Target: +10-15 points on Category Search.',
-    threshold: 'category'
-  },
-  authority: {
-    label: 'Primary Gap · Topical Authority',
-    name: 'AI engines don\'t recognize you as an expert voice',
-    desc: 'Your competitor is being cited as an authority because they have more depth on the topics buyers are asking about.',
-    actions: [
-      { text: '<strong>Identify the top 3 topics your competitor is being cited for</strong> and create deeper, more specific content on each. AI engines favor breadth and depth over recency — more content on a topic signals authority.' },
-      { text: '<strong>Publish one piece of original data or research</strong> — a survey, benchmark, or proprietary analysis. AI engines disproportionately cite original data because it can\'t be found elsewhere.' },
-      { text: '<strong>Build a content cluster</strong> — 5-7 related articles around your core topic that interlink. Topical clusters signal domain expertise and dramatically increase the likelihood of AI citation across multiple query types.' }
-    ],
-    measure: 'Re-run your Waypoint scan in 60 days. Topical authority takes longer to build. Target: +10 points on Thought Leadership.',
-    threshold: 'thought'
+    measure: 'Re-run your Waypoint scan in 30 days. Target: +10-15 points on Prompt Alignment.',
+    threshold: 'prompt'
   },
   citation: {
-    label: 'Primary Gap · Citation Sources',
-    name: 'Your competitor has citation patterns you haven\'t established',
-    desc: 'AI engines cite your competitor from third-party sources you\'re not appearing in. This is a structural gap that requires external action.',
+    label: 'Primary Gap · Citation Presence',
+    name: 'AI engines lack third-party signals to cite you with confidence',
+    desc: 'Your brand\'s own website accounts for only 5-10% of what AI engines reference. The other 90% comes from publishers, reviews, directories, and analyst coverage — and that\'s where you\'re underrepresented.',
     actions: [
-      { text: '<strong>Identify which third-party publications are citing your competitor</strong> — industry media, analyst reports, review sites. These are the sources AI engines trust most. Target them for coverage in the next 60 days.' },
-      { text: '<strong>Analyze your competitor\'s top-cited content</strong> — the format, length, and structure AI engines are extracting from. Reverse-engineer what\'s working and create a superior version.' },
-      { text: '<strong>Submit to 3 industry directories or publications</strong> your competitor appears in that you don\'t. Being indexed in trusted sources is one of the fastest ways to improve AI citation rates.' }
+      { text: '<strong>Audit your presence on the top 5 third-party platforms in your category</strong> — G2, Capterra, industry directories, review sites. Fill every gap. AI engines weight independent sources far more than branded content.' },
+      { text: '<strong>Identify which publications are citing your competitor</strong> and target them for coverage in the next 60 days. A single mention in a trusted industry publication can significantly increase your AI citation rate.' },
+      { text: '<strong>Ensure your brand description is identical across all platforms</strong> — same name, category, and one-line description everywhere. Inconsistency creates uncertainty and reduces the confidence AI engines need to cite you.' }
     ],
-    measure: 'Re-run your Waypoint scan in 90 days. Citation gaps take the longest to close. Target: narrow the overall gap by 15+ points.',
-    threshold: 'overall'
+    measure: 'Re-run your Waypoint scan in 60 days. Citation presence takes time to build. Target: +10 points on Citation Presence.',
+    threshold: 'citation'
+  },
+  answer: {
+    label: 'Primary Gap · Answer Readiness',
+    name: 'Your content isn\'t structured for AI extraction',
+    desc: 'AI engines can only cite content they can reliably extract. Your current content structure isn\'t formatted in the way AI engines prefer to pull answers from.',
+    actions: [
+      { text: '<strong>Build a FAQ page</strong> targeting the 5 most common buyer questions in your category. Use explicit question-and-answer format. AI engines prioritize content that directly answers the question being asked.' },
+      { text: '<strong>Add FAQPage and HowTo schema markup</strong> to your highest-traffic pages. This signals to AI engines that your content is structured for direct extraction and significantly increases citation probability.' },
+      { text: '<strong>Reformat your key content pages</strong> with question-based H2 headings and 40-80 word answer paragraphs that follow each heading. This is the format AI engines are trained to extract and cite as authoritative answers.' }
+    ],
+    measure: 'Re-run your Waypoint scan in 30 days. Target: +10-15 points on Answer Readiness.',
+    threshold: 'answer'
   }
 };
 
 function selectBucket(data) {
-  const brand = data.company_total_avg ? Math.round((data.brand?.a||0 + (data.openai?.brand?.a||data.brand?.a||0)) / (data.openai?2:1)) : Math.round(data.brand?.a || 0);
-  const category = data.company_total_avg ? Math.round((data.category?.a||0 + (data.openai?.category?.a||data.category?.a||0)) / (data.openai?2:1)) : Math.round(data.category?.a || 0);
-  const thought = data.company_total_avg ? Math.round((data.thought?.a||0 + (data.openai?.thought?.a||data.thought?.a||0)) / (data.openai?2:1)) : Math.round(data.thought?.a || 0);
+  const pa = data.openai ? Math.round(((data.prompt_alignment?.a||0) + (data.openai?.prompt_alignment?.a||0)) / 2) : Math.round(data.prompt_alignment?.a || 0);
+  const cp = data.openai ? Math.round(((data.citation_presence?.a||0) + (data.openai?.citation_presence?.a||0)) / 2) : Math.round(data.citation_presence?.a || 0);
+  const ar = data.openai ? Math.round(((data.answer_readiness?.a||0) + (data.openai?.answer_readiness?.a||0)) / 2) : Math.round(data.answer_readiness?.a || 0);
   const compTotal = Math.round(data.competitor_total_avg || data.competitor_total || 0);
   const myTotal = Math.round(data.company_total_avg || data.company_total || 0);
   const gap = compTotal - myTotal;
 
-  // Find weakest dimension
   const dims = [
-    { key: 'entity', score: brand },
-    { key: 'content', score: category },
-    { key: 'authority', score: thought }
+    { key: 'prompt', score: pa },
+    { key: 'citation', score: cp },
+    { key: 'answer', score: ar }
   ];
   dims.sort((a, b) => a.score - b.score);
   const weakest = dims[0];
 
-  // If competitor gap is very large and weakest score is above 50, show citation bucket
   if (gap >= 20 && weakest.score >= 50) return BUCKETS.citation;
-
   return BUCKETS[weakest.key];
 }
 
@@ -739,9 +673,9 @@ function renderResults(data,co,comp,openaiData){
   // Dimensions
   // Dimensions — dual bar (Claude + GPT)
   const DIMS=[
-    {id:'brand',label:'Brand Awareness'},
-    {id:'category',label:'Category Search'},
-    {id:'thought',label:'Thought Leadership'}
+    {id:'prompt_alignment',label:'Prompt Alignment',desc:'How well your brand language matches buyer queries'},
+    {id:'citation_presence',label:'Citation Presence',desc:'How often third parties reference your brand in AI'},
+    {id:'answer_readiness',label:'Answer Readiness',desc:'How well your content is structured for AI extraction'}
   ];
   const container=document.getElementById('r-dims');
   container.innerHTML='';
@@ -761,7 +695,10 @@ function renderResults(data,co,comp,openaiData){
     el.className='dim';
     el.innerHTML=`
       <div class="dim-hd">
-        <span class="dim-nm">${d.label}</span>
+        <div>
+          <span class="dim-nm">${d.label}</span>
+          <div class="dim-desc">${d.desc}</div>
+        </div>
         <span class="dim-avg">${avgA}<span class="dim-avg-label">avg</span></span>
       </div>
       <div class="dim-bars">
@@ -781,7 +718,7 @@ function renderResults(data,co,comp,openaiData){
           <span class="dim-score b">${gptA}</span>
         </div>`:''}
       </div>
-      ${insight?`<div class="dim-insight">Claude: ${insight}${gptInsight?' · GPT: '+gptInsight:''}</div>`:''}`;
+      ${insight?`<div class="dim-insight">${insight}${gptInsight?' <span style="color:rgba(245,242,236,0.25)">·</span> GPT: '+gptInsight:''}</div>`:''}`;
     container.appendChild(el);
     setTimeout(()=>{
       const caEl=document.getElementById('ca-'+d.id);
@@ -794,44 +731,14 @@ function renderResults(data,co,comp,openaiData){
   // Prompts
   const promptsEl=document.getElementById('r-prompts');
   promptsEl.innerHTML='';
-  (data.prompts||[]).forEach(p=>{
+  (data.top_prompts||data.prompts||[]).forEach(p=>{
     const el=document.createElement('div');
     el.className='prompt-item';
     el.textContent='"'+p+'"';
     promptsEl.appendChild(el);
   });
 
-  // Citations
-  document.getElementById('r-cit-co-name').textContent=co;
-  document.getElementById('r-cit-comp-name').textContent=comp;
-  document.getElementById('r-cit-co-rate').textContent=data.citations?.company_citation_rate||'—';
-  document.getElementById('r-cit-comp-rate').textContent=data.citations?.competitor_citation_rate||'—';
-  document.getElementById('r-cit-co-ctx').textContent=data.citations?.company_mention_context||'—';
-  document.getElementById('r-cit-comp-ctx').textContent=data.citations?.competitor_mention_context||'—';
-
-  // ChatGPT data from OpenAI
-  const chatgptEl=document.getElementById('r-chatgpt');
-  if(chatgptEl){
-    if(data.openai){
-      const o=data.openai;
-      chatgptEl.style.display='block';
-      document.getElementById('r-cit-co-name2').textContent=co;
-      document.getElementById('r-cit-comp-name2').textContent=comp;
-      document.getElementById('r-chatgpt-co-score').textContent=Math.round(o.chatgpt_company_visibility||0);
-      document.getElementById('r-chatgpt-comp-score').textContent=Math.round(o.chatgpt_competitor_visibility||0);
-      document.getElementById('r-chatgpt-co-ctx').textContent=o.company_chatgpt_context||'—';
-      document.getElementById('r-chatgpt-comp-ctx').textContent=o.competitor_chatgpt_context||'—';
-      document.getElementById('r-chatgpt-insight').textContent=o.chatgpt_insight||'—';
-    }
-  }
-
-  // SEO
-  document.getElementById('r-seo-co').textContent=co+': '+( data.seo?.company_signal||'—');
-  document.getElementById('r-seo-comp').textContent=comp+': '+(data.seo?.competitor_signal||'—');
-  document.getElementById('r-seo-gap').textContent='Key gap: '+(data.seo?.keyword_gap||'—');
-
-  // Verdict & gap
-  document.getElementById('r-verdict').textContent=data.verdict||'—';
+  // Gap insight
   document.getElementById('r-gap').textContent=data.gap||'—';
 
   // Diagnostic framework

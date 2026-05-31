@@ -501,24 +501,15 @@ async function runScan(){
     return {
       pa: [
         `Best ${ind} in ${market}?`,
-        `Top ${ind} companies in ${market}`,
-        `${co} vs ${comp} — which is better for ${ind}?`,
-        `Most trusted ${ind} provider in ${market}`,
-        `Who leads in ${ind} in ${market}?`
+        `${co} vs ${comp} — which is better for ${ind}?`
       ],
       cp: [
         `What do people say about ${co} in ${ind}?`,
-        `${co} reviews and reputation ${market}`,
-        `Is ${co} well known in ${ind}?`,
-        `Most cited ${ind} brands in ${market}`,
         `Who is more authoritative — ${co} or ${comp} in ${ind}?`
       ],
       ar: [
         `How much does ${ind} cost in ${market}?`,
-        `What questions should I ask when hiring ${ind}?`,
-        `${co} FAQ — common questions answered`,
-        `How to evaluate ${ind} providers in ${market}`,
-        `What makes a good ${ind} provider?`
+        `What questions should I ask when hiring ${ind}?`
       ]
     };
   }
@@ -527,10 +518,10 @@ async function runScan(){
 
   // Update scan animation labels
   [
-    {id:'brand',   delay:0,    prog:25, label:'Prompt Alignment — 5 queries'},
-    {id:'cat',     delay:2500, prog:55, label:'Citation Presence — 5 queries'},
-    {id:'thought', delay:5000, prog:80, label:'Answer Readiness — 5 queries'},
-    {id:'comp',    delay:7500, prog:95, label:'Calculating scores...'},
+    {id:'brand',   delay:0,    prog:30},
+    {id:'cat',     delay:1200, prog:55},
+    {id:'thought', delay:2400, prog:80},
+    {id:'comp',    delay:3600, prog:95},
   ].forEach(s=>{
     setTimeout(()=>{
       setQ(s.id,'scanning');
@@ -546,7 +537,7 @@ async function runScan(){
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({ company:co, competitor:comp, industry:ind, market, prompts })
       }).then(r=>r.json()),
-      new Promise(r=>setTimeout(r,9000))
+      new Promise(r=>setTimeout(r,5000))
     ]);
 
     if(response.error) throw new Error(response.error);

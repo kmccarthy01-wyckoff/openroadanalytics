@@ -500,43 +500,25 @@ async function runScan(){
   function buildPrompts(co, comp, ind, market) {
     return {
       pa: [
-        // Prompt Alignment — buyer intent queries
         `Best ${ind} in ${market}?`,
         `Top ${ind} companies in ${market}`,
-        `Who should I hire for ${ind} in ${market}?`,
-        `Recommended ${ind} near ${market}`,
-        `${ind} services in ${market} — who is the best?`,
         `${co} vs ${comp} — which is better for ${ind}?`,
-        `Alternatives to ${comp} for ${ind} in ${market}`,
         `Most trusted ${ind} provider in ${market}`,
-        `${ind} expert recommendations ${market}`,
         `Who leads in ${ind} in ${market}?`
       ],
       cp: [
-        // Citation Presence — authority and reputation queries
         `What do people say about ${co} in ${ind}?`,
         `${co} reviews and reputation ${market}`,
         `Is ${co} well known in ${ind}?`,
-        `What experts say about ${comp} in ${ind}`,
-        `${comp} reputation in ${market}`,
         `Most cited ${ind} brands in ${market}`,
-        `Industry analysts on ${co} vs ${comp}`,
-        `${co} mentioned in ${ind} publications`,
-        `Third party reviews of ${comp} ${ind}`,
         `Who is more authoritative — ${co} or ${comp} in ${ind}?`
       ],
       ar: [
-        // Answer Readiness — structured content queries
         `How much does ${ind} cost in ${market}?`,
         `What questions should I ask when hiring ${ind}?`,
-        `What to look for in a ${ind} provider`,
         `${co} FAQ — common questions answered`,
-        `How does ${co} work for ${ind}?`,
-        `Step by step guide to choosing ${ind} in ${market}`,
-        `What makes a good ${ind} provider?`,
-        `${comp} vs ${co} — feature comparison`,
         `How to evaluate ${ind} providers in ${market}`,
-        `${ind} checklist for ${market}`
+        `What makes a good ${ind} provider?`
       ]
     };
   }
@@ -545,10 +527,10 @@ async function runScan(){
 
   // Update scan animation labels
   [
-    {id:'brand', delay:0,    prog:25, label:'Prompt Alignment — 10 queries'},
-    {id:'cat',   delay:4000, prog:55, label:'Citation Presence — 10 queries'},
-    {id:'thought',delay:8000,prog:80, label:'Answer Readiness — 10 queries'},
-    {id:'comp',  delay:12000,prog:95, label:'Calculating scores...'},
+    {id:'brand',   delay:0,    prog:25, label:'Prompt Alignment — 5 queries'},
+    {id:'cat',     delay:2500, prog:55, label:'Citation Presence — 5 queries'},
+    {id:'thought', delay:5000, prog:80, label:'Answer Readiness — 5 queries'},
+    {id:'comp',    delay:7500, prog:95, label:'Calculating scores...'},
   ].forEach(s=>{
     setTimeout(()=>{
       setQ(s.id,'scanning');
@@ -564,7 +546,7 @@ async function runScan(){
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({ company:co, competitor:comp, industry:ind, market, prompts })
       }).then(r=>r.json()),
-      new Promise(r=>setTimeout(r,14000))
+      new Promise(r=>setTimeout(r,9000))
     ]);
 
     if(response.error) throw new Error(response.error);
@@ -591,7 +573,7 @@ async function runScan(){
         insight: `${co} cited in ${response.scores.answer_readiness.citation_rate_a}% of structured content queries vs ${comp} in ${response.scores.answer_readiness.citation_rate_b}%.`
       },
       top_prompts: response.top_prompts,
-      gap: `This score reflects ${response.raw_counts.total_responses} real AI responses across ${response.raw_counts.total_prompts} prompts on ${response.raw_counts.engines} engines. Each score is a measured citation rate and position average — not an estimate.`,
+      gap: `This score reflects ${response.raw_counts.total_responses} real AI responses across ${response.raw_counts.total_prompts} prompts on ${response.raw_counts.engines} engines. Each score is a measured citation rate, position, and sentiment average — not an estimate.`,
       methodology: response.raw_counts
     };
 

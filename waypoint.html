@@ -496,86 +496,109 @@ async function runScan(){
     },s.delay);
   });
 
-  const claudePrompt=`You are an expert AI search visibility analyst. Analyze how "${co}" and "${comp}" appear in AI search engines including Claude, ChatGPT, and Perplexity in the "${ind}" industry in the "${market}" market.
+  // ── GENERATE 30 PROMPTS ─────────────────────────────────────
+  function buildPrompts(co, comp, ind, market) {
+    return {
+      pa: [
+        // Prompt Alignment — buyer intent queries
+        `Best ${ind} in ${market}?`,
+        `Top ${ind} companies in ${market}`,
+        `Who should I hire for ${ind} in ${market}?`,
+        `Recommended ${ind} near ${market}`,
+        `${ind} services in ${market} — who is the best?`,
+        `${co} vs ${comp} — which is better for ${ind}?`,
+        `Alternatives to ${comp} for ${ind} in ${market}`,
+        `Most trusted ${ind} provider in ${market}`,
+        `${ind} expert recommendations ${market}`,
+        `Who leads in ${ind} in ${market}?`
+      ],
+      cp: [
+        // Citation Presence — authority and reputation queries
+        `What do people say about ${co} in ${ind}?`,
+        `${co} reviews and reputation ${market}`,
+        `Is ${co} well known in ${ind}?`,
+        `What experts say about ${comp} in ${ind}`,
+        `${comp} reputation in ${market}`,
+        `Most cited ${ind} brands in ${market}`,
+        `Industry analysts on ${co} vs ${comp}`,
+        `${co} mentioned in ${ind} publications`,
+        `Third party reviews of ${comp} ${ind}`,
+        `Who is more authoritative — ${co} or ${comp} in ${ind}?`
+      ],
+      ar: [
+        // Answer Readiness — structured content queries
+        `How much does ${ind} cost in ${market}?`,
+        `What questions should I ask when hiring ${ind}?`,
+        `What to look for in a ${ind} provider`,
+        `${co} FAQ — common questions answered`,
+        `How does ${co} work for ${ind}?`,
+        `Step by step guide to choosing ${ind} in ${market}`,
+        `What makes a good ${ind} provider?`,
+        `${comp} vs ${co} — feature comparison`,
+        `How to evaluate ${ind} providers in ${market}`,
+        `${ind} checklist for ${market}`
+      ]
+    };
+  }
 
-Score each company 0-100 across three discoverability dimensions:
+  const prompts = buildPrompts(co, comp, ind, market);
 
-1. PROMPT ALIGNMENT: How well does the brand's language, positioning and content match the actual queries buyers type into AI engines in this category? High score = the brand's vocabulary closely matches buyer intent signals AI engines have learned to associate with this industry.
-
-2. CITATION PRESENCE: How frequently and from how many independent third-party sources do AI engines reference this brand? High score = strong coverage from industry publications, review platforms, analyst mentions, and directories — not just the brand's own site.
-
-3. ANSWER READINESS: How well is the brand's content structured for AI extraction? High score = strong FAQ format, schema markup, direct answer formatting, question-based headings, and structured data that AI engines can confidently cite.
-
-Return ONLY valid JSON, no markdown, no other text:
-{
-  "company_total": <integer 0-100>,
-  "competitor_total": <integer 0-100>,
-  "prompt_alignment": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence: which brand wins this dimension and the specific reason why — based on vocabulary alignment, content language, or buyer intent matching>"},
-  "citation_presence": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence: which brand wins and why — based on third-party coverage, review presence, analyst mentions, or directory listings>"},
-  "answer_readiness": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence: which brand wins and why — based on content structure, schema usage, FAQ presence, or direct answer formatting>"},
-  "top_prompts": [
-    "<the most common buyer query in this category that AI engines answer — e.g. 'best [category] software for enterprise'>",
-    "<a comparison query buyers use — e.g. 'vs [competitor]' or 'alternatives to [brand]'>",
-    "<a problem-based query — e.g. 'how to solve [key pain point] in [industry]'>"
-  ],
-  "gap": "<One sentence of expert analyst commentary. Name the specific structural, linguistic, or strategic reason one brand outperforms the other in AI discoverability. Reference real brand dynamics or content patterns. Must feel like insider analysis. End with an implicit question about whether the gap can be closed.>"
-}`;
-
-  const openaiPrompt=`You are an expert AI search visibility analyst representing ChatGPT's perspective. Analyze how "${co}" and "${comp}" appear when users query ChatGPT in the "${ind}" industry in the "${market}" market.
-
-Score each company 0-100 across three discoverability dimensions:
-
-1. PROMPT ALIGNMENT: How well does the brand's language match actual buyer queries in ChatGPT for this category?
-2. CITATION PRESENCE: How often does ChatGPT reference this brand from third-party sources?
-3. ANSWER READINESS: How well is the brand's content structured for ChatGPT to extract and cite?
-
-Return ONLY valid JSON, no markdown, no other text:
-{
-  "company_total": <integer 0-100>,
-  "competitor_total": <integer 0-100>,
-  "prompt_alignment": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins in ChatGPT and why>"},
-  "citation_presence": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins in ChatGPT and why>"},
-  "answer_readiness": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins in ChatGPT and why>"},
-  "chatgpt_summary": "<one sentence on the most important ChatGPT discoverability difference between the two brands>"
-}`;
+  // Update scan animation labels
+  [
+    {id:'brand', delay:0,    prog:25, label:'Prompt Alignment — 10 queries'},
+    {id:'cat',   delay:4000, prog:55, label:'Citation Presence — 10 queries'},
+    {id:'thought',delay:8000,prog:80, label:'Answer Readiness — 10 queries'},
+    {id:'comp',  delay:12000,prog:95, label:'Calculating scores...'},
+  ].forEach(s=>{
+    setTimeout(()=>{
+      setQ(s.id,'scanning');
+      setProgress(s.prog);
+      setTimeout(()=>setQ(s.id,'done'),2000);
+    },s.delay);
+  });
 
   try{
     const [response]=await Promise.all([
-      fetch('/.netlify/functions/waypoint',{
+      fetch('/.netlify/functions/waypoint-measure',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          messages:[{role:'user',content:claudePrompt}],
-          openaiMessage: openaiPrompt
-        })
+        body:JSON.stringify({ company:co, competitor:comp, industry:ind, market, prompts })
       }).then(r=>r.json()),
-      new Promise(r=>setTimeout(r,5800))
+      new Promise(r=>setTimeout(r,14000))
     ]);
 
-    const raw = response.claudeText || '';
-    const openaiRaw = response.openaiText || '';
+    if(response.error) throw new Error(response.error);
 
-    const data=JSON.parse(raw.replace(/```json|```/g,'').replace(/^[^{]*/,'').replace(/[^}]*$/,'').trim());
-
-    let openaiData = null;
-    try {
-      openaiData = JSON.parse(openaiRaw.replace(/```json|```/g,'').replace(/^[^{]*/,'').replace(/[^}]*$/,'').trim());
-    } catch(e) { /* openai optional */ }
-
-    // Average the totals if both engines returned data
-    if(openaiData){
-      data.company_total_avg = Math.round((data.company_total + (openaiData.company_total||0)) / 2);
-      data.competitor_total_avg = Math.round((data.competitor_total + (openaiData.competitor_total||0)) / 2);
-      data.openai = openaiData;
-    } else {
-      data.company_total_avg = data.company_total;
-      data.competitor_total_avg = data.competitor_total;
-    }
+    // Build data object compatible with renderResults
+    const data = {
+      company_total: response.company_total,
+      competitor_total: response.competitor_total,
+      company_total_avg: response.company_total,
+      competitor_total_avg: response.competitor_total,
+      prompt_alignment: {
+        a: response.scores.prompt_alignment.a,
+        b: response.scores.prompt_alignment.b,
+        insight: `${co} cited in ${response.scores.prompt_alignment.citation_rate_a}% of buyer intent queries vs ${comp} in ${response.scores.prompt_alignment.citation_rate_b}%.`
+      },
+      citation_presence: {
+        a: response.scores.citation_presence.a,
+        b: response.scores.citation_presence.b,
+        insight: `${co} appeared in ${response.scores.citation_presence.citation_rate_a}% of authority queries vs ${comp} in ${response.scores.citation_presence.citation_rate_b}%.`
+      },
+      answer_readiness: {
+        a: response.scores.answer_readiness.a,
+        b: response.scores.answer_readiness.b,
+        insight: `${co} cited in ${response.scores.answer_readiness.citation_rate_a}% of structured content queries vs ${comp} in ${response.scores.answer_readiness.citation_rate_b}%.`
+      },
+      top_prompts: response.top_prompts,
+      gap: `This score reflects ${response.raw_counts.total_responses} real AI responses across ${response.raw_counts.total_prompts} prompts on ${response.raw_counts.engines} engines. Each score is a measured citation rate and position average — not an estimate.`,
+      methodology: response.raw_counts
+    };
 
     stopSpin();
     setProgress(100);
     await new Promise(r=>setTimeout(r,400));
-    renderResults(data,co,comp,openaiData,market);
+    renderResults(data,co,comp,null,market);
 
   }catch(e){
     stopSpin();
@@ -745,8 +768,17 @@ function renderResults(data,co,comp,openaiData,market){
     promptsEl.appendChild(el);
   });
 
-  // Gap insight
-  document.getElementById('r-gap').textContent=data.gap||'—';
+  // Gap insight + methodology
+  const gapEl = document.getElementById('r-gap');
+  if(gapEl) {
+    gapEl.textContent = data.gap||'—';
+    if(data.methodology) {
+      const methEl = document.createElement('div');
+      methEl.style.cssText = 'margin-top:8px;padding:8px 10px;background:rgba(245,242,236,0.03);border:1px solid rgba(245,242,236,0.06);border-radius:3px;';
+      methEl.innerHTML = `<span style="font-family:var(--mono);font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,80,42,0.7);">Score Methodology: </span><span style="font-size:9px;color:rgba(245,242,236,0.35);">${data.methodology.total_prompts} real prompts · ${data.methodology.total_responses} AI responses · ${data.methodology.engines} engines · Citation rate + position + sentiment scored per response</span>`;
+      gapEl.parentNode.insertBefore(methEl, gapEl.nextSibling);
+    }
+  }
 
   // Diagnostic framework
   renderDiagnostic(data, co, comp);

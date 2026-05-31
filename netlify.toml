@@ -3,3 +3,6 @@
 
 [functions.waypoint]
   timeout = 30
+
+[functions.waypoint-measure]
+  timeout = 30

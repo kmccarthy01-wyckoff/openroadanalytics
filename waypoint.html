@@ -567,9 +567,9 @@ async function runScan(){
       ],
       // Answer Readiness — is content structured for AI extraction?
       ar: [
-        `How much does ${ind} cost in ${market}?`,
-        `What should I look for when choosing a ${ind} company?`,
-        `What questions should I ask when evaluating ${ind} providers?`
+        `Tell me about ${co} — what do they offer and how much do they charge?`,
+        `What makes ${co} different from ${comp} in ${ind}?`,
+        `Give me a quick overview of ${co} and ${comp} in ${ind} in ${market}`
       ]
     };
   }
@@ -611,6 +611,10 @@ async function runScan(){
       prompt_alignment: {
         a: response.scores.prompt_alignment.a,
         b: response.scores.prompt_alignment.b,
+        claude_a: response.scores.prompt_alignment.claude_a,
+        claude_b: response.scores.prompt_alignment.claude_b,
+        gpt_a: response.scores.prompt_alignment.gpt_a,
+        gpt_b: response.scores.prompt_alignment.gpt_b,
         citation_rate_a: response.scores.prompt_alignment.citation_rate_a,
         citation_rate_b: response.scores.prompt_alignment.citation_rate_b,
         insight: buildInsight(co, comp, response.scores.prompt_alignment),
@@ -620,6 +624,10 @@ async function runScan(){
       citation_presence: {
         a: response.scores.citation_presence.a,
         b: response.scores.citation_presence.b,
+        claude_a: response.scores.citation_presence.claude_a,
+        claude_b: response.scores.citation_presence.claude_b,
+        gpt_a: response.scores.citation_presence.gpt_a,
+        gpt_b: response.scores.citation_presence.gpt_b,
         citation_rate_a: response.scores.citation_presence.citation_rate_a,
         citation_rate_b: response.scores.citation_presence.citation_rate_b,
         insight: buildInsight(co, comp, response.scores.citation_presence),
@@ -629,6 +637,10 @@ async function runScan(){
       answer_readiness: {
         a: response.scores.answer_readiness.a,
         b: response.scores.answer_readiness.b,
+        claude_a: response.scores.answer_readiness.claude_a,
+        claude_b: response.scores.answer_readiness.claude_b,
+        gpt_a: response.scores.answer_readiness.gpt_a,
+        gpt_b: response.scores.answer_readiness.gpt_b,
         citation_rate_a: response.scores.answer_readiness.citation_rate_a,
         citation_rate_b: response.scores.answer_readiness.citation_rate_b,
         insight: buildInsight(co, comp, response.scores.answer_readiness),
@@ -778,16 +790,16 @@ function renderResults(data,co,comp,openaiData,market){
   const container=document.getElementById('r-dims');
   container.innerHTML='';
   DIMS.forEach(d=>{
-    const claudeA=Math.round(data[d.id]?.a||0);
-    const claudeB=Math.round(data[d.id]?.b||0);
-    const gptA=openaiData?Math.round(openaiData[d.id]?.a||0):null;
-    const gptB=openaiData?Math.round(openaiData[d.id]?.b||0):null;
-    const avgA=gptA!==null?Math.round((claudeA+gptA)/2):claudeA;
-    const avgB=gptB!==null?Math.round((claudeB+gptB)/2):claudeB;
-    const maxA=Math.max(claudeA,gptA||0,1);
-    const maxB=Math.max(claudeB,gptB||0,1);
+    // Use per-engine scores from waypoint-measure response
+    const claudeA=Math.round(data[d.id]?.claude_a ?? data[d.id]?.a ?? 0);
+    const claudeB=Math.round(data[d.id]?.claude_b ?? data[d.id]?.b ?? 0);
+    const gptA=Math.round(data[d.id]?.gpt_a ?? null);
+    const gptB=Math.round(data[d.id]?.gpt_b ?? null);
+    const hasGpt = data[d.id]?.gpt_a !== undefined;
+    const avgA=hasGpt?Math.round((claudeA+gptA)/2):claudeA;
+    const avgB=hasGpt?Math.round((claudeB+gptB)/2):claudeB;
     const insight=data[d.id]?.insight||'';
-    const gptInsight=openaiData?openaiData[d.id]?.insight:'';
+    const gptInsight='';
 
     const el=document.createElement('div');
     el.className='dim';
@@ -807,7 +819,7 @@ function renderResults(data,co,comp,openaiData,market){
           </div>
           <span class="dim-score a">${claudeA}</span>
         </div>
-        ${gptA!==null?`
+        ${hasGpt?`
         <div class="dim-bar-row">
           <span class="dim-engine gpt">GPT</span>
           <div class="track">
@@ -825,7 +837,7 @@ function renderResults(data,co,comp,openaiData,market){
       const caEl=document.getElementById('ca-'+d.id);
       const gaEl=document.getElementById('ga-'+d.id);
       if(caEl) caEl.style.width=(claudeA/Math.max(claudeA,gptA||claudeA,1)*100)+'%';
-      if(gaEl&&gptA!==null) gaEl.style.width=(gptA/Math.max(claudeA,gptA,1)*100)+'%';
+      if(gaEl&&hasGpt) gaEl.style.width=(gptA/Math.max(claudeA,gptA,1)*100)+'%';
     },300);
   });
 

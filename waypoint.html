@@ -345,7 +345,7 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
     </div>
 
     <div class="methodology-strip">
-      <span class="meth-dot"></span>12 buyer queries · 2 engines · 24 real AI responses
+      <span class="meth-dot"></span>9 buyer queries · 2 engines · 18 real AI responses
       <span class="meth-sep">·</span>Citation detected · position + sentiment scored
       <span class="meth-sep">·</span>3 dimensions equally weighted → Waypoint Score™
     </div>
@@ -557,22 +557,19 @@ async function runScan(){
       pa: [
         `Best ${ind} company in ${market}?`,
         `${co} vs ${comp} — which is better for ${ind}?`,
-        `Who are the top ${ind} providers in ${market}?`,
-        `Recommend a ${ind} provider for a business in ${market}`
+        `Who are the top ${ind} providers in ${market}?`
       ],
       // Citation Presence — do third parties vouch for the brand?
       cp: [
         `What do customers say about ${co} in ${ind}?`,
         `Is ${co} a reputable ${ind} company?`,
-        `Compare ${co} and ${comp} reviews in ${ind}`,
-        `Which ${ind} companies have the best reputation in ${market}?`
+        `Compare ${co} and ${comp} reviews in ${ind}`
       ],
       // Answer Readiness — is content structured for AI extraction?
       ar: [
         `How much does ${ind} cost in ${market}?`,
         `What should I look for when choosing a ${ind} company?`,
-        `What questions should I ask when evaluating ${ind} providers?`,
-        `How long does a typical ${ind} engagement take?`
+        `What questions should I ask when evaluating ${ind} providers?`
       ]
     };
   }

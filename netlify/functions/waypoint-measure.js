@@ -27,14 +27,26 @@ function parseResponse(text, company, competitor) {
   const coCited = coIdx !== -1;
   const compCited = compIdx !== -1;
 
-  // Extract a short verbatim snippet around the brand mention
+  // Strip markdown and extract clean snippet around brand mention
   function extractSnippet(fullText, idx) {
     if (idx === -1) return '';
-    const start = Math.max(0, idx - 40);
-    const end = Math.min(fullText.length, idx + 120);
-    let snippet = fullText.substring(start, end).trim();
+    // Strip markdown headers, bold, bullets before extracting
+    const clean = fullText
+      .replace(/#{1,6}\s+[^\n]*/g, '')  // remove ## headings
+      .replace(/\*\*([^*]+)\*\*/g, '$1') // remove **bold**
+      .replace(/\*([^*]+)\*/g, '$1')      // remove *italic*
+      .replace(/^[-*]\s+/gm, '')           // remove bullet points
+      .replace(/\n{2,}/g, ' ')             // collapse newlines
+      .trim();
+    // Recalculate idx in cleaned text
+    const brand = fullText.substring(idx, idx + 30).toLowerCase();
+    const cleanIdx = clean.toLowerCase().indexOf(brand.substring(0, 15));
+    const useIdx = cleanIdx !== -1 ? cleanIdx : 0;
+    const start = Math.max(0, useIdx - 30);
+    const end = Math.min(clean.length, useIdx + 130);
+    let snippet = clean.substring(start, end).trim();
     if (start > 0) snippet = '...' + snippet;
-    if (end < fullText.length) snippet = snippet + '...';
+    if (end < clean.length) snippet = snippet + '...';
     return snippet;
   }
 
@@ -165,21 +177,37 @@ exports.handler = async (event) => {
       return null;
     }
 
+    // Per-engine scores for display
+    function dimScoreEngine(results, brand, engine) {
+      const avg = results.reduce((s,r) => {
+        const src = engine === 'claude' ? r.claude : r.gpt;
+        const raw = brand === 'co' ? src.coRaw : src.compRaw;
+        return s + raw;
+      }, 0) / results.length;
+      return normalize(avg);
+    }
+
     const scores = {
       prompt_alignment:  {
         a: dimScore(pa,'co'),  b: dimScore(pa,'comp'),
+        claude_a: dimScoreEngine(pa,'co','claude'), claude_b: dimScoreEngine(pa,'comp','claude'),
+        gpt_a: dimScoreEngine(pa,'co','gpt'), gpt_b: dimScoreEngine(pa,'comp','gpt'),
         citation_rate_a: citRate(pa,'co'),  citation_rate_b: citRate(pa,'comp'),
         snippet_a: getBestSnippet(pa,'co','claude') || getBestSnippet(pa,'co','gpt'),
         snippet_b: getBestSnippet(pa,'comp','claude') || getBestSnippet(pa,'comp','gpt')
       },
       citation_presence: {
         a: dimScore(cp,'co'),  b: dimScore(cp,'comp'),
+        claude_a: dimScoreEngine(cp,'co','claude'), claude_b: dimScoreEngine(cp,'comp','claude'),
+        gpt_a: dimScoreEngine(cp,'co','gpt'), gpt_b: dimScoreEngine(cp,'comp','gpt'),
         citation_rate_a: citRate(cp,'co'),  citation_rate_b: citRate(cp,'comp'),
         snippet_a: getBestSnippet(cp,'co','claude') || getBestSnippet(cp,'co','gpt'),
         snippet_b: getBestSnippet(cp,'comp','claude') || getBestSnippet(cp,'comp','gpt')
       },
       answer_readiness:  {
         a: dimScore(ar,'co'),  b: dimScore(ar,'comp'),
+        claude_a: dimScoreEngine(ar,'co','claude'), claude_b: dimScoreEngine(ar,'comp','claude'),
+        gpt_a: dimScoreEngine(ar,'co','gpt'), gpt_b: dimScoreEngine(ar,'comp','gpt'),
         citation_rate_a: citRate(ar,'co'),  citation_rate_b: citRate(ar,'comp'),
         snippet_a: getBestSnippet(ar,'co','claude') || getBestSnippet(ar,'co','gpt'),
         snippet_b: getBestSnippet(ar,'comp','claude') || getBestSnippet(ar,'comp','gpt')

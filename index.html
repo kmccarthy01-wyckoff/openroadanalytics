@@ -1260,6 +1260,64 @@ footer {
   footer { padding: 1.2rem; gap: 0.8rem; }
   .footer-brand { font-size: 0.58rem; }
 }
+
+/* ─── COMPARISON TABLE ─── */
+.comparison-wrap {
+  max-width: 900px; margin: 0 auto; padding: 3rem 2rem 4rem;
+}
+.comparison-eyebrow {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem;
+}
+.comparison-table {
+  border: 1px solid rgba(245,242,236,0.12); border-radius: 6px; overflow: hidden;
+  margin-bottom: 1.2rem;
+}
+.comparison-row {
+  display: grid; grid-template-columns: 1.4fr 1.6fr 1.2fr 1.2fr;
+  border-bottom: 1px solid rgba(245,242,236,0.07);
+}
+.comparison-row:last-child { border-bottom: none; }
+.comparison-row.comparison-header { background: rgba(245,242,236,0.04); }
+.comparison-cell {
+  padding: 10px 14px; font-size: 0.72rem; color: rgba(245,242,236,0.55);
+  line-height: 1.5; border-right: 1px solid rgba(245,242,236,0.07);
+}
+.comparison-cell:last-child { border-right: none; }
+.comparison-cell.label {
+  font-family: var(--mono); font-size: 0.58rem; letter-spacing: 1.5px;
+  text-transform: uppercase; color: rgba(245,242,236,0.35); padding-top: 12px;
+}
+.comparison-cell.col-waypoint {
+  background: rgba(200,80,42,0.06); color: rgba(245,242,236,0.8);
+  font-weight: 400;
+}
+.comparison-cell.col-waypoint.highlight {
+  color: #f5f2ec; font-weight: 500;
+}
+.comparison-row.comparison-header .col-waypoint {
+  font-family: var(--mono); font-size: 0.65rem; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--accent); font-weight: 500;
+}
+.comparison-row.comparison-header .col-waypoint span,
+.comparison-row.comparison-header .col-other span {
+  display: block; font-size: 0.58rem; letter-spacing: 0; text-transform: none;
+  color: rgba(245,242,236,0.3); margin-top: 2px; font-weight: 300;
+}
+.comparison-row.comparison-header .col-other {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 1px;
+  text-transform: uppercase; color: rgba(245,242,236,0.4);
+}
+.comparison-note {
+  font-size: 0.72rem; color: rgba(245,242,236,0.35); line-height: 1.7;
+  font-style: italic; text-align: center;
+}
+@media(max-width:700px){
+  .comparison-row { grid-template-columns: 1fr 1fr; }
+  .comparison-cell.col-other:last-child { display: none; }
+  .comparison-row.comparison-header .col-other:last-child { display: none; }
+}
+
 </style>
 </head>
 <body>
@@ -1412,7 +1470,7 @@ footer {
     <div class="sample-header">
       <div class="eyebrow">AI Discoverability Intelligence</div>
       <h2 class="section-h">This is what your<br><em>Waypoint Score™ looks like.</em></h2>
-      <p class="sample-sub">Run a free scan. See exactly how AI engines perceive your brand versus your top competitor — across Prompt Alignment, Citation Presence, and Answer Readiness.</p>
+      <p class="sample-sub">Run a free scan. See exactly how AI engines perceive your brand versus your top competitor — across Prompt Alignment, Citation Presence, and Answer Readiness. A North Carolina wedding vendor went from invisible to consistently cited in AI searches within 90 days. A North Jersey law firm closed a 23-point gap against its top competitor in one quarter.</p>
     </div>
     <div class="sample-report">
       <div class="sample-report-header">
@@ -1470,15 +1528,59 @@ footer {
             <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:61%"></div></div><span class="sample-score-n a">61</span></div>
             <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:79%"></div></div><span class="sample-score-n b">79</span></div>
           </div>
-          <div class="sample-insight">PIMCO's content structure lacks the FAQ format and schema markup AI engines use to extract and cite direct answers.</div>
+          <div class="sample-insight">Nike deploys FAQPage schema across its top product pages and uses question-based H2 headings — the exact structural signals AI engines use to identify and extract direct answers.</div>
         </div>
       </div>
       <div class="sample-gap">
         <div class="sample-gap-label">// Discoverability Gap</div>
-        <div class="sample-gap-text">BlackRock's dominance in AI search stems from a structural content advantage built over years — their educational content library is indexed, cited, and trusted by AI engines in ways PIMCO's investment-focused content isn't, raising the question of whether repositioning thought leadership content can close the gap before the next model retraining cycle.</div>
+        <div class="sample-gap-text">Nike’s AI search advantage is structural, not cosmetic — two decades of athlete storytelling created a citation ecosystem of millions of independent references that AI engines treat as categorical authority. Adidas’s post-Yeezy narrative disruption compounded the gap, leaving semantic uncertainty that Nike’s content depth now fills by default.</div>
       </div>
       <a href="/waypoint.html" class="sample-cta">Run your own Waypoint Scan — free →</a>
     </div>
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <div class="comparison-wrap">
+    <div class="comparison-eyebrow">// How Waypoint Compares</div>
+    <div class="comparison-table" role="table" aria-label="Waypoint vs enterprise AI visibility platforms">
+      <div class="comparison-row comparison-header" role="row">
+        <div class="comparison-cell label" role="columnheader"></div>
+        <div class="comparison-cell col-waypoint" role="columnheader">Waypoint™<br><span>Open Road Analytics</span></div>
+        <div class="comparison-cell col-other" role="columnheader">Profound<br><span>Enterprise Platform</span></div>
+        <div class="comparison-cell col-other" role="columnheader">SEMrush AI Toolkit<br><span>Add-on Suite</span></div>
+      </div>
+      <div class="comparison-row" role="row">
+        <div class="comparison-cell label" role="rowheader">Who it’s for</div>
+        <div class="comparison-cell col-waypoint">Mid-market companies that need expert judgment, not another dashboard</div>
+        <div class="comparison-cell col-other">Fortune 500 teams with dedicated AEO staff</div>
+        <div class="comparison-cell col-other">Existing SEMrush customers wanting basic AI tracking</div>
+      </div>
+      <div class="comparison-row" role="row">
+        <div class="comparison-cell label" role="rowheader">Investment</div>
+        <div class="comparison-cell col-waypoint highlight">From $25,000 · fixed fee</div>
+        <div class="comparison-cell col-other">$96K–$500K+/year</div>
+        <div class="comparison-cell col-other">$139/mo + $99/mo AI add-on</div>
+      </div>
+      <div class="comparison-row" role="row">
+        <div class="comparison-cell label" role="rowheader">What you get</div>
+        <div class="comparison-cell col-waypoint highlight">Expert-interpreted audit · written findings · sequenced playbook · Kevin’s senior judgment</div>
+        <div class="comparison-cell col-other">Dashboard · raw data · requires your team to interpret and act</div>
+        <div class="comparison-cell col-other">Weekly score updates · brand mentions · no implementation guidance</div>
+      </div>
+      <div class="comparison-row" role="row">
+        <div class="comparison-cell label" role="rowheader">Engines tracked</div>
+        <div class="comparison-cell col-waypoint">Claude + GPT-4o · 40 real buyer queries per scan</div>
+        <div class="comparison-cell col-other">10+ engines · 400M+ prompts · continuous monitoring</div>
+        <div class="comparison-cell col-other">ChatGPT, Perplexity, Google AI Overviews · weekly refresh</div>
+      </div>
+      <div class="comparison-row" role="row">
+        <div class="comparison-cell label" role="rowheader">Implementation</div>
+        <div class="comparison-cell col-waypoint highlight">Included · Kevin works with you to execute the playbook</div>
+        <div class="comparison-cell col-other">Not included · platform only</div>
+        <div class="comparison-cell col-other">Not included · platform only</div>
+      </div>
+    </div>
+    <p class="comparison-note">Profound and SEMrush are excellent platforms for organizations with dedicated AEO teams. Waypoint exists for organizations that don’t have that team — and don’t need to build one.</p>
   </div>
 </section>
 
@@ -1586,10 +1688,10 @@ footer {
         <div class="eyebrow">Services</div>
         <!-- H2 — keyword rich -->
         <h2 class="section-h" id="services-heading">
-          Marketing analytics<br>consulting that <em>performs.</em>
+          AI visibility and analytics<br>consulting that <em>performs.</em>
         </h2>
       </div>
-      <p class="section-intro">From measurement frameworks and lead scoring to AI program governance — built for organizations that need enterprise-grade analytics leadership without a full-time hire.</p>
+      <p class="section-intro">From AI search visibility diagnostics to marketing measurement frameworks — senior analytics expertise for organizations that need enterprise-grade intelligence without enterprise-grade overhead.</p>
     </div>
 
     <!-- GEO answer capsule — invisible to visitors, cited by AI engines -->
@@ -1599,47 +1701,47 @@ footer {
 
     <div class="services-grid" role="list">
 
-      <article class="svc reveal" role="listitem">
+      <article class="svc-featured reveal" role="listitem">
+        <div class="svc-badge">Waypoint™</div>
         <div class="svc-n">01</div>
-        <h3 class="svc-name">Measurement Strategy & KPI Design</h3>
-        <p class="svc-desc">End-to-end KPI frameworks, attribution modeling, and reporting architecture that connects every marketing dollar to a business outcome.</p>
+        <h3 class="svc-name">AI Search Visibility & Waypoint Audit</h3>
+        <p class="svc-desc">The only expert-interpreted AI visibility diagnostic built for mid-market companies. Waypoint measures exactly how ChatGPT, Claude, and Perplexity see your brand — across 40 buyer queries, 2 engines, 3 dimensions — and delivers a written audit with a sequenced playbook. Not a dashboard. A decision.</p>
       </article>
 
       <article class="svc reveal" role="listitem">
         <div class="svc-n">02</div>
-        <h3 class="svc-name">Marketing Data Infrastructure</h3>
-        <p class="svc-desc">CDP selection, data layer design, tagging governance, and pipeline architecture that makes clean, trusted data the default — not the exception.</p>
-      </article>
-
-      <article class="svc reveal" role="listitem">
-        <div class="svc-n">03</div>
-        <h3 class="svc-name">ABM & B2B Pipeline Analytics</h3>
-        <p class="svc-desc">Account-based measurement, territory and pipeline influence reporting, lead scoring algorithm design, and ABM platform evaluation including DemandBase and 6Sense.</p>
-      </article>
-
-      <article class="svc reveal" role="listitem">
-        <div class="svc-n">04</div>
-        <h3 class="svc-name">Analytics Practice Build</h3>
-        <p class="svc-desc">Org design, hiring frameworks, and capability roadmaps for building or scaling in-house analytics teams — built to scale from day one.</p>
-      </article>
-
-      <article class="svc-featured reveal" role="listitem">
-        <div class="svc-badge">Featured</div>
-        <div class="svc-n">05</div>
         <h3 class="svc-name">Agentic AI Performance Audit</h3>
         <p class="svc-desc">Your AI programs are running. Do you know if they're working? This audit covers AI attribution, output quality governance, AEO visibility across ChatGPT and Perplexity, and ROI modeling for autonomous marketing systems. Research shows nearly 90% of organizations deploying AI in marketing have no measurement framework. That gap is the opportunity.</p>
       </article>
 
       <article class="svc reveal" role="listitem">
+        <div class="svc-n">03</div>
+        <h3 class="svc-name">Measurement Strategy & KPI Design</h3>
+        <p class="svc-desc">End-to-end KPI frameworks, attribution modeling, and reporting architecture that connects every marketing dollar to a business outcome.</p>
+      </article>
+
+      <article class="svc reveal" role="listitem">
+        <div class="svc-n">04</div>
+        <h3 class="svc-name">ABM & B2B Pipeline Analytics</h3>
+        <p class="svc-desc">Account-based measurement, territory and pipeline influence reporting, lead scoring algorithm design, and ABM platform evaluation including DemandBase and 6Sense.</p>
+      </article>
+
+      <article class="svc reveal" role="listitem">
+        <div class="svc-n">05</div>
+        <h3 class="svc-name">Marketing Data Infrastructure</h3>
+        <p class="svc-desc">CDP selection, data layer design, tagging governance, and pipeline architecture that makes clean, trusted data the default — not the exception.</p>
+      </article>
+
+      <article class="svc reveal" role="listitem">
         <div class="svc-n">06</div>
-        <h3 class="svc-name">AI Search Visibility & Attribution</h3>
-        <p class="svc-desc">Measure how AI search engines discover, cite, and recommend your brand — and connect that visibility to traffic, attribution, and revenue. Covers ChatGPT, Perplexity, Claude, and Google AI Overviews. Built on the Waypoint methodology.</p>
+        <h3 class="svc-name">Executive Reporting & BI</h3>
+        <p class="svc-desc">Power BI, Domo, and GA4 implementations with CMO-ready storytelling — including AI program performance dashboards that translate agent activity into board-level decisions.</p>
       </article>
 
       <article class="svc reveal" role="listitem">
         <div class="svc-n">07</div>
-        <h3 class="svc-name">Executive Reporting & BI</h3>
-        <p class="svc-desc">Power BI, Domo, and GA4 implementations with CMO-ready storytelling — including AI program performance dashboards that translate agent activity into board-level decisions.</p>
+        <h3 class="svc-name">Analytics Practice Build</h3>
+        <p class="svc-desc">Org design, hiring frameworks, and capability roadmaps for building or scaling in-house analytics teams — built to scale from day one.</p>
       </article>
 
       <article class="svc reveal" role="listitem">

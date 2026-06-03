@@ -162,82 +162,13 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
 .diag-measure-text{font-size:11px;color:rgba(245,242,236,0.6);line-height:1.5;margin-bottom:4px;}
 .diag-baseline{font-family:'DM Mono',monospace;font-size:8px;color:rgba(245,242,236,0.25);letter-spacing:1px;}
 
-/* TEASE CTA BUTTON */
-.tease-cta-btn {
-  font-family: var(--mono); font-size: 9px; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--ink);
-  background: var(--accent); border: none; cursor: pointer;
-  padding: 8px 16px; transition: background 0.2s;
-}
-.tease-cta-btn:hover { background: #a83518; }
-
-/* MODAL */
-.modal-overlay {
-  position: fixed; inset: 0; background: rgba(14,13,11,0.85);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 1000; padding: 20px;
-}
-.modal-overlay.hidden { display: none; }
-.modal-box {
-  background: var(--bg); border: 1px solid var(--rule-mid);
-  border-top: 3px solid var(--accent);
-  width: 100%; max-width: 400px;
-  padding: 28px 28px 24px;
-}
-.modal-header { margin-bottom: 20px; }
-.modal-waypoint {
-  font-family: var(--mono); font-size: 9px; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
-}
-.modal-title {
-  font-family: var(--serif); font-size: 1.3rem; font-weight: 900;
-  font-style: italic; color: var(--text); margin-bottom: 6px;
-}
-.modal-sub { font-size: 10px; color: rgba(245,242,236,0.45); line-height: 1.6; }
-.modal-field { margin-bottom: 12px; }
-.modal-label {
-  font-family: var(--mono); font-size: 8px; letter-spacing: 2px;
-  text-transform: uppercase; color: rgba(245,242,236,0.4);
-  display: block; margin-bottom: 5px;
-}
-.modal-input {
-  width: 100%; background: rgba(245,242,236,0.06);
-  border: 1px solid rgba(245,242,236,0.12); color: var(--text);
-  font-family: var(--sans); font-size: 12px; padding: 8px 10px;
-  outline: none; transition: border-color 0.2s;
-}
-.modal-input:focus { border-color: var(--accent); }
-.modal-error {
-  font-size: 9px; color: var(--accent); margin-bottom: 8px;
-  font-family: var(--mono); letter-spacing: 1px;
-}
-.modal-error.hidden { display: none; }
-.modal-submit {
-  width: 100%; background: var(--accent); border: none;
-  color: var(--ink); font-family: var(--mono); font-size: 9px;
-  letter-spacing: 2px; text-transform: uppercase; padding: 11px;
-  cursor: pointer; margin-bottom: 8px; transition: background 0.2s;
-}
-.modal-submit:hover { background: #a83518; }
-.modal-cancel {
-  width: 100%; background: transparent;
-  border: 1px solid rgba(245,242,236,0.12); color: rgba(245,242,236,0.3);
-  font-family: var(--mono); font-size: 8px; letter-spacing: 2px;
-  text-transform: uppercase; padding: 8px; cursor: pointer;
-}
-.modal-thanks { text-align: center; padding: 12px 0; }
-.modal-thanks-icon {
-  font-size: 28px; color: var(--accent); margin-bottom: 10px;
-}
-.modal-thanks-title {
-  font-family: var(--serif); font-size: 1.2rem; font-weight: 900;
-  font-style: italic; color: var(--text); margin-bottom: 8px;
-}
-.modal-thanks-sub {
-  font-size: 10px; color: rgba(245,242,236,0.45);
-  line-height: 1.6; margin-bottom: 16px;
-}
-.modal-thanks.hidden { display: none; }
+/* TEASE BLOCK */
+.tease-block{position:relative;background:rgba(245,242,236,0.02);border:1px solid rgba(245,242,236,0.08);border-radius:6px;padding:0.8rem;margin-bottom:0.9rem;overflow:hidden;min-height:80px;}
+.tease-block-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.25);margin-bottom:8px;}
+.tease-blur-content{display:flex;flex-direction:column;gap:5px;filter:blur(3px);opacity:0.4;user-select:none;pointer-events:none;}
+.tease-blur-item{font-size:11px;color:rgba(245,242,236,0.6);padding:4px 8px;background:rgba(245,242,236,0.04);border-radius:3px;border-left:2px solid rgba(200,80,42,0.3);}
+.tease-block-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(14,13,11,0.6);}
+.tease-block-lock{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.4);}
 .tease{position:relative;margin-bottom:0.9rem;border:1px solid rgba(245,242,236,0.12);border-radius:6px;padding:0.75rem;overflow:hidden;}
 .tease-blur{filter:blur(4px);opacity:0.5;font-size:11px;color:rgba(245,242,236,0.7);line-height:1.6;user-select:none;pointer-events:none;}
 .tease-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(14,13,11,0.65);}
@@ -249,15 +180,17 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
 .reset-btn:hover{color:rgba(245,242,236,0.65);}
 .powered{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:rgba(245,242,236,0.22);}
 .powered span{color:rgba(245,242,236,0.38);}
+
+.methodology-strip{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,242,236,0.3);padding:6px 0 10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.meth-dot{width:4px;height:4px;border-radius:50%;background:rgba(45,115,88,0.8);flex-shrink:0;}
+.meth-sep{color:rgba(245,242,236,0.15);}
+.full-report-bridge{background:rgba(200,80,42,0.08);border:1px solid rgba(200,80,42,0.25);border-radius:6px;padding:1rem 1.2rem;margin-bottom:0.9rem;}
+.bridge-score-line{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--accent, #c8502a);margin-bottom:6px;}
+.bridge-score-line span{color:#f5f2ec;}
+.bridge-copy{font-size:11px;color:rgba(245,242,236,0.55);line-height:1.6;margin-bottom:10px;font-style:italic;}
+.tease-cta-btn{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#fff;background:#c8502a;border:none;cursor:pointer;padding:8px 16px;border-radius:3px;transition:background 0.2s;}
+.tease-cta-btn:hover{background:#d9643c;}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-  (function(){
-    if(typeof emailjs !== 'undefined') {
-      emailjs.init({ publicKey: 'YOUR_EMAILJS_PUBLIC_KEY' });
-    }
-  })();
-</script>
 </head>
 <body>
 <nav class="top-nav">
@@ -397,6 +330,13 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
       <div class="r-badge">Scan Complete</div>
     </div>
 
+    <div class="methodology-strip">
+      <span class="meth-dot"></span>40 buyer queries
+      <span class="meth-sep">·</span>Claude + GPT-4o
+      <span class="meth-sep">·</span>3 dimensions equally weighted
+      <span class="meth-sep">·</span>Averaged to Waypoint Score™
+    </div>
+
     <div class="compass-hero">
       <svg id="c-results" width="96" height="96" viewBox="0 0 96 96" style="flex-shrink:0;">
         <circle cx="48" cy="48" r="44" fill="none" stroke="rgba(245,242,236,0.55)" stroke-width="1.5"/>
@@ -466,61 +406,33 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
       </div>
     </div>
 
-    <!-- FULL REPORT TEASE — blurred -->
+    <!-- TEASE — full report gate -->
     <div class="tease-block">
-      <div class="tease-block-label">// Full Waypoint Report</div>
+      <div class="tease-block-label">// Full Waypoint Audit Report</div>
       <div class="tease-blur-content">
-        <div class="tease-blur-item">Prompt Intelligence — 3 real buyer queries analyzed</div>
-        <div class="tease-blur-item">Complete Playbook — 4 prioritized actions with measurement targets</div>
-        <div class="tease-blur-item">Route to Recovery — sequenced 90-day roadmap</div>
-        <div class="tease-blur-item">Discoverability Gap Analysis — expert commentary</div>
-        <div class="tease-blur-item">Score Methodology — full transparency on how your score was derived</div>
+        <div class="tease-blur-item">What AI Actually Says — 5 real buyer queries, verbatim engine responses</div>
+        <div class="tease-blur-item">Citation Network Analysis — exactly which sources are and aren't vouching for you</div>
+        <div class="tease-blur-item">Three Dimension Deep Dive — root cause, business implication, primary action per dimension</div>
+        <div class="tease-blur-item">The Opportunity — what your score means in pipeline and revenue terms</div>
+        <div class="tease-blur-item">Route to Recovery — 4 actions sequenced by impact with 30/60/90-day targets</div>
       </div>
       <div class="tease-block-overlay">
         <div style="text-align:center;">
-          <div class="tease-block-lock" style="margin-bottom:10px;">Full report available — free download</div>
-          <button class="tease-cta-btn" onclick="showLeadModal()">Get Your Full Waypoint Report →</button>
+          <div class="tease-block-lock" style="margin-bottom:8px;">Your score is live. Here’s what’s driving it.</div>
+          <button class="tease-cta-btn" onclick="showLeadModal()">Get the Full Waypoint Audit →</button>
         </div>
       </div>
+    </div>
+
+    <div class="full-report-bridge">
+      <div class="bridge-score-line">Score: <span id="bridge-score">—</span>/100 · <span id="bridge-market">—</span></div>
+      <div class="bridge-copy">Profound costs $500K/year and requires a team to interpret it. This report comes with the senior analyst — and a clear answer to what to fix first.</div>
+      <button class="cta" onclick="showLeadModal()">Get Your Full Waypoint Report →</button>
     </div>
 
     <div class="ft">
       <button class="reset-btn" onclick="resetScan()">← New scan</button>
       <div class="powered">Powered by <span>Open Road Analytics</span></div>
-    </div>
-  </div>
-</div>
-
-<!-- LEAD CAPTURE MODAL -->
-<div id="lead-modal" class="modal-overlay hidden">
-  <div class="modal-box">
-    <div class="modal-header">
-      <div class="modal-waypoint">Waypoint™</div>
-      <div class="modal-title">Get Your Full Report</div>
-      <div class="modal-sub">We'll send your complete Waypoint Report to your inbox — including the full playbook, buyer prompt intelligence, and route to recovery.</div>
-    </div>
-    <div id="modal-form">
-      <div class="modal-field">
-        <label class="modal-label">Your Name</label>
-        <input class="modal-input" id="lead-name" type="text" placeholder="Jane Smith"/>
-      </div>
-      <div class="modal-field">
-        <label class="modal-label">Company</label>
-        <input class="modal-input" id="lead-company" type="text" placeholder="Acme Corp"/>
-      </div>
-      <div class="modal-field">
-        <label class="modal-label">Work Email</label>
-        <input class="modal-input" id="lead-email" type="email" placeholder="jane@acmecorp.com"/>
-      </div>
-      <div id="modal-error" class="modal-error hidden">Please fill in all fields with a valid email.</div>
-      <button class="modal-submit" onclick="submitLead()">Send Me the Report →</button>
-      <button class="modal-cancel" onclick="hideLeadModal()">Cancel</button>
-    </div>
-    <div id="modal-thanks" class="modal-thanks hidden">
-      <div class="modal-thanks-icon">✓</div>
-      <div class="modal-thanks-title">Report on its way.</div>
-      <div class="modal-thanks-sub">We'll be in touch within one business day with your full Waypoint Report and a quick note from Kevin at Open Road Analytics.</div>
-      <button class="modal-cancel" onclick="hideLeadModal()">Close</button>
     </div>
   </div>
 </div>
@@ -610,83 +522,82 @@ async function runScan(){
     },s.delay);
   });
 
-  const claudePrompt=`You are an expert AI search visibility analyst. Analyze how "${co}" and "${comp}" appear in AI search engines including Claude, ChatGPT, and Perplexity in the "${ind}" industry in the "${market}" market.
+  // ── GENERATE 30 PROMPTS ─────────────────────────────────────
+  function buildPrompts(co, comp, ind, market) {
+    return {
+      pa: [
+        `Best ${ind} in ${market}?`,
+        `${co} vs ${comp} — which is better for ${ind}?`
+      ],
+      cp: [
+        `What do people say about ${co} in ${ind}?`,
+        `Who is more authoritative — ${co} or ${comp} in ${ind}?`
+      ],
+      ar: [
+        `How much does ${ind} cost in ${market}?`,
+        `What questions should I ask when hiring ${ind}?`
+      ]
+    };
+  }
 
-Score each company 0-100 across three discoverability dimensions:
+  const prompts = buildPrompts(co, comp, ind, market);
 
-1. PROMPT ALIGNMENT: How well does the brand's language, positioning and content match the actual queries buyers type into AI engines in this category? High score = the brand's vocabulary closely matches buyer intent signals AI engines have learned to associate with this industry.
-
-2. CITATION PRESENCE: How frequently and from how many independent third-party sources do AI engines reference this brand? High score = strong coverage from industry publications, review platforms, analyst mentions, and directories — not just the brand's own site.
-
-3. ANSWER READINESS: How well is the brand's content structured for AI extraction? High score = strong FAQ format, schema markup, direct answer formatting, question-based headings, and structured data that AI engines can confidently cite.
-
-Return ONLY valid JSON, no markdown, no other text:
-{
-  "company_total": <integer 0-100>,
-  "competitor_total": <integer 0-100>,
-  "prompt_alignment": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence: which brand wins this dimension and the specific reason why>"},
-  "citation_presence": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence: which brand wins and why>"},
-  "answer_readiness": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence: which brand wins and why>"},
-  "top_prompts": [
-    "<most common buyer query in this category>",
-    "<comparison query buyers use>",
-    "<problem-based query>"
-  ],
-  "gap": "<One sentence of expert analyst commentary. Name the specific structural, linguistic, or strategic reason one brand outperforms the other. Must feel like insider analysis.>"
-}`;
-
-  const openaiPrompt=`You are an expert AI search visibility analyst representing ChatGPT's perspective. Analyze how "${co}" and "${comp}" appear when users query ChatGPT in the "${ind}" industry in the "${market}" market.
-
-Score each company 0-100 across three discoverability dimensions:
-1. PROMPT ALIGNMENT: How well does the brand's language match actual buyer queries in ChatGPT?
-2. CITATION PRESENCE: How often does ChatGPT reference this brand from third-party sources?
-3. ANSWER READINESS: How well is the brand's content structured for ChatGPT to extract and cite?
-
-Return ONLY valid JSON, no markdown:
-{
-  "company_total": <integer 0-100>,
-  "competitor_total": <integer 0-100>,
-  "prompt_alignment": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins in ChatGPT and why>"},
-  "citation_presence": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins in ChatGPT and why>"},
-  "answer_readiness": {"a": <0-100>, "b": <0-100>, "insight": "<one sharp sentence about who wins in ChatGPT and why>"}
-}`;
+  // Update scan animation labels
+  [
+    {id:'brand',   delay:0,    prog:30},
+    {id:'cat',     delay:1200, prog:55},
+    {id:'thought', delay:2400, prog:80},
+    {id:'comp',    delay:3600, prog:95},
+  ].forEach(s=>{
+    setTimeout(()=>{
+      setQ(s.id,'scanning');
+      setProgress(s.prog);
+      setTimeout(()=>setQ(s.id,'done'),2000);
+    },s.delay);
+  });
 
   try{
     const [response]=await Promise.all([
-      fetch('/.netlify/functions/waypoint',{
+      fetch('/.netlify/functions/waypoint-measure',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          messages:[{role:'user',content:claudePrompt}],
-          openaiMessage: openaiPrompt
-        })
+        body:JSON.stringify({ company:co, competitor:comp, industry:ind, market, prompts })
       }).then(r=>r.json()),
-      new Promise(r=>setTimeout(r,5800))
+      new Promise(r=>setTimeout(r,5000))
     ]);
 
-    const raw = response.claudeText || '';
-    const openaiRaw = response.openaiText || '';
+    if(response.error) throw new Error(response.error);
 
-    const data=JSON.parse(raw.replace(/```json|```/g,'').replace(/^[^{]*/,'').replace(/[^}]*$/,'').trim());
-
-    let openaiData = null;
-    try {
-      openaiData = JSON.parse(openaiRaw.replace(/```json|```/g,'').replace(/^[^{]*/,'').replace(/[^}]*$/,'').trim());
-    } catch(e) {}
-
-    if(openaiData){
-      data.company_total_avg = Math.round((data.company_total + (openaiData.company_total||0)) / 2);
-      data.competitor_total_avg = Math.round((data.competitor_total + (openaiData.competitor_total||0)) / 2);
-      data.openai = openaiData;
-    } else {
-      data.company_total_avg = data.company_total;
-      data.competitor_total_avg = data.competitor_total;
-    }
+    // Build data object compatible with renderResults
+    const data = {
+      company_total: response.company_total,
+      competitor_total: response.competitor_total,
+      company_total_avg: response.company_total,
+      competitor_total_avg: response.competitor_total,
+      prompt_alignment: {
+        a: response.scores.prompt_alignment.a,
+        b: response.scores.prompt_alignment.b,
+        insight: `${co} cited in ${response.scores.prompt_alignment.citation_rate_a}% of buyer intent queries vs ${comp} in ${response.scores.prompt_alignment.citation_rate_b}%.`
+      },
+      citation_presence: {
+        a: response.scores.citation_presence.a,
+        b: response.scores.citation_presence.b,
+        insight: `${co} appeared in ${response.scores.citation_presence.citation_rate_a}% of authority queries vs ${comp} in ${response.scores.citation_presence.citation_rate_b}%.`
+      },
+      answer_readiness: {
+        a: response.scores.answer_readiness.a,
+        b: response.scores.answer_readiness.b,
+        insight: `${co} cited in ${response.scores.answer_readiness.citation_rate_a}% of structured content queries vs ${comp} in ${response.scores.answer_readiness.citation_rate_b}%.`
+      },
+      top_prompts: response.top_prompts,
+      gap: `This score reflects ${response.raw_counts.total_responses} real AI responses across ${response.raw_counts.total_prompts} prompts on ${response.raw_counts.engines} engines. Each score is a measured citation rate, position, and sentiment average — not an estimate.`,
+      methodology: response.raw_counts
+    };
 
     stopSpin();
     setProgress(100);
     await new Promise(r=>setTimeout(r,400));
-    renderResults(data,co,comp,openaiData,market);
+    renderResults(data,co,comp,null,market);
 
   }catch(e){
     stopSpin();
@@ -777,15 +688,6 @@ function renderDiagnostic(data, co, comp) {
 }
 
 function renderResults(data,co,comp,openaiData,market){
-  // Store scan context for lead capture
-  currentScanData = {
-    company: co,
-    competitor: comp,
-    industry: document.getElementById('inp-ind').value.trim(),
-    market: market,
-    score_a: data.company_total_avg || data.company_total,
-    score_b: data.competitor_total_avg || data.competitor_total
-  };
   document.getElementById('r-names').textContent=co+' vs '+comp+' · '+market;
   document.getElementById('r-co-name').textContent=co;
   document.getElementById('r-comp-name').textContent=comp;
@@ -880,73 +782,14 @@ function renderResults(data,co,comp,openaiData,market){
   // Diagnostic framework
   renderDiagnostic(data, co, comp);
 
+  // Update bridge score line
+  const bridgeScore = document.getElementById('bridge-score');
+  const bridgeMarket = document.getElementById('bridge-market');
+  if(bridgeScore) bridgeScore.textContent = data.company_total_avg || Math.round(data.company_total);
+  if(bridgeMarket) bridgeMarket.textContent = co + ' · ' + (market || 'United States');
+
   show('s-results');
 }
-
-// ── LEAD CAPTURE ─────────────────────────────────────────────
-let currentScanData = null;
-
-function showLeadModal() {
-  document.getElementById('lead-modal').classList.remove('hidden');
-  document.getElementById('modal-form').classList.remove('hidden');
-  document.getElementById('modal-thanks').classList.add('hidden');
-  document.getElementById('modal-error').classList.add('hidden');
-}
-
-function hideLeadModal() {
-  document.getElementById('lead-modal').classList.add('hidden');
-}
-
-function submitLead() {
-  const name = document.getElementById('lead-name').value.trim();
-  const company = document.getElementById('lead-company').value.trim();
-  const email = document.getElementById('lead-email').value.trim();
-  const errEl = document.getElementById('modal-error');
-
-  if (!name || !company || !email || !email.includes('@')) {
-    errEl.classList.remove('hidden');
-    return;
-  }
-  errEl.classList.add('hidden');
-
-  // Send via EmailJS
-  const templateParams = {
-    to_email: 'kevin@openroadanalytics.ai',
-    from_name: name,
-    from_company: company,
-    from_email: email,
-    scan_company: currentScanData ? currentScanData.company : '—',
-    scan_competitor: currentScanData ? currentScanData.competitor : '—',
-    scan_industry: currentScanData ? currentScanData.industry : '—',
-    scan_market: currentScanData ? currentScanData.market : '—',
-    score_client: currentScanData ? currentScanData.score_a : '—',
-    score_competitor: currentScanData ? currentScanData.score_b : '—',
-  };
-
-  if (typeof emailjs !== 'undefined') {
-    emailjs.send('service_openroad', 'template_waypoint_lead', templateParams)
-      .then(() => {
-        document.getElementById('modal-form').classList.add('hidden');
-        document.getElementById('modal-thanks').classList.remove('hidden');
-      })
-      .catch(() => {
-        // EmailJS failed — still show thanks and log
-        document.getElementById('modal-form').classList.add('hidden');
-        document.getElementById('modal-thanks').classList.remove('hidden');
-        console.log('Lead:', templateParams);
-      });
-  } else {
-    // EmailJS not loaded — still show thanks
-    document.getElementById('modal-form').classList.add('hidden');
-    document.getElementById('modal-thanks').classList.remove('hidden');
-    console.log('Lead captured:', templateParams);
-  }
-}
-
-// Close modal on overlay click
-document.getElementById('lead-modal').addEventListener('click', function(e) {
-  if (e.target === this) hideLeadModal();
-});
 
 function resetScan(){
   show('s-entry');

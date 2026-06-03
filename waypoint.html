@@ -29,7 +29,7 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
 }
 
 /* PAGE LAYOUT */
-.page-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:5rem 2rem 2rem;}
+.page-wrap{min-height:auto;display:flex;align-items:flex-start;justify-content:center;padding:5rem 2rem 2rem;}
 
 .shell{width:100%;max-width:560px;background:#141310;border-radius:12px;position:relative;border:1px solid rgba(245,242,236,0.18);}
 .shell::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:#c8502a;border-radius:12px 12px 0 0;}
@@ -204,7 +204,129 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
 .mp-prompts-list{display:flex;flex-direction:column;gap:3px;}
 .mp-prompt-tag{font-size:9px;color:rgba(245,242,236,0.4);font-style:italic;padding:2px 0;}
 .dim-insight-label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(200,80,42,0.6);display:block;margin-bottom:3px;}
+.dim-insight-quote{font-size:10px;color:rgba(245,242,236,0.5);line-height:1.5;font-style:italic;margin-top:3px;}
+
+/* ── FAQ SECTION ── */
+.faq-wrap{max-width:560px;margin:0 auto;padding:2rem 2rem 4rem;font-family:'DM Sans',sans-serif;}
+.faq-header{margin-bottom:2rem;text-align:center;}
+.faq-eyebrow{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#c8502a;margin-bottom:10px;}
+.faq-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:#f5f2ec;line-height:1.1;margin-bottom:10px;}
+.faq-title em{font-style:italic;color:#c8502a;}
+.faq-sub{font-size:12px;color:rgba(245,242,236,0.5);line-height:1.7;}
+
+/* Example card */
+.faq-example-card{background:#141310;border:1px solid rgba(245,242,236,0.12);border-top:2px solid #c8502a;border-radius:8px;padding:1.2rem 1.4rem;margin-bottom:1.5rem;}
+.faq-example-label{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.3);margin-bottom:12px;}
+.faq-example-brands{display:flex;align-items:center;gap:1rem;margin-bottom:10px;}
+.faq-ex-brand{flex:1;}
+.faq-ex-name{font-size:11px;color:rgba(245,242,236,0.5);margin-bottom:3px;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;}
+.faq-ex-score{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;font-style:italic;line-height:1;}
+.faq-ex-brand.a .faq-ex-score{color:#c8502a;}
+.faq-ex-brand.b .faq-ex-score{color:rgba(245,242,236,0.3);}
+.faq-ex-score span{font-size:0.9rem;color:rgba(245,242,236,0.3);font-style:normal;}
+.faq-ex-vs{font-family:'DM Mono',monospace;font-size:9px;color:rgba(245,242,236,0.2);letter-spacing:2px;}
+.faq-example-meta{font-size:9px;color:rgba(245,242,236,0.25);font-family:'DM Mono',monospace;letter-spacing:1px;}
+
+/* FAQ items */
+.faq-item{border:1px solid rgba(245,242,236,0.08);border-radius:6px;margin-bottom:8px;overflow:hidden;}
+.faq-item-header{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;transition:background 0.2s;}
+.faq-item-header:hover{background:rgba(245,242,236,0.03);}
+.faq-item-label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;color:#c8502a;flex-shrink:0;}
+.faq-item-title{font-size:12px;font-weight:500;color:#f5f2ec;flex:1;}
+.faq-item-toggle{font-family:'DM Mono',monospace;font-size:14px;color:rgba(245,242,236,0.3);flex-shrink:0;transition:transform 0.2s;}
+.faq-item-header.open .faq-item-toggle{transform:rotate(45deg);color:#c8502a;}
+.faq-item-body{display:none;padding:0 14px 14px;border-top:1px solid rgba(245,242,236,0.06);}
+.faq-item-body.open{display:block;}
+.faq-p{font-size:11px;color:rgba(245,242,236,0.55);line-height:1.75;margin-top:12px;}
+.faq-p strong{color:rgba(245,242,236,0.8);}
+.faq-p.faq-method{font-style:italic;color:rgba(245,242,236,0.35);border-top:1px solid rgba(245,242,236,0.06);padding-top:10px;margin-top:14px;}
+
+/* Score scale */
+.faq-score-scale{display:flex;flex-direction:column;gap:5px;margin-top:12px;}
+.faq-scale-row{display:flex;gap:10px;align-items:baseline;}
+.faq-scale-range{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;width:55px;flex-shrink:0;font-weight:500;}
+.faq-scale-range.signal{color:#c8502a;}
+.faq-scale-range.mid{color:rgba(245,242,236,0.6);}
+.faq-scale-range.low{color:rgba(245,242,236,0.35);}
+.faq-scale-range.zero{color:rgba(245,242,236,0.2);}
+.faq-scale-desc{font-size:10px;color:rgba(245,242,236,0.4);line-height:1.5;}
+
+/* Steps */
+.faq-steps{display:flex;flex-direction:column;gap:8px;margin-top:12px;}
+.faq-step{display:flex;gap:10px;align-items:flex-start;}
+.faq-step-n{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:#c8502a;flex-shrink:0;margin-top:2px;}
+.faq-step div{font-size:11px;color:rgba(245,242,236,0.55);line-height:1.65;}
+.faq-step strong{color:rgba(245,242,236,0.8);}
+
+/* Example boxes */
+.faq-example-box{margin-top:14px;padding:12px 14px;background:rgba(245,242,236,0.03);border:1px solid rgba(245,242,236,0.08);border-radius:4px;}
+.faq-ex-label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,242,236,0.25);margin-bottom:5px;}
+.faq-ex-query{font-size:11px;color:#f5f2ec;font-style:italic;margin-bottom:3px;}
+.faq-ex-response{font-size:10px;color:rgba(245,242,236,0.5);line-height:1.6;font-style:italic;}
+.faq-ex-scoring{font-size:9.5px;color:rgba(245,242,236,0.45);line-height:1.6;margin-top:3px;}
+.faq-ex-scoring strong{color:#c8502a;}
+
+/* Dim examples */
+.faq-dim-example{margin-top:12px;padding:12px;background:rgba(245,242,236,0.03);border-radius:4px;border:1px solid rgba(245,242,236,0.08);}
+.faq-dim-scores{display:flex;gap:1.5rem;margin-bottom:10px;}
+.faq-dim-score-row{display:flex;align-items:baseline;gap:8px;}
+.faq-brand-a{font-size:10px;color:rgba(245,242,236,0.5);}
+.faq-brand-b{font-size:10px;color:rgba(245,242,236,0.3);}
+.faq-dscore{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;font-style:italic;line-height:1;}
+.faq-dscore.signal{color:#c8502a;}
+.faq-dscore.muted{color:rgba(245,242,236,0.3);}
+.faq-dim-insight{font-size:10px;color:rgba(245,242,236,0.4);line-height:1.6;font-style:italic;border-left:2px solid rgba(200,80,42,0.3);padding-left:10px;}
+
+/* Formula */
+.faq-formula{display:flex;flex-direction:column;gap:5px;margin-top:12px;border:1px solid rgba(245,242,236,0.08);border-radius:4px;overflow:hidden;}
+.faq-formula-line{display:flex;gap:12px;padding:8px 12px;border-bottom:1px solid rgba(245,242,236,0.05);}
+.faq-formula-line:last-child{border-bottom:none;}
+.faq-formula-line.total{background:rgba(200,80,42,0.06);}
+.faq-formula-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:#c8502a;width:130px;flex-shrink:0;}
+.faq-formula-val{font-size:10px;color:rgba(245,242,236,0.5);line-height:1.5;}
+.faq-calc{font-family:'DM Mono',monospace;font-size:11px;color:rgba(245,242,236,0.6);margin-top:10px;padding:8px 12px;background:rgba(245,242,236,0.03);border-radius:4px;}
+.faq-calc strong{color:#c8502a;}
+.faq-calc-example{margin-top:8px;padding:10px 12px;background:rgba(245,242,236,0.03);border-radius:4px;border:1px solid rgba(245,242,236,0.08);}
+.faq-calc-row{font-family:'DM Mono',monospace;font-size:10px;color:rgba(245,242,236,0.5);padding:3px 0;}
+.faq-calc-row strong{color:#c8502a;}
+
+/* Trademark */
+.faq-trademark{margin-top:1.5rem;padding:14px 16px;border:1px solid rgba(245,242,236,0.06);border-radius:4px;}
+.faq-tm-label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.2);margin-bottom:8px;}
+.faq-tm-text{font-size:9.5px;color:rgba(245,242,236,0.25);line-height:1.7;}
+.faq-link{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,242,236,0.25);text-decoration:none;}.faq-link:hover{color:rgba(245,242,236,0.5);}
+
+/* ── LEAD MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(14,13,11,0.85);display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px;}
+.modal-overlay.hidden{display:none;}
+.modal-box{background:#141310;border:1px solid rgba(245,242,236,0.18);border-top:3px solid #c8502a;width:100%;max-width:400px;padding:28px 28px 24px;}
+.modal-header{margin-bottom:20px;}
+.modal-waypoint{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#c8502a;margin-bottom:6px;}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;font-style:italic;color:#f5f2ec;margin-bottom:6px;}
+.modal-sub{font-size:10px;color:rgba(245,242,236,0.45);line-height:1.6;}
+.modal-field{margin-bottom:12px;}
+.modal-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.4);display:block;margin-bottom:5px;}
+.modal-input{width:100%;background:rgba(245,242,236,0.06);border:1px solid rgba(245,242,236,0.12);color:#f5f2ec;font-family:'DM Sans',sans-serif;font-size:12px;padding:8px 10px;outline:none;transition:border-color 0.2s;border-radius:3px;}
+.modal-input:focus{border-color:#c8502a;}
+.modal-error{font-size:9px;color:#c8502a;margin-bottom:8px;font-family:'DM Mono',monospace;letter-spacing:1px;}
+.modal-error.hidden{display:none;}
+.modal-submit{width:100%;background:#c8502a;border:none;color:#fff;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:11px;cursor:pointer;margin-bottom:8px;transition:background 0.2s;border-radius:3px;}
+.modal-submit:hover{background:#d9643c;}
+.modal-cancel{width:100%;background:transparent;border:1px solid rgba(245,242,236,0.12);color:rgba(245,242,236,0.3);font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:8px;cursor:pointer;border-radius:3px;}
+.modal-thanks{text-align:center;padding:12px 0;}
+.modal-thanks-icon{font-size:28px;color:#c8502a;margin-bottom:10px;}
+.modal-thanks-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;font-style:italic;color:#f5f2ec;margin-bottom:8px;}
+.modal-thanks-sub{font-size:10px;color:rgba(245,242,236,0.45);line-height:1.6;margin-bottom:16px;}
+.modal-thanks.hidden{display:none;}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  (function(){
+    if(typeof emailjs !== 'undefined') {
+      emailjs.init({ publicKey: 'YOUR_EMAILJS_PUBLIC_KEY' });
+    }
+  })();
+</script>
 </head>
 <body>
 <nav class="top-nav">
@@ -348,6 +470,7 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
       <span class="meth-dot"></span>9 buyer queries · 2 engines · 18 real AI responses
       <span class="meth-sep">·</span>Citation detected · position + sentiment scored
       <span class="meth-sep">·</span>3 dimensions equally weighted → Waypoint Score™
+      <span class="meth-sep">·</span>Proprietary methodology © Open Road Analytics
     </div>
 
     <div class="compass-hero">
@@ -460,7 +583,10 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
 
     <div class="ft">
       <button class="reset-btn" onclick="resetScan()">← New scan</button>
-      <div class="powered">Powered by <span>Open Road Analytics</span></div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+        <a href="#how-it-works" class="faq-link">How scoring works ↓</a>
+        <div class="powered">Powered by <span>Open Road Analytics</span></div>
+      </div>
     </div>
   </div>
 </div>
@@ -534,59 +660,82 @@ async function runScan(){
 
   show('s-scan');
   startSpin();
-  setProgress(0);
-
-  // Animate query steps
-  [
-    {id:'brand',delay:0,prog:25},
-    {id:'cat',delay:1400,prog:50},
-    {id:'thought',delay:2800,prog:75},
-    {id:'comp',delay:4200,prog:95},
-  ].forEach(s=>{
-    setTimeout(()=>{
-      setQ(s.id,'scanning');
-      setProgress(s.prog);
-      setTimeout(()=>setQ(s.id,'done'),1100);
-    },s.delay);
-  });
+  setProgress(5);
 
   // ── GENERATE 30 PROMPTS ─────────────────────────────────────
-  function buildPrompts(co, comp, ind, market) {
+  // ── GENERATE BUYER-AUTHENTIC PROMPTS VIA CLAUDE ─────────────────────────
+  async function generatePrompts(co, comp, ind, market) {
+    const promptRequest = `Someone is researching ${ind} in ${market}. They are deciding between ${co} and ${comp}. Write the 9 questions they would actually type into ChatGPT — word for word, exactly how a real person types, not how a company writes.
+
+First 3 questions: They are exploring the category. They have not decided on a brand yet.
+Next 3 questions: They have heard of ${co} and want to know if it is worth it.
+Last 3 questions: They want specific facts about ${co} — what it costs, what makes it different, how it compares.
+
+Real people use short sentences. They do not say "provider" or "solution" or "industry." They say what they mean.
+
+Return ONLY this JSON with no other text:
+{"pa":["question 1","question 2","question 3"],"cp":["question 4","question 5","question 6"],"ar":["question 7","question 8","question 9"]}`;
+
+    try {
+      const res = await fetch('/.netlify/functions/waypoint', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: [{ role: 'user', content: promptRequest }]
+        })
+      }).then(r => r.json());
+
+      const raw = res.claudeText || '';
+      const cleaned = raw.replace(/\`\`\`json|\`\`\`/g, '').replace(/^[^{]*/,'').replace(/[^}]*$/,'').trim();
+      const parsed = JSON.parse(cleaned);
+      
+      // Validate structure
+      if (parsed.pa && parsed.cp && parsed.ar &&
+          parsed.pa.length >= 3 && parsed.cp.length >= 3 && parsed.ar.length >= 3) {
+        return {
+          pa: parsed.pa.slice(0, 3),
+          cp: parsed.cp.slice(0, 3),
+          ar: parsed.ar.slice(0, 3)
+        };
+      }
+    } catch(e) {
+      console.warn('Prompt generation failed, using fallback:', e.message);
+    }
+
+    // Fallback if AI generation fails
     return {
-      // Prompt Alignment — does brand language match buyer queries?
       pa: [
-        `Best ${ind} company in ${market}?`,
-        `${co} vs ${comp} — which is better for ${ind}?`,
-        `Who are the top ${ind} providers in ${market}?`
+        `What's the best ${ind} in ${market}?`,
+        `${co} or ${comp} — which would you recommend?`,
+        `Who should I go with for ${ind} in ${market}?`
       ],
-      // Citation Presence — do third parties vouch for the brand?
       cp: [
-        `What do customers say about ${co} in ${ind}?`,
-        `Is ${co} a reputable ${ind} company?`,
-        `Compare ${co} and ${comp} reviews in ${ind}`
+        `Is ${co} any good?`,
+        `What are people saying about ${co}?`,
+        `${co} vs ${comp} — which one has better reviews?`
       ],
-      // Answer Readiness — is content structured for AI extraction?
       ar: [
-        `Tell me about ${co} — what do they offer and how much do they charge?`,
-        `What makes ${co} different from ${comp} in ${ind}?`,
-        `Give me a quick overview of ${co} and ${comp} in ${ind} in ${market}`
+        `What does ${co} offer and how much does it cost?`,
+        `How is ${co} different from ${comp}?`,
+        `Give me a quick rundown on ${co} and ${comp}`
       ]
     };
   }
 
-  const prompts = buildPrompts(co, comp, ind, market);
+  const prompts = await generatePrompts(co, comp, ind, market);
 
-  // Update scan animation labels
+  // Animate scan steps now that prompts are ready
+  setProgress(20);
   [
-    {id:'brand',   delay:0,    prog:30},
-    {id:'cat',     delay:1200, prog:55},
-    {id:'thought', delay:2400, prog:80},
-    {id:'comp',    delay:3600, prog:95},
+    {id:'brand',   delay:0,    prog:35},
+    {id:'cat',     delay:1400, prog:55},
+    {id:'thought', delay:2800, prog:75},
+    {id:'comp',    delay:4200, prog:90},
   ].forEach(s=>{
     setTimeout(()=>{
       setQ(s.id,'scanning');
       setProgress(s.prog);
-      setTimeout(()=>setQ(s.id,'done'),2000);
+      setTimeout(()=>setQ(s.id,'done'),1200);
     },s.delay);
   });
 
@@ -647,7 +796,7 @@ async function runScan(){
         snippet_a: response.scores.answer_readiness.snippet_a,
         snippet_b: response.scores.answer_readiness.snippet_b
       },
-      top_prompts: response.top_prompts,
+      top_prompts: [...(prompts.pa||[]), ...(prompts.cp||[]), ...(prompts.ar||[])].slice(0,3),
       gap: `This score reflects ${response.raw_counts.total_responses} real AI responses across ${response.raw_counts.total_prompts} prompts on ${response.raw_counts.engines} engines. Each score is a measured citation rate, position, and sentiment average — not an estimate.`,
       methodology: response.raw_counts
     };
@@ -750,14 +899,14 @@ function buildInsight(co, comp, dimData) {
   const rateB = dimData.citation_rate_b || 0;
   const snipA = dimData.snippet_a;
   const snipB = dimData.snippet_b;
-  // Prefer verbatim snippet over citation rate string
-  if (snipA && snipA.snippet) {
+  // Only show snippet if it actually contains the brand name
+  if (snipA && snipA.snippet && snipA.snippet.toLowerCase().includes(co.toLowerCase())) {
     const engine = snipA.engine === 'claude' ? 'Claude' : 'GPT-4o';
     return `${engine}: "${snipA.snippet}"`;
   }
-  if (snipB && snipB.snippet) {
+  if (snipB && snipB.snippet && snipB.snippet.toLowerCase().includes(comp.toLowerCase())) {
     const engine = snipB.engine === 'claude' ? 'Claude' : 'GPT-4o';
-    return `${engine} on ${comp}: "${snipB.snippet}"`;
+    return `${engine}: "${snipB.snippet}"`;
   }
   // Fallback to citation rate
   if (rateA > 0 || rateB > 0) {
@@ -769,6 +918,15 @@ function buildInsight(co, comp, dimData) {
 }
 
 function renderResults(data,co,comp,openaiData,market){
+  // Store scan data for lead capture
+  currentScanData = {
+    company: co,
+    competitor: comp,
+    industry: document.getElementById('inp-ind').value.trim(),
+    market: market,
+    score_a: data.company_total_avg || Math.round(data.company_total),
+    score_b: data.competitor_total_avg || Math.round(data.competitor_total)
+  };
   document.getElementById('r-names').textContent=co+' vs '+comp+' · '+market;
   document.getElementById('r-co-name').textContent=co;
   document.getElementById('r-comp-name').textContent=comp;
@@ -829,8 +987,10 @@ function renderResults(data,co,comp,openaiData,market){
         </div>`:''}
       </div>
       ${insight?`<div class="dim-insight">
-        <span class="dim-insight-label">${insight.startsWith('Claude:') || insight.startsWith('GPT-4o:') ? '// AI said' : '// Citation rate'}</span>
-        ${insight}
+        ${insight.startsWith('Claude:') || insight.startsWith('GPT-4o:')
+          ? `<span class="dim-insight-label">// AI said</span><div class="dim-insight-quote">${insight}</div>`
+          : `<span class="dim-insight-label">// Citation rate</span><div class="dim-insight-quote">${insight}</div>`
+        }
       </div>`:''}`;
     container.appendChild(el);
     setTimeout(()=>{
@@ -879,9 +1039,15 @@ function renderResults(data,co,comp,openaiData,market){
     const mpList = document.getElementById('mp-prompts-list');
     if(mpPrompts) mpPrompts.textContent = data.methodology.total_prompts;
     if(mpResponses) mpResponses.textContent = data.methodology.total_responses;
-    if(mpList && data.methodology.prompts_tested) {
+    // Show all 9 generated prompts
+    const allPrompts = [...(prompts.pa||[]),...(prompts.cp||[]),...(prompts.ar||[])];
+    if(mpList && allPrompts.length > 0) {
+      mpList.innerHTML = allPrompts
+        .map(p => `<span class="mp-prompt-tag">“${p}”</span>`)
+        .join('');
+    } else if(mpList && data.methodology.prompts_tested) {
       mpList.innerHTML = data.methodology.prompts_tested
-        .map(p => `<span class="mp-prompt-tag">${p}</span>`)
+        .map(p => `<span class="mp-prompt-tag">“${p}”</span>`)
         .join('');
     }
   }
@@ -902,7 +1068,323 @@ function resetScan(){
   document.getElementById('needle-a').setAttribute('transform','rotate(0,48,48)');
   document.getElementById('needle-b').setAttribute('transform','rotate(180,48,48)');
 }
+
+// ── LEAD CAPTURE ─────────────────────────────────────────────────────────
+function showLeadModal() {
+  document.getElementById('lead-modal').classList.remove('hidden');
+  document.getElementById('modal-form').classList.remove('hidden');
+  document.getElementById('modal-thanks').classList.add('hidden');
+  var errEl = document.getElementById('modal-error');
+  if(errEl) errEl.classList.add('hidden');
+}
+
+function hideLeadModal() {
+  document.getElementById('lead-modal').classList.add('hidden');
+}
+
+function submitLead() {
+  var name = document.getElementById('lead-name').value.trim();
+  var company = document.getElementById('lead-company').value.trim();
+  var email = document.getElementById('lead-email').value.trim();
+  var errEl = document.getElementById('modal-error');
+
+  if (!name || !company || !email || !email.includes('@')) {
+    errEl.classList.remove('hidden');
+    return;
+  }
+  errEl.classList.add('hidden');
+
+  var templateParams = {
+    to_email: 'kevin@openroadanalytics.ai',
+    from_name: name,
+    from_company: company,
+    from_email: email,
+    scan_company: currentScanData ? currentScanData.company : '—',
+    scan_competitor: currentScanData ? currentScanData.competitor : '—',
+    scan_industry: currentScanData ? currentScanData.industry : '—',
+    scan_market: currentScanData ? currentScanData.market : '—',
+    score_client: currentScanData ? currentScanData.score_a : '—',
+    score_competitor: currentScanData ? currentScanData.score_b : '—',
+  };
+
+  if (typeof emailjs !== 'undefined') {
+    emailjs.send('service_openroad', 'template_waypoint_lead', templateParams)
+      .then(function() {
+        document.getElementById('modal-form').classList.add('hidden');
+        document.getElementById('modal-thanks').classList.remove('hidden');
+      })
+      .catch(function() {
+        document.getElementById('modal-form').classList.add('hidden');
+        document.getElementById('modal-thanks').classList.remove('hidden');
+      });
+  } else {
+    document.getElementById('modal-form').classList.add('hidden');
+    document.getElementById('modal-thanks').classList.remove('hidden');
+    console.log('Lead captured:', templateParams);
+  }
+}
+
+document.addEventListener('click', function(e) {
+  var modal = document.getElementById('lead-modal');
+  if (modal && e.target === modal) hideLeadModal();
+});
+
+// ── FAQ TOGGLE ────────────────────────────────────────────────────────────
+function toggleFaq(header) {
+  var body = header.nextElementSibling;
+  var isOpen = body.classList.contains('open');
+  document.querySelectorAll('.faq-item-body').forEach(function(b) { b.classList.remove('open'); });
+  document.querySelectorAll('.faq-item-header').forEach(function(h) { h.classList.remove('open'); });
+  if (!isOpen) {
+    body.classList.add('open');
+    header.classList.add('open');
+  }
+}
 </script>
+</div>
+
+<a id="how-it-works"></a>
+<!-- ══ FAQ SECTION ══════════════════════════════════════════════════════ -->
+<div class="faq-wrap">
+
+  <div class="faq-header">
+    <div class="faq-eyebrow">// How Waypoint Works</div>
+    <h2 class="faq-title">Understanding Your<br><em>Waypoint Score™</em></h2>
+    <p class="faq-sub">A plain-English explanation of every number, every section, and exactly how the score was calculated — using a fictional example so the math is clear.</p>
+  </div>
+
+  <!-- EXAMPLE SCAN CARD -->
+  <div class="faq-example-card">
+    <div class="faq-example-label">// Example Scan — Fictional Brands</div>
+    <div class="faq-example-brands">
+      <div class="faq-ex-brand a">
+        <div class="faq-ex-name">Taco Tornado</div>
+        <div class="faq-ex-score">61<span>/100</span></div>
+      </div>
+      <div class="faq-ex-vs">vs</div>
+      <div class="faq-ex-brand b">
+        <div class="faq-ex-name">Burrito Rocket</div>
+        <div class="faq-ex-score">44<span>/100</span></div>
+      </div>
+    </div>
+    <div class="faq-example-meta">Fast Casual Restaurant · Austin, TX · Fictional example for illustration only</div>
+  </div>
+
+  <!-- SECTION 1: THE WAYPOINT SCORE -->
+  <div class="faq-item">
+    <div class="faq-item-header" onclick="toggleFaq(this)">
+      <div class="faq-item-label">// Section 01</div>
+      <div class="faq-item-title">The Waypoint Score™</div>
+      <div class="faq-item-toggle">+</div>
+    </div>
+    <div class="faq-item-body">
+      <p class="faq-p">The Waypoint Score™ is a single number from 0 to 100 that measures how visible and credible your brand is when real buyers ask AI assistants about your category.</p>
+      <p class="faq-p">A score of <strong>61</strong> means: when someone asks Claude or ChatGPT about fast casual restaurants in Austin, Taco Tornado appears in roughly 6 out of 10 relevant AI responses — and when it does appear, it's usually mentioned positively and relatively early in the answer.</p>
+      <p class="faq-p">A score of <strong>44</strong> means: Burrito Rocket appears in fewer than half of relevant AI responses, and when it does appear, it's often mentioned with less confidence or later in the response than its competitor.</p>
+      <div class="faq-score-scale">
+        <div class="faq-scale-row"><span class="faq-scale-range signal">75–100</span><span class="faq-scale-desc">AI consistently recommends your brand with confidence. Strong citation density and positive context.</span></div>
+        <div class="faq-scale-row"><span class="faq-scale-range mid">50–74</span><span class="faq-scale-desc">AI knows your brand and mentions it regularly, but not always first or with full confidence.</span></div>
+        <div class="faq-scale-row"><span class="faq-scale-range low">25–49</span><span class="faq-scale-desc">AI has limited signals about your brand. Appears inconsistently, often with caveats.</span></div>
+        <div class="faq-scale-row"><span class="faq-scale-range zero">0–24</span><span class="faq-scale-desc">AI rarely or never mentions your brand in relevant searches. Effectively invisible.</span></div>
+      </div>
+      <p class="faq-p faq-method">The Waypoint Score™ is the average of three dimension scores: Prompt Alignment, Citation Presence, and Answer Readiness. Each dimension is equally weighted.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 2: THE SCAN -->
+  <div class="faq-item">
+    <div class="faq-item-header" onclick="toggleFaq(this)">
+      <div class="faq-item-label">// Section 02</div>
+      <div class="faq-item-title">How the Scan Works</div>
+      <div class="faq-item-toggle">+</div>
+    </div>
+    <div class="faq-item-body">
+      <p class="faq-p">When you run a Waypoint scan, here is exactly what happens:</p>
+      <div class="faq-steps">
+        <div class="faq-step"><span class="faq-step-n">01</span><div><strong>Claude generates 9 buyer queries</strong> — real questions a person would actually type into an AI assistant when researching your category. Some are unbranded category searches. Some mention your brand directly. All are written the way a real buyer searches, not the way a marketer describes their product.</div></div>
+        <div class="faq-step"><span class="faq-step-n">02</span><div><strong>All 9 queries are fired at two AI engines simultaneously</strong> — Claude (Anthropic) and GPT-4o (OpenAI). That produces 18 real AI responses, each answered independently.</div></div>
+        <div class="faq-step"><span class="faq-step-n">03</span><div><strong>Each response is analyzed for three things:</strong> Was your brand mentioned? Where in the response (first or buried)? Was the context positive, neutral, or negative?</div></div>
+        <div class="faq-step"><span class="faq-step-n">04</span><div><strong>Scores are calculated per dimension</strong> and averaged across both engines. The three dimension scores are averaged to produce the final Waypoint Score™.</div></div>
+      </div>
+      <div class="faq-example-box">
+        <div class="faq-ex-label">Example query generated for Taco Tornado scan:</div>
+        <div class="faq-ex-query">"Where should I go for tacos in Austin — any recommendations?"</div>
+        <div class="faq-ex-label" style="margin-top:10px;">Claude's actual response (paraphrased):</div>
+        <div class="faq-ex-response">"Austin has a great taco scene. Taco Tornado on South Congress is a popular choice — known for their breakfast tacos and late-night hours. Burrito Rocket is another option but draws more of a lunch crowd..."</div>
+        <div class="faq-ex-label" style="margin-top:10px;">What that response scores:</div>
+        <div class="faq-ex-scoring">Taco Tornado: mentioned first → position score 3 · positive context ("popular") → sentiment score 3 · no third-party citation → bonus 0 · <strong>RAW = 3 × 3 + 0 = 9</strong></div>
+        <div class="faq-ex-scoring">Burrito Rocket: mentioned second → position score 2 · neutral context → sentiment score 2 · no third-party citation → bonus 0 · <strong>RAW = 2 × 2 + 0 = 4</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: PROMPT ALIGNMENT -->
+  <div class="faq-item">
+    <div class="faq-item-header" onclick="toggleFaq(this)">
+      <div class="faq-item-label">// Section 03</div>
+      <div class="faq-item-title">Prompt Alignment — What It Measures</div>
+      <div class="faq-item-toggle">+</div>
+    </div>
+    <div class="faq-item-body">
+      <p class="faq-p"><strong>Prompt Alignment measures whether your brand's language matches how buyers actually search.</strong> AI engines cite brands whose content vocabulary mirrors the queries buyers type. If buyers ask "best breakfast tacos Austin" and your website talks about "artisanal morning cuisine," AI can't connect the two.</p>
+      <div class="faq-dim-example">
+        <div class="faq-dim-scores">
+          <div class="faq-dim-score-row"><span class="faq-brand-a">Taco Tornado</span><span class="faq-dscore signal">68</span></div>
+          <div class="faq-dim-score-row"><span class="faq-brand-b">Burrito Rocket</span><span class="faq-dscore muted">41</span></div>
+        </div>
+        <div class="faq-dim-insight">"Taco Tornado's website opens with the exact phrases buyers use — 'best tacos in Austin,' 'late night food Austin,' 'South Congress eats.' Burrito Rocket leads with brand story. AI engines surface Taco Tornado more consistently in category searches because the language matches."</div>
+      </div>
+      <p class="faq-p">The 3 prompts used for this dimension are unbranded category searches — the kind a buyer types before they know which brand they want. Your score here tells you whether AI organically surfaces your brand when someone searches your category.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 4: CITATION PRESENCE -->
+  <div class="faq-item">
+    <div class="faq-item-header" onclick="toggleFaq(this)">
+      <div class="faq-item-label">// Section 04</div>
+      <div class="faq-item-title">Citation Presence — What It Measures</div>
+      <div class="faq-item-toggle">+</div>
+    </div>
+    <div class="faq-item-body">
+      <p class="faq-p"><strong>Citation Presence measures how much independent third-party evidence AI engines have to back up a mention of your brand.</strong> AI engines don't just repeat your website — they weight external sources like review platforms, press coverage, directories, and industry publications far more heavily than anything you publish yourself.</p>
+      <div class="faq-dim-example">
+        <div class="faq-dim-scores">
+          <div class="faq-dim-score-row"><span class="faq-brand-a">Taco Tornado</span><span class="faq-dscore signal">59</span></div>
+          <div class="faq-dim-score-row"><span class="faq-brand-b">Burrito Rocket</span><span class="faq-dscore muted">38</span></div>
+        </div>
+        <div class="faq-dim-insight">"Taco Tornado appears in Yelp, Austin Chronicle, Eater Austin, and TripAdvisor — sources AI engines treat as independent validation. Burrito Rocket's coverage is thinner. When AI says 'Taco Tornado is popular,' it has evidence. When it mentions Burrito Rocket, it hedges."</div>
+      </div>
+      <p class="faq-p">The 3 prompts used here are brand-specific reputation queries — "is [brand] any good," "reviews for [brand]," "[brand] vs [competitor]." Your score here tells you whether AI can confidently vouch for you or has to qualify every mention.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 5: ANSWER READINESS -->
+  <div class="faq-item">
+    <div class="faq-item-header" onclick="toggleFaq(this)">
+      <div class="faq-item-label">// Section 05</div>
+      <div class="faq-item-title">Answer Readiness — What It Measures</div>
+      <div class="faq-item-toggle">+</div>
+    </div>
+    <div class="faq-item-body">
+      <p class="faq-p"><strong>Answer Readiness measures whether your content is structured so AI engines can actually extract and cite it.</strong> AI engines don't browse — they extract. Content that is formatted as direct answers to specific questions gets cited. Content that requires navigation, interpretation, or reading between the lines gets ignored.</p>
+      <div class="faq-dim-example">
+        <div class="faq-dim-scores">
+          <div class="faq-dim-score-row"><span class="faq-brand-a">Taco Tornado</span><span class="faq-dscore signal">56</span></div>
+          <div class="faq-dim-score-row"><span class="faq-brand-b">Burrito Rocket</span><span class="faq-dscore muted">53</span></div>
+        </div>
+        <div class="faq-dim-insight">"Both brands are close here. Taco Tornado has a FAQ page with hours, pricing, and menu highlights in extractable format. Burrito Rocket's equivalent information is buried in a PDF menu. Narrow gap — but Taco Tornado's structured data gives it a consistent citation edge."</div>
+      </div>
+      <p class="faq-p">The 3 prompts here are direct information queries — "tell me about [brand]," "what makes [brand] different," "overview of [brand] and [competitor]." Your score here tells you whether AI can answer specific questions about you or has to say "I don't have enough information."</p>
+    </div>
+  </div>
+
+  <!-- SECTION 6: THE SCORING MATH -->
+  <div class="faq-item">
+    <div class="faq-item-header" onclick="toggleFaq(this)">
+      <div class="faq-item-label">// Section 06</div>
+      <div class="faq-item-title">The Scoring Math — Exactly How Numbers Are Calculated</div>
+      <div class="faq-item-toggle">+</div>
+    </div>
+    <div class="faq-item-body">
+      <p class="faq-p">For every AI response, each brand gets a raw score calculated like this:</p>
+      <div class="faq-formula">
+        <div class="faq-formula-line"><span class="faq-formula-label">Position Score (1–3)</span><span class="faq-formula-val">Mentioned first or only = 3 · Mentioned within 150 chars of competitor = 2 · Mentioned after competitor = 1 · Not mentioned = 0</span></div>
+        <div class="faq-formula-line"><span class="faq-formula-label">Sentiment Score (1–3)</span><span class="faq-formula-val">More positive words nearby = 3 · Neutral = 2 · More negative words nearby = 1</span></div>
+        <div class="faq-formula-line"><span class="faq-formula-label">Third-Party Bonus</span><span class="faq-formula-val">Response cites an external source = +1 · No external citation = 0</span></div>
+        <div class="faq-formula-line total"><span class="faq-formula-label">Raw Score</span><span class="faq-formula-val">Position × Sentiment + Bonus · Maximum possible = 10</span></div>
+      </div>
+      <p class="faq-p">Using the Taco Tornado example above — mentioned first (3), positive context (3), no third-party bonus (0):</p>
+      <div class="faq-calc">3 × 3 + 0 = <strong>9 out of 10</strong></div>
+      <p class="faq-p">After scoring all 6 responses in a dimension:</p>
+      <div class="faq-formula">
+        <div class="faq-formula-line"><span class="faq-formula-label">Average</span><span class="faq-formula-val">Add up all 6 raw scores ÷ 6</span></div>
+        <div class="faq-formula-line"><span class="faq-formula-label">Normalize</span><span class="faq-formula-val">(Average ÷ 10) × 100 = dimension score out of 100</span></div>
+        <div class="faq-formula-line total"><span class="faq-formula-label">Final Score</span><span class="faq-formula-val">(Prompt Alignment + Citation Presence + Answer Readiness) ÷ 3</span></div>
+      </div>
+      <div class="faq-calc-example">
+        <div class="faq-calc-row">Taco Tornado: (68 + 59 + 56) ÷ 3 = <strong>61</strong></div>
+        <div class="faq-calc-row">Burrito Rocket: (41 + 38 + 53) ÷ 3 = <strong>44</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: THE DIAGNOSTIC -->
+  <div class="faq-item">
+    <div class="faq-item-header" onclick="toggleFaq(this)">
+      <div class="faq-item-label">// Section 07</div>
+      <div class="faq-item-title">The Primary Gap Diagnostic</div>
+      <div class="faq-item-toggle">+</div>
+    </div>
+    <div class="faq-item-body">
+      <p class="faq-p">After scoring, Waypoint identifies your single most impactful gap — the one dimension where improvement will move your score the most. It then gives you three specific actions to address it.</p>
+      <p class="faq-p">The diagnostic looks at your three dimension scores and finds the weakest one. That becomes your primary gap. The actions are sequenced by impact — the highest-ROI change first.</p>
+      <p class="faq-p">For Burrito Rocket, the weakest dimension is Citation Presence (38). The primary gap diagnosis: <em>"AI engines lack the third-party signals to recommend you with confidence."</em> The first action: complete all directory profiles and request reviews — because one verified Yelp review carries more AI weight than any website update.</p>
+      <p class="faq-p">The baseline date stamps when the scan ran. Re-run in 30 days to measure improvement.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 8: THE FULL REPORT -->
+  <div class="faq-item">
+    <div class="faq-item-header" onclick="toggleFaq(this)">
+      <div class="faq-item-label">// Section 08</div>
+      <div class="faq-item-title">The Full Waypoint Audit Report</div>
+      <div class="faq-item-toggle">+</div>
+    </div>
+    <div class="faq-item-body">
+      <p class="faq-p">The free scan shows your score, dimension breakdown, and primary gap. The full Waypoint Audit Report goes deeper:</p>
+      <div class="faq-steps">
+        <div class="faq-step"><span class="faq-step-n">→</span><div><strong>What AI Actually Says</strong> — verbatim excerpts from real AI responses to buyer queries in your category</div></div>
+        <div class="faq-step"><span class="faq-step-n">→</span><div><strong>Citation Network Analysis</strong> — exactly which sources are and aren't vouching for you in AI training data</div></div>
+        <div class="faq-step"><span class="faq-step-n">→</span><div><strong>Root Cause Analysis</strong> — why each dimension scored the way it did, with specific evidence</div></div>
+        <div class="faq-step"><span class="faq-step-n">→</span><div><strong>The Opportunity</strong> — what your score means in real business terms: pipeline, revenue, inquiries</div></div>
+        <div class="faq-step"><span class="faq-step-n">→</span><div><strong>Route to Recovery</strong> — four actions sequenced by impact with 30, 60, and 90-day targets</div></div>
+      </div>
+      <p class="faq-p">The audit is produced by Kevin McCarthy at Open Road Analytics — not generated automatically. Every report includes senior analyst judgment on what the data actually means for your specific business.</p>
+    </div>
+  </div>
+
+  <!-- TRADEMARK NOTE -->
+  <div class="faq-trademark">
+    <div class="faq-tm-label">// Methodology</div>
+    <p class="faq-tm-text">The Waypoint Score™ is a proprietary AI visibility measurement methodology developed by Open Road Analytics. Scores are derived from live AI engine responses at the time of the scan and may vary on re-scan as AI model behavior evolves. The scoring algorithm — measuring citation detection, mention position, sentiment context, and third-party signal presence across multiple AI engines — is the intellectual property of Open Road Analytics.</p>
+  </div>
+
+</div>
+<!-- ══ END FAQ ══════════════════════════════════════════════════════════ -->
+
+
+<!-- LEAD CAPTURE MODAL -->
+<div id="lead-modal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-waypoint">Waypoint™</div>
+      <div class="modal-title">Get Your Full Report</div>
+      <div class="modal-sub">We’ll send your complete Waypoint Report to your inbox — including the full playbook, buyer prompt intelligence, and route to recovery.</div>
+    </div>
+    <div id="modal-form">
+      <div class="modal-field">
+        <label class="modal-label">Your Name</label>
+        <input class="modal-input" id="lead-name" type="text" placeholder="Jane Smith"/>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Company</label>
+        <input class="modal-input" id="lead-company" type="text" placeholder="Acme Corp"/>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Work Email</label>
+        <input class="modal-input" id="lead-email" type="email" placeholder="jane@acmecorp.com"/>
+      </div>
+      <div id="modal-error" class="modal-error hidden">Please fill in all fields with a valid email.</div>
+      <button class="modal-submit" onclick="submitLead()">Send Me the Report →</button>
+      <button class="modal-cancel" onclick="hideLeadModal()">Cancel</button>
+    </div>
+    <div id="modal-thanks" class="modal-thanks hidden">
+      <div class="modal-thanks-icon">✓</div>
+      <div class="modal-thanks-title">Report on its way.</div>
+      <div class="modal-thanks-sub">We’ll be in touch within one business day with your full Waypoint Report and a quick note from Kevin at Open Road Analytics.</div>
+      <button class="modal-cancel" onclick="hideLeadModal()">Close</button>
+    </div>
+  </div>
 </div>
 </body>
 </html>

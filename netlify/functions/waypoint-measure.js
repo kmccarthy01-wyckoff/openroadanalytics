@@ -1,128 +1,72 @@
 const https = require('https');
 
-function callClaude(key, prompt) {
-  const payload = JSON.stringify({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 400,
-    messages: [{ role: 'user', content: prompt }]
-  });
-  return new Promise((resolve, reject) => {
-    const options = {
-      hostname: 'api.anthropic.com',
-      path: '/v1/messages',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(payload),
-        'x-api-key': key,
-        'anthropic-version': '2023-06-01'
-      }
-    };
+function callAPI(hostname, path, apiHeaders, payload) {
+  return new Promise((resolve) => {
+    const options = { hostname, path, method: 'POST', headers: apiHeaders };
     const req = https.request(options, res => {
       let data = '';
       res.on('data', c => data += c);
       res.on('end', () => {
-        try {
-          const parsed = JSON.parse(data);
-          resolve(parsed.content?.[0]?.text || '');
-        } catch(e) { resolve(''); }
+        try { resolve(JSON.parse(data)); }
+        catch(e) { resolve(null); }
       });
     });
-    req.on('error', () => resolve(''));
+    req.on('error', () => resolve(null));
     req.write(payload);
     req.end();
   });
 }
 
-function callGPT(key, prompt) {
-  const payload = JSON.stringify({
-    model: 'gpt-4o-mini',
-    max_tokens: 400,
-    messages: [{ role: 'user', content: prompt }]
-  });
-  return new Promise((resolve, reject) => {
-    const options = {
-      hostname: 'api.openai.com',
-      path: '/v1/chat/completions',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(payload),
-        'Authorization': 'Bearer ' + key
-      }
-    };
-    const req = https.request(options, res => {
-      let data = '';
-      res.on('data', c => data += c);
-      res.on('end', () => {
-        try {
-          const parsed = JSON.parse(data);
-          resolve(parsed.choices?.[0]?.message?.content || '');
-        } catch(e) { resolve(''); }
-      });
-    });
-    req.on('error', () => resolve(''));
-    req.write(payload);
-    req.end();
-  });
-}
-
-// Parse a response to extract citation data
 function parseResponse(text, company, competitor) {
+  if (!text) return { coRaw: 0, compRaw: 0, coCited: false, compCited: false, coSnippet: '', compSnippet: '' };
   const t = text.toLowerCase();
   const co = company.toLowerCase();
   const comp = competitor.toLowerCase();
-
-  // Was brand cited?
-  const coCited = t.includes(co);
-  const compCited = t.includes(comp);
-
-  // Position — find first mention index
   const coIdx = t.indexOf(co);
   const compIdx = t.indexOf(comp);
+  const coCited = coIdx !== -1;
+  const compCited = compIdx !== -1;
 
-  // Position score — lower index = higher score
+  // Extract a short verbatim snippet around the brand mention
+  function extractSnippet(fullText, idx) {
+    if (idx === -1) return '';
+    const start = Math.max(0, idx - 40);
+    const end = Math.min(fullText.length, idx + 120);
+    let snippet = fullText.substring(start, end).trim();
+    if (start > 0) snippet = '...' + snippet;
+    if (end < fullText.length) snippet = snippet + '...';
+    return snippet;
+  }
+
+  const coSnippet = extractSnippet(text, coIdx);
+  const compSnippet = extractSnippet(text, compIdx);
+
   function posScore(idx, otherIdx) {
     if (idx === -1) return 0;
-    if (otherIdx === -1 || idx < otherIdx) return 3; // mentioned first
-    if (idx < otherIdx + 100) return 2; // mentioned close second
-    return 1; // mentioned later
+    if (otherIdx === -1 || idx < otherIdx) return 3;
+    if (idx < otherIdx + 150) return 2;
+    return 1;
   }
 
-  // Sentiment — simple positive/negative signals around brand mention
   function sentScore(text, brand) {
     if (!text.includes(brand)) return 0;
-    const brandIdx = text.indexOf(brand);
-    const window = text.substring(Math.max(0, brandIdx - 80), brandIdx + 80);
-    const positive = ['recommend', 'best', 'top', 'excellent', 'leading', 'popular', 'trusted', 'known for', 'great', 'premier', 'well-known'];
-    const negative = ['however', 'but', 'although', 'limited', 'lacks', 'despite', 'compared to', 'behind'];
-    const posCount = positive.filter(w => window.includes(w)).length;
-    const negCount = negative.filter(w => window.includes(w)).length;
-    if (posCount > negCount) return 3;
-    if (negCount > posCount) return 1;
-    return 2;
+    const idx = text.indexOf(brand);
+    const w = text.substring(Math.max(0, idx-100), idx+100);
+    const pos = ['recommend','best','top','excellent','leading','popular','trusted','premier','well-known','great','strong','widely'].filter(s=>w.includes(s)).length;
+    const neg = ['however','but','although','limited','lacks','despite','behind','compared to','weaker','less'].filter(s=>w.includes(s)).length;
+    return pos > neg ? 3 : neg > pos ? 1 : 2;
   }
 
-  // Third party signal
-  const thirdPartySignals = ['according to', 'cited by', 'featured in', 'reviewed by', 'mentioned by', 'referenced', 'source:', 'via ', 'from ', 'reports', 'study', 'research'];
-  const hasThirdParty = thirdPartySignals.some(s => t.includes(s));
+  const hasThirdParty = ['according to','cited by','featured in','reviewed','referenced','source:','reports','study','research','survey','analysis'].some(s=>t.includes(s));
 
-  const coPos = posScore(coIdx, compIdx);
-  const compPos = posScore(compIdx, coIdx);
-  const coSent = sentScore(t, co);
-  const compSent = sentScore(t, comp);
-  const bonus = hasThirdParty ? 1 : 0;
+  const coRaw = coCited ? (posScore(coIdx,compIdx) * sentScore(t,co)) + (hasThirdParty?1:0) : 0;
+  const compRaw = compCited ? (posScore(compIdx,coIdx) * sentScore(t,comp)) + (hasThirdParty?1:0) : 0;
 
-  const coRaw = coCited ? (coPos * coSent) + bonus : 0;
-  const compRaw = compCited ? (compPos * compSent) + bonus : 0;
-
-  return { coRaw, compRaw, coCited, compCited };
+  return { coRaw, compRaw, coCited, compCited, coSnippet, compSnippet };
 }
 
-// Normalize raw scores to 0-100
-function normalize(scores) {
-  const max = 10; // max possible: 3 pos * 3 sent + 1 bonus = 10
-  return Math.min(100, Math.round((scores / max) * 100));
+function normalize(avg) {
+  return Math.min(100, Math.round((avg / 10) * 100));
 }
 
 exports.handler = async (event) => {
@@ -141,84 +85,118 @@ exports.handler = async (event) => {
     const anthropicKey = process.env.ANTHROPIC_API_KEY;
     const openaiKey = process.env.OPENAI_API_KEY;
 
-    // Build analysis prompts — ask engines to respond naturally to each query
-    const buildPrompt = (query) =>
-      `Answer this question naturally and helpfully, as you would to a real user. Be specific and mention relevant brands when appropriate.\n\nQuestion: ${query}\n\nContext: The user is asking about ${industry} in ${market}.`;
+    const allPrompts = [...prompts.pa, ...prompts.cp, ...prompts.ar];
+    const dimSize = prompts.pa.length;
 
-    // Run all prompts in parallel batches of 10
-    const BATCH = 10;
-    const results = { pa: [], cp: [], ar: [] };
+    // Build all API calls at once — fully parallel
+    const calls = allPrompts.flatMap(q => {
+      const question = `Answer this question naturally. Mention specific brands when relevant.\n\nQuestion: ${q}\nContext: ${industry} in ${market}.`;
 
-    for (let dim of ['pa', 'cp', 'ar']) {
-      const dimPrompts = prompts[dim];
-      for (let i = 0; i < dimPrompts.length; i += BATCH) {
-        const batch = dimPrompts.slice(i, i + BATCH);
-        const calls = batch.flatMap(q => [
-          callClaude(anthropicKey, buildPrompt(q)),
-          callGPT(openaiKey, buildPrompt(q))
-        ]);
-        const responses = await Promise.all(calls);
-        for (let j = 0; j < batch.length; j++) {
-          const claudeResp = responses[j * 2];
-          const gptResp = responses[j * 2 + 1];
-          results[dim].push({
-            prompt: batch[j],
-            claude: parseResponse(claudeResp, company, competitor),
-            gpt: parseResponse(gptResp, company, competitor),
-            claudeText: claudeResp.substring(0, 300),
-            gptText: gptResp.substring(0, 300)
-          });
-        }
+      const claudePayload = JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 300,
+        messages: [{ role: 'user', content: question }]
+      });
+
+      const gptPayload = JSON.stringify({
+        model: 'gpt-4o-mini',
+        max_tokens: 300,
+        messages: [{ role: 'user', content: question }]
+      });
+
+      const claudeHeaders = {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(claudePayload),
+        'x-api-key': anthropicKey,
+        'anthropic-version': '2023-06-01'
+      };
+
+      const gptHeaders = {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(gptPayload),
+        'Authorization': 'Bearer ' + openaiKey
+      };
+
+      return [
+        callAPI('api.anthropic.com', '/v1/messages', claudeHeaders, claudePayload)
+          .then(r => r && r.content && r.content[0] ? r.content[0].text : ''),
+        callAPI('api.openai.com', '/v1/chat/completions', gptHeaders, gptPayload)
+          .then(r => r && r.choices && r.choices[0] ? r.choices[0].message.content : '')
+      ];
+    });
+
+    // Fire everything at once
+    const responses = await Promise.all(calls);
+
+    // Parse results — now includes snippets
+    const parsed = allPrompts.map((q, i) => ({
+      prompt: q,
+      claude: parseResponse(responses[i*2], company, competitor),
+      gpt: parseResponse(responses[i*2+1], company, competitor),
+      claudeRaw: responses[i*2] || '',
+      gptRaw: responses[i*2+1] || ''
+    }));
+
+    const pa = parsed.slice(0, dimSize);
+    const cp = parsed.slice(dimSize, dimSize*2);
+    const ar = parsed.slice(dimSize*2);
+
+    function dimScore(results, brand) {
+      const avg = results.reduce((s,r) => {
+        const raw = brand==='co' ? (r.claude.coRaw+r.gpt.coRaw)/2 : (r.claude.compRaw+r.gpt.compRaw)/2;
+        return s + raw;
+      }, 0) / results.length;
+      return normalize(avg);
+    }
+
+    function citRate(results, brand) {
+      const n = results.filter(r => brand==='co' ? (r.claude.coCited||r.gpt.coCited) : (r.claude.compCited||r.gpt.compCited)).length;
+      return Math.round((n/results.length)*100);
+    }
+
+    // Pull best verbatim snippets per dimension (first cited response)
+    function getBestSnippet(results, brand, engine) {
+      for (const r of results) {
+        const snippet = engine === 'claude'
+          ? (brand === 'co' ? r.claude.coSnippet : r.claude.compSnippet)
+          : (brand === 'co' ? r.gpt.coSnippet : r.gpt.compSnippet);
+        if (snippet && snippet.length > 20) return { prompt: r.prompt, snippet, engine };
       }
-    }
-
-    // Calculate dimension scores
-    function dimScore(dimResults, brand) {
-      const total = dimResults.reduce((sum, r) => {
-        const claudeRaw = brand === 'co' ? r.claude.coRaw : r.claude.compRaw;
-        const gptRaw = brand === 'co' ? r.gpt.coRaw : r.gpt.compRaw;
-        return sum + (claudeRaw + gptRaw) / 2;
-      }, 0);
-      return normalize(total / dimResults.length);
-    }
-
-    function citationRate(dimResults, brand) {
-      const cited = dimResults.filter(r =>
-        brand === 'co' ? (r.claude.coCited || r.gpt.coCited) : (r.claude.compCited || r.gpt.compCited)
-      ).length;
-      return Math.round((cited / dimResults.length) * 100);
+      return null;
     }
 
     const scores = {
-      prompt_alignment: {
-        a: dimScore(results.pa, 'co'),
-        b: dimScore(results.pa, 'comp'),
-        citation_rate_a: citationRate(results.pa, 'co'),
-        citation_rate_b: citationRate(results.pa, 'comp')
+      prompt_alignment:  {
+        a: dimScore(pa,'co'),  b: dimScore(pa,'comp'),
+        citation_rate_a: citRate(pa,'co'),  citation_rate_b: citRate(pa,'comp'),
+        snippet_a: getBestSnippet(pa,'co','claude') || getBestSnippet(pa,'co','gpt'),
+        snippet_b: getBestSnippet(pa,'comp','claude') || getBestSnippet(pa,'comp','gpt')
       },
       citation_presence: {
-        a: dimScore(results.cp, 'co'),
-        b: dimScore(results.cp, 'comp'),
-        citation_rate_a: citationRate(results.cp, 'co'),
-        citation_rate_b: citationRate(results.cp, 'comp')
+        a: dimScore(cp,'co'),  b: dimScore(cp,'comp'),
+        citation_rate_a: citRate(cp,'co'),  citation_rate_b: citRate(cp,'comp'),
+        snippet_a: getBestSnippet(cp,'co','claude') || getBestSnippet(cp,'co','gpt'),
+        snippet_b: getBestSnippet(cp,'comp','claude') || getBestSnippet(cp,'comp','gpt')
       },
-      answer_readiness: {
-        a: dimScore(results.ar, 'co'),
-        b: dimScore(results.ar, 'comp'),
-        citation_rate_a: citationRate(results.ar, 'co'),
-        citation_rate_b: citationRate(results.ar, 'comp')
+      answer_readiness:  {
+        a: dimScore(ar,'co'),  b: dimScore(ar,'comp'),
+        citation_rate_a: citRate(ar,'co'),  citation_rate_b: citRate(ar,'comp'),
+        snippet_a: getBestSnippet(ar,'co','claude') || getBestSnippet(ar,'co','gpt'),
+        snippet_b: getBestSnippet(ar,'comp','claude') || getBestSnippet(ar,'comp','gpt')
       }
     };
 
     const company_total = Math.round((scores.prompt_alignment.a + scores.citation_presence.a + scores.answer_readiness.a) / 3);
     const competitor_total = Math.round((scores.prompt_alignment.b + scores.citation_presence.b + scores.answer_readiness.b) / 3);
 
-    // Sample prompts shown in UI — pick 3 representative ones
-    const top_prompts = [
-      prompts.pa[0],
-      prompts.cp[0],
-      prompts.ar[0]
-    ];
+    // Build methodology transparency object
+    const methodology = {
+      total_prompts: allPrompts.length,
+      engines: 2,
+      total_responses: allPrompts.length * 2,
+      prompts_tested: allPrompts,
+      scoring: 'Citation detected · Position score (1-3) × Sentiment score (1-3) + Third-party signal bonus · Normalized 0-100 · Averaged across both engines'
+    };
 
     return {
       statusCode: 200,
@@ -227,12 +205,13 @@ exports.handler = async (event) => {
         company_total,
         competitor_total,
         scores,
-        top_prompts,
+        top_prompts: [prompts.pa[0], prompts.cp[0], prompts.ar[0]],
         raw_counts: {
-          total_prompts: results.pa.length + results.cp.length + results.ar.length,
+          total_prompts: allPrompts.length,
           engines: 2,
-          total_responses: (results.pa.length + results.cp.length + results.ar.length) * 2
-        }
+          total_responses: allPrompts.length * 2
+        },
+        methodology
       })
     };
 

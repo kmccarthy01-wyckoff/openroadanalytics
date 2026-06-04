@@ -1048,14 +1048,10 @@ function renderResults(data,co,comp,openaiData,market){
     const mpList = document.getElementById('mp-prompts-list');
     if(mpPrompts) mpPrompts.textContent = data.methodology.total_prompts;
     if(mpResponses) mpResponses.textContent = data.methodology.total_responses;
-    // Show all 9 generated prompts
-    const allPrompts = [...(prompts.pa||[]),...(prompts.cp||[]),...(prompts.ar||[])];
+    // Show all generated prompts — read from data (prompts var is out of scope here)
+    const allPrompts = (data.methodology && data.methodology.prompts_tested) || data.top_prompts || [];
     if(mpList && allPrompts.length > 0) {
       mpList.innerHTML = allPrompts
-        .map(p => `<span class="mp-prompt-tag">“${p}”</span>`)
-        .join('');
-    } else if(mpList && data.methodology.prompts_tested) {
-      mpList.innerHTML = data.methodology.prompts_tested
         .map(p => `<span class="mp-prompt-tag">“${p}”</span>`)
         .join('');
     }

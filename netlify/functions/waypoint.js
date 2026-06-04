@@ -1,12 +1,16 @@
 const https = require('https');
 
-function callAPI(hostname, path, apiHeaders, payload) {
+function callAPI(hostname, path, headers, payload) {
   return new Promise((resolve, reject) => {
     const options = {
       hostname,
       path,
       method: 'POST',
-      headers: apiHeaders
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload),
+        ...headers
+      }
     };
     const req = https.request(options, (res) => {
       let data = '';
@@ -50,26 +54,18 @@ exports.handler = async (event) => {
       messages: [{ role: 'user', content: body.openaiMessage }]
     });
 
-    const anthropicHeaders = {
-      'Content-Type': 'application/json',
-      'Content-Length': Buffer.byteLength(anthropicPayload),
-      'x-api-key': anthropicKey,
-      'anthropic-version': '2023-06-01'
-    };
-
-    const openaiHeaders = {
-      'Content-Type': 'application/json',
-      'Content-Length': Buffer.byteLength(openaiPayload),
-      'Authorization': 'Bearer ' + openaiKey
-    };
-
     const [claudeRes, openaiRes] = await Promise.all([
-      callAPI('api.anthropic.com', '/v1/messages', anthropicHeaders, anthropicPayload),
-      callAPI('api.openai.com', '/v1/chat/completions', openaiHeaders, openaiPayload)
+      callAPI('api.anthropic.com', '/v1/messages', {
+        'x-api-key': anthropicKey,
+        'anthropic-version': '2023-06-01'
+      }, anthropicPayload),
+      callAPI('api.openai.com', '/v1/chat/completions', {
+        'Authorization': `Bearer ${openaiKey}`
+      }, openaiPayload)
     ]);
 
-    const claudeText = claudeRes.content && claudeRes.content[0] ? claudeRes.content[0].text : '';
-    const openaiText = openaiRes.choices && openaiRes.choices[0] ? openaiRes.choices[0].message.content : '';
+    const claudeText = claudeRes.content?.[0]?.text || '';
+    const openaiText = openaiRes.choices?.[0]?.message?.content || '';
 
     return {
       statusCode: 200,

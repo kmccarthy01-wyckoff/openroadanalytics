@@ -722,7 +722,16 @@ Return ONLY this JSON with no other text:
     };
   }
 
-  const prompts = await generatePrompts(co, comp, ind, market);
+  let prompts = await generatePrompts(co, comp, ind, market);
+
+  // Hard safety net — guarantee prompts is always a valid object
+  if (!prompts || !prompts.pa || !prompts.cp || !prompts.ar) {
+    prompts = {
+      pa: [`What's the best ${ind} in ${market}?`, `${co} or ${comp} — which would you recommend?`, `Who should I go with for ${ind} in ${market}?`],
+      cp: [`Is ${co} any good?`, `What are people saying about ${co}?`, `${co} vs ${comp} — which has better reviews?`],
+      ar: [`What does ${co} offer and how much does it cost?`, `How is ${co} different from ${comp}?`, `Give me a quick rundown on ${co} and ${comp}`]
+    };
+  }
 
   // Animate scan steps now that prompts are ready
   setProgress(20);

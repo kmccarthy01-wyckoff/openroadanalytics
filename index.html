@@ -14,7 +14,7 @@
 
 <meta name="keywords" content="marketing analytics consultant New Jersey, fractional marketing analytics director, B2B marketing measurement consultant NJ, marketing analytics audit, ABM analytics consulting, GA4 consultant New Jersey, lead scoring consultant, AI marketing analytics, AEO consultant, answer engine optimization, marketing measurement strategy NYC, fractional CMO analytics NJ">
 
-<meta name="author" content="Kevin McCarthy">
+<meta name="author" content="Open Road Analytics">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="canonical" href="https://www.openroadanalytics.ai/">
 
@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://www.openroadanalytics.ai/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Kevin McCarthy — Fractional Marketing Analytics Consultant, NY · NJ · CT">
+<meta property="og:image:alt" content="Open Road Analytics — AI Visibility Intelligence &amp; Marketing Analytics, NY · NJ · CT">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
@@ -451,7 +451,7 @@ nav.scrolled { border-color: var(--rule-dark); }
 }
 .hero-h1 em { font-style: italic; color: var(--accent); }
 
-/* Differentiator — the one line that separates Kevin from everyone else */
+/* Differentiator */
 .hero-diff {
   font-family: var(--mono);
   font-size: 0.68rem; letter-spacing: 0.08em;
@@ -1313,11 +1313,80 @@ footer {
   font-style: italic; text-align: center;
 }
 @media(max-width:700px){
-  .comparison-row { grid-template-columns: 1fr 1fr; }
-  .comparison-cell.col-other:last-child { display: none; }
-  .comparison-row.comparison-header .col-other:last-child { display: none; }
+  .comparison-table { border: none; background: transparent; }
+  .comparison-row {
+    display: flex; flex-direction: column;
+    border: 1px solid rgba(245,242,236,0.1);
+    border-radius: 6px; margin-bottom: 8px;
+    overflow: hidden; background: rgba(245,242,236,0.02);
+  }
+  .comparison-row.comparison-header { display: none; }
+  .comparison-cell {
+    border-right: none;
+    border-bottom: 1px solid rgba(245,242,236,0.06);
+    padding: 9px 12px;
+  }
+  .comparison-cell:last-child { border-bottom: none; }
+  .comparison-cell.label {
+    background: rgba(245,242,236,0.04);
+    font-size: 7px; letter-spacing: 2px;
+    padding: 7px 12px;
+  }
+  .comparison-cell.col-waypoint {
+    font-size: 11px; font-weight: 500;
+    border-left: 3px solid #c8502a;
+  }
+  .comparison-cell.col-waypoint::before {
+    content: 'WAYPOINT™ · ';
+    font-family: 'DM Mono', monospace;
+    font-size: 7px; letter-spacing: 1.5px;
+    color: #c8502a; display: block;
+    margin-bottom: 3px;
+  }
+  .comparison-cell.col-other {
+    font-size: 9.5px; color: rgba(245,242,236,0.35);
+  }
+  .comparison-cell.col-other:first-of-type::before {
+    content: 'PROFOUND · ';
+    font-family: 'DM Mono', monospace;
+    font-size: 6.5px; letter-spacing: 1.5px;
+    color: rgba(245,242,236,0.2); display: block;
+    margin-bottom: 2px;
+  }
+  .comparison-cell.col-other:last-child::before {
+    content: 'SEMRUSH · ';
+    font-family: 'DM Mono', monospace;
+    font-size: 6.5px; letter-spacing: 1.5px;
+    color: rgba(245,242,236,0.2); display: block;
+    margin-bottom: 2px;
+  }
+  .comparison-note { font-size: 10px; text-align: left; }
+  .comparison-wrap { padding: 1.5rem 1rem 2rem; }
 }
 
+
+/* CAROUSEL */
+.carousel-wrap{width:100%;}
+.carousel-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.2rem;justify-content:center;}
+.carousel-tab{font-family:var(--mono);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,242,236,0.35);background:transparent;border:1px solid rgba(245,242,236,0.1);padding:5px 12px;cursor:pointer;border-radius:3px;transition:all 0.2s;}
+.carousel-tab:hover{color:rgba(245,242,236,0.6);border-color:rgba(245,242,236,0.2);}
+.carousel-tab.active{color:#c8502a;border-color:#c8502a;background:rgba(200,80,42,0.08);}
+.carousel-track{position:relative;overflow:hidden;}
+.carousel-slide{display:none;}
+.carousel-slide.active{display:block;}
+.carousel-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:1rem;}
+.carousel-arrow{font-family:var(--mono);font-size:14px;color:rgba(245,242,236,0.3);background:transparent;border:1px solid rgba(245,242,236,0.1);width:32px;height:32px;cursor:pointer;border-radius:3px;transition:all 0.2s;display:flex;align-items:center;justify-content:center;}
+.carousel-arrow:hover{color:#f5f2ec;border-color:rgba(245,242,236,0.3);}
+.carousel-dots{display:flex;gap:6px;align-items:center;}
+.carousel-dot{width:6px;height:6px;border-radius:50%;background:rgba(245,242,236,0.15);border:none;cursor:pointer;transition:all 0.2s;padding:0;}
+.carousel-dot.active{background:#c8502a;width:18px;border-radius:3px;}
+@media(max-width:600px){.carousel-tabs{gap:4px;}.carousel-tab{font-size:7px;padding:4px 8px;}}
+
+.problem-card-ai { border-left: 2px solid rgba(200,80,42,0.4); }
+.problem-tag { font-family: var(--mono); font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: #c8502a; margin-bottom: 8px; }
+.problems-divider { display: flex; align-items: center; gap: 12px; grid-column: 1 / -1; padding: 8px 0; }
+.problems-divider-line { flex: 1; height: 1px; background: rgba(245,242,236,0.08); }
+.problems-divider-label { font-family: var(--mono); font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,242,236,0.2); white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -1357,22 +1426,17 @@ footer {
     <div>
       <div class="hero-eyebrow">AI Visibility Intelligence · Marketing Measurement · NY · NJ · CT</div>
 
-      <!-- H1 — the provocation -->
       <h1 class="hero-h1">
-        We help brands succeed<br>
-        in a world where<br>
-        <em>AI decides who gets found.</em>
+        Can AI discover, verify,<br>and recommend<br><em>your business?</em>
       </h1>
 
       <!-- The secondary line — keeping the original -->
       <p class="hero-diff">
-        Know what your marketing is actually doing —<br>
-        and what AI is saying about your brand.
+        Most businesses are invisible in AI search without knowing it. We diagnose whether AI can find you, trust you, and recommend you — then build the program to fix it.
       </p>
 
       <p class="hero-sub">
-        Expert analytics experience across Fortune 50 technology,<br>
-        global financial services, and America's most recognized consumer brands.
+        Senior analytics experience across Fortune 50 technology, global financial services, and America's most recognized consumer brands.
       </p>
 
       <div class="hero-ctas">
@@ -1450,139 +1514,348 @@ footer {
   </div>
 </section>
 
-<!-- CREDENTIAL STRIP -->
-<div class="cred-strip" role="complementary" aria-label="Track record">
-  <div class="cred-manifesto">
-    <span class="cred-manifesto-phrase">Seen it.</span>
-    <span class="cred-manifesto-dot"></span>
-    <span class="cred-manifesto-phrase">Built it.</span>
-    <span class="cred-manifesto-dot"></span>
-    <span class="cred-manifesto-phrase">Fixed it.</span>
-  </div>
-  <div class="cred-sub">
-    Analytics leadership that delivers measurable outcomes.
-  </div>
-</div>
-
 <!-- WAYPOINT SAMPLE REPORT -->
 <section id="waypoint-sample" aria-label="Waypoint sample report">
   <div class="sample-wrap">
     <div class="sample-header">
       <div class="eyebrow">AI Discoverability Intelligence</div>
-      <h2 class="section-h">This is what your<br><em>Waypoint Score™ looks like.</em></h2>
-      <p class="sample-sub">Run a free scan. See exactly how AI engines perceive your brand versus your top competitor — across Prompt Alignment, Citation Presence, and Answer Readiness. A North Carolina wedding vendor went from invisible to consistently cited in AI searches within 90 days. A North Jersey law firm closed a 23-point gap against its top competitor in one quarter.</p>
+      <h2 class="section-h">Can AI discover, verify,<br>and <em>recommend you?</em></h2>
+      <p class="sample-sub">Waypoint measures three things: whether AI can find your business in category searches (Discover), whether it trusts the sources that mention you (Verify), and whether it can answer the questions buyers ask before making a decision (Recommend). The result is a diagnosis — and a clear path to fix it.</p>
     </div>
-    <div class="sample-report">
-      <div class="sample-report-header">
-        <div class="sample-report-label">// Sample · Waypoint AI Discoverability Report</div>
-        <div class="sample-report-pair">Nike <span>vs</span> Adidas · Sportswear & Apparel · United States</div>
-      </div>
-      <div class="sample-scores">
-        <div class="sample-score-card a">
-          <div class="sample-score-name">Nike</div>
-          <div class="sample-score-num">62</div>
-          <div class="sample-score-label">Waypoint Score™</div>
+    <div class="carousel-wrap">
+    <div class="carousel-tabs"><button class="carousel-tab active" onclick="goToSlide(0)">Legal</button><button class="carousel-tab" onclick="goToSlide(1)">Events</button><button class="carousel-tab" onclick="goToSlide(2)">Healthcare</button><button class="carousel-tab" onclick="goToSlide(3)">Food</button><button class="carousel-tab" onclick="goToSlide(4)">Consumer</button></div>
+    <div class="carousel-track" id="carousel-track">
+    <div class="carousel-slide active" data-index="0">
+      <div class="sample-report">
+        <div class="sample-report-header">
+          <div class="sample-report-label">// Sample · Waypoint AI Discoverability Report</div>
+          <div class="sample-report-pair">Epstein Law Firm <span>vs</span> Bergen Law · Legal · Personal Injury · North Jersey, NJ</div>
         </div>
-        <div class="sample-compass">
-          <svg width="80" height="80" viewBox="0 0 80 80">
-            <circle cx="40" cy="40" r="36" fill="none" stroke="rgba(245,242,236,0.1)" stroke-width="1"/>
-            <circle cx="40" cy="40" r="26" fill="none" stroke="rgba(245,242,236,0.06)" stroke-width="0.8"/>
-            <line x1="40" y1="4" x2="40" y2="10" stroke="rgba(245,242,236,0.5)" stroke-width="1.5"/>
-            <line x1="40" y1="70" x2="40" y2="76" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
-            <line x1="4" y1="40" x2="10" y2="40" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
-            <line x1="70" y1="40" x2="76" y2="40" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
-            <text x="40" y="17" text-anchor="middle" font-family="DM Mono,monospace" font-size="7" fill="rgba(245,242,236,0.6)">N</text>
-            <polygon points="40,12 37.5,40 40,44 42.5,40" fill="#c8502a" transform="rotate(-80,40,40)"/>
-            <polygon points="40,44 37.5,40 40,66 42.5,40" fill="rgba(245,242,236,0.15)" transform="rotate(-80,40,40)"/>
-            <polygon points="40,12 37.5,40 40,44 42.5,40" fill="rgba(245,242,236,0.3)" transform="rotate(100,40,40)"/>
-            <polygon points="40,44 37.5,40 40,66 42.5,40" fill="rgba(245,242,236,0.08)" transform="rotate(100,40,40)"/>
-            <circle cx="40" cy="40" r="4" fill="#0e0d0b" stroke="rgba(245,242,236,0.3)" stroke-width="1"/>
-          </svg>
+        <div class="sample-scores">
+          <div class="sample-score-card a">
+            <div class="sample-score-name">Epstein Law Firm</div>
+            <div class="sample-score-num">44</div>
+            <div class="sample-score-label">Waypoint Score™</div>
+          </div>
+          <div class="sample-compass"><svg width="80" height="80" viewBox="0 0 80 80">
+              <circle cx="40" cy="40" r="36" fill="none" stroke="rgba(245,242,236,0.1)" stroke-width="1"/>
+              <circle cx="40" cy="40" r="26" fill="none" stroke="rgba(245,242,236,0.06)" stroke-width="0.8"/>
+              <line x1="40" y1="4" x2="40" y2="10" stroke="rgba(245,242,236,0.5)" stroke-width="1.5"/>
+              <line x1="40" y1="70" x2="40" y2="76" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
+              <line x1="4" y1="40" x2="10" y2="40" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
+              <line x1="70" y1="40" x2="76" y2="40" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
+              <text x="40" y="17" text-anchor="middle" font-family="DM Mono,monospace" font-size="7" fill="rgba(245,242,236,0.6)">N</text>
+              <polygon points="40,12 37.5,40 40,44 42.5,40" fill="#c8502a" transform="rotate(-30,40,40)"/>
+              <polygon points="40,44 37.5,40 40,66 42.5,40" fill="rgba(245,242,236,0.15)" transform="rotate(-30,40,40)"/>
+              <polygon points="40,12 37.5,40 40,44 42.5,40" fill="rgba(245,242,236,0.3)" transform="rotate(150,40,40)"/>
+              <polygon points="40,44 37.5,40 40,66 42.5,40" fill="rgba(245,242,236,0.08)" transform="rotate(150,40,40)"/>
+              <circle cx="40" cy="40" r="4" fill="#0e0d0b" stroke="rgba(245,242,236,0.3)" stroke-width="1"/>
+            </svg></div>
+          <div class="sample-score-card b">
+            <div class="sample-score-name">Bergen Law</div>
+            <div class="sample-score-num">67</div>
+            <div class="sample-score-label">Waypoint Score™</div>
+          </div>
         </div>
-        <div class="sample-score-card b">
-          <div class="sample-score-name">Adidas</div>
-          <div class="sample-score-num">79</div>
-          <div class="sample-score-label">Waypoint Score™</div>
-        </div>
-      </div>
-      <div class="sample-dims">
+        <div class="sample-dims">
         <div class="sample-dim">
           <div class="sample-dim-label">Prompt Alignment</div>
           <div class="sample-dim-bars">
-            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:68%"></div></div><span class="sample-score-n a">68</span></div>
-            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:82%"></div></div><span class="sample-score-n b">82</span></div>
+            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:40%"></div></div><span class="sample-score-n a">40</span></div>
+            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:47%"></div></div><span class="sample-score-n b">47</span></div>
           </div>
-          <div class="sample-insight">Nike's content vocabulary closely mirrors the queries buyers use when asking AI about athletic performance and product recommendations.</div>
+          <div class="sample-insight">Bergen Law opens every practice page answering the question a victim just typed. Epstein leads with credentials and case history — content AI engines cannot cite for intent-driven queries.</div>
         </div>
         <div class="sample-dim">
           <div class="sample-dim-label">Citation Presence</div>
           <div class="sample-dim-bars">
-            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:58%"></div></div><span class="sample-score-n a">58</span></div>
-            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:74%"></div></div><span class="sample-score-n b">74</span></div>
+            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:46%"></div></div><span class="sample-score-n a">46</span></div>
+            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:45%"></div></div><span class="sample-score-n b">45</span></div>
           </div>
-          <div class="sample-insight">Nike appears in significantly more third-party sports media and retail sources that AI engines weight as authoritative citations.</div>
+          <div class="sample-insight">Bergen has verified profiles across Avvo, Super Lawyers, Martindale-Hubbell, and FindLaw with consistent review volume. Each profile is an independent signal AI engines treat as validation.</div>
         </div>
         <div class="sample-dim">
           <div class="sample-dim-label">Answer Readiness</div>
           <div class="sample-dim-bars">
-            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:61%"></div></div><span class="sample-score-n a">61</span></div>
-            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:79%"></div></div><span class="sample-score-n b">79</span></div>
+            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:45%"></div></div><span class="sample-score-n a">45</span></div>
+            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:49%"></div></div><span class="sample-score-n b">49</span></div>
           </div>
-          <div class="sample-insight">Nike deploys FAQPage schema across its top product pages and uses question-based H2 headings — the exact structural signals AI engines use to identify and extract direct answers.</div>
+          <div class="sample-insight">Bergen deploys FAQPage schema with victim-language questions on every practice area page. Claude extracts and cites these directly. Epstein has no structured FAQ content.</div>
+        </div>
+        </div>
+        <div class="sample-gap">
+          <div class="sample-gap-label">// Discoverability Gap</div>
+          <div class="sample-gap-text">Bergen Law appears in AI responses to NJ injury queries at roughly twice the rate of Epstein Law Firm. Every unanswered query is a potential case that never reaches intake.</div>
         </div>
       </div>
-      <div class="sample-gap">
-        <div class="sample-gap-label">// Discoverability Gap</div>
-        <div class="sample-gap-text">Nike’s AI search advantage is structural, not cosmetic — two decades of athlete storytelling created a citation ecosystem of millions of independent references that AI engines treat as categorical authority. Adidas’s post-Yeezy narrative disruption compounded the gap, leaving semantic uncertainty that Nike’s content depth now fills by default.</div>
+    </div>
+    <div class="carousel-slide" data-index="1">
+      <div class="sample-report">
+        <div class="sample-report-header">
+          <div class="sample-report-label">// Sample · Waypoint AI Discoverability Report</div>
+          <div class="sample-report-pair">Carolina Royal Strings <span>vs</span> Charlotte Strings · Wedding Musicians · Charlotte, NC</div>
+        </div>
+        <div class="sample-scores">
+          <div class="sample-score-card a">
+            <div class="sample-score-name">Carolina Royal Strings</div>
+            <div class="sample-score-num">48</div>
+            <div class="sample-score-label">Waypoint Score™</div>
+          </div>
+          <div class="sample-compass"><svg width="80" height="80" viewBox="0 0 80 80">
+              <circle cx="40" cy="40" r="36" fill="none" stroke="rgba(245,242,236,0.1)" stroke-width="1"/>
+              <circle cx="40" cy="40" r="26" fill="none" stroke="rgba(245,242,236,0.06)" stroke-width="0.8"/>
+              <line x1="40" y1="4" x2="40" y2="10" stroke="rgba(245,242,236,0.5)" stroke-width="1.5"/>
+              <line x1="40" y1="70" x2="40" y2="76" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
+              <line x1="4" y1="40" x2="10" y2="40" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
+              <line x1="70" y1="40" x2="76" y2="40" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
+              <text x="40" y="17" text-anchor="middle" font-family="DM Mono,monospace" font-size="7" fill="rgba(245,242,236,0.6)">N</text>
+              <polygon points="40,12 37.5,40 40,44 42.5,40" fill="#c8502a" transform="rotate(10,40,40)"/>
+              <polygon points="40,44 37.5,40 40,66 42.5,40" fill="rgba(245,242,236,0.15)" transform="rotate(10,40,40)"/>
+              <polygon points="40,12 37.5,40 40,44 42.5,40" fill="rgba(245,242,236,0.3)" transform="rotate(190,40,40)"/>
+              <polygon points="40,44 37.5,40 40,66 42.5,40" fill="rgba(245,242,236,0.08)" transform="rotate(190,40,40)"/>
+              <circle cx="40" cy="40" r="4" fill="#0e0d0b" stroke="rgba(245,242,236,0.3)" stroke-width="1"/>
+            </svg></div>
+          <div class="sample-score-card b">
+            <div class="sample-score-name">Charlotte Strings</div>
+            <div class="sample-score-num">71</div>
+            <div class="sample-score-label">Waypoint Score™</div>
+          </div>
+        </div>
+        <div class="sample-dims">
+        <div class="sample-dim">
+          <div class="sample-dim-label">Prompt Alignment</div>
+          <div class="sample-dim-bars">
+            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:41%"></div></div><span class="sample-score-n a">41</span></div>
+            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:47%"></div></div><span class="sample-score-n b">47</span></div>
+          </div>
+          <div class="sample-insight">Charlotte Strings opens with the questions couples ask — repertoire, pricing, booking process. Carolina Royal Strings leads with biography. AI engines surface the brand that answers the question first.</div>
+        </div>
+        <div class="sample-dim">
+          <div class="sample-dim-label">Citation Presence</div>
+          <div class="sample-dim-bars">
+            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:46%"></div></div><span class="sample-score-n a">46</span></div>
+            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:54%"></div></div><span class="sample-score-n b">54</span></div>
+          </div>
+          <div class="sample-insight">Charlotte Strings has active profiles on The Knot and WeddingWire — the two platforms AI engines weight most heavily for local wedding vendor recommendations. Carolina Royal Strings has neither.</div>
+        </div>
+        <div class="sample-dim">
+          <div class="sample-dim-label">Answer Readiness</div>
+          <div class="sample-dim-bars">
+            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:48%"></div></div><span class="sample-score-n a">48</span></div>
+            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:54%"></div></div><span class="sample-score-n b">54</span></div>
+          </div>
+          <div class="sample-insight">Charlotte Strings has a dedicated FAQ page with FAQPage schema and venue-specific landing pages. Carolina Royal Strings has no structured content AI engines can extract directly.</div>
+        </div>
+        </div>
+        <div class="sample-gap">
+          <div class="sample-gap-label">// Discoverability Gap</div>
+          <div class="sample-gap-text">Charlotte Strings wins every AI wedding query in the Charlotte market. The average booking is worth $2,500–$5,000. AI search is already where couples start.</div>
+        </div>
       </div>
-      <a href="/waypoint.html" class="sample-cta">Run your own Waypoint Scan — free →</a>
+    </div>
+    <div class="carousel-slide" data-index="2">
+      <div class="sample-report">
+        <div class="sample-report-header">
+          <div class="sample-report-label">// Sample · Waypoint AI Discoverability Report</div>
+          <div class="sample-report-pair">Hackensack UMC <span>vs</span> Valley Hospital · Health Systems · North Jersey, NJ</div>
+        </div>
+        <div class="sample-scores">
+          <div class="sample-score-card a">
+            <div class="sample-score-name">Hackensack UMC</div>
+            <div class="sample-score-num">71</div>
+            <div class="sample-score-label">Waypoint Score™</div>
+          </div>
+          <div class="sample-compass"><svg width="80" height="80" viewBox="0 0 80 80">
+              <circle cx="40" cy="40" r="36" fill="none" stroke="rgba(245,242,236,0.1)" stroke-width="1"/>
+              <circle cx="40" cy="40" r="26" fill="none" stroke="rgba(245,242,236,0.06)" stroke-width="0.8"/>
+              <line x1="40" y1="4" x2="40" y2="10" stroke="rgba(245,242,236,0.5)" stroke-width="1.5"/>
+              <line x1="40" y1="70" x2="40" y2="76" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
+              <line x1="4" y1="40" x2="10" y2="40" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
+              <line x1="70" y1="40" x2="76" y2="40" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
+              <text x="40" y="17" text-anchor="middle" font-family="DM Mono,monospace" font-size="7" fill="rgba(245,242,236,0.6)">N</text>
+              <polygon points="40,12 37.5,40 40,44 42.5,40" fill="#c8502a" transform="rotate(-60,40,40)"/>
+              <polygon points="40,44 37.5,40 40,66 42.5,40" fill="rgba(245,242,236,0.15)" transform="rotate(-60,40,40)"/>
+              <polygon points="40,12 37.5,40 40,44 42.5,40" fill="rgba(245,242,236,0.3)" transform="rotate(120,40,40)"/>
+              <polygon points="40,44 37.5,40 40,66 42.5,40" fill="rgba(245,242,236,0.08)" transform="rotate(120,40,40)"/>
+              <circle cx="40" cy="40" r="4" fill="#0e0d0b" stroke="rgba(245,242,236,0.3)" stroke-width="1"/>
+            </svg></div>
+          <div class="sample-score-card b">
+            <div class="sample-score-name">Valley Hospital</div>
+            <div class="sample-score-num">58</div>
+            <div class="sample-score-label">Waypoint Score™</div>
+          </div>
+        </div>
+        <div class="sample-dims">
+        <div class="sample-dim">
+          <div class="sample-dim-label">Prompt Alignment</div>
+          <div class="sample-dim-bars">
+            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:74%"></div></div><span class="sample-score-n a">74</span></div>
+            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:78%"></div></div><span class="sample-score-n b">78</span></div>
+          </div>
+          <div class="sample-insight">Hackensack’s content mirrors the questions patients ask AI — symptoms, specialists, appointment booking. Valley’s content is organized around departments, not patient questions.</div>
+        </div>
+        <div class="sample-dim">
+          <div class="sample-dim-label">Citation Presence</div>
+          <div class="sample-dim-bars">
+            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:68%"></div></div><span class="sample-score-n a">68</span></div>
+            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:72%"></div></div><span class="sample-score-n b">72</span></div>
+          </div>
+          <div class="sample-insight">Hackensack’s national rankings, research publications, and news coverage create a dense third-party citation network AI engines treat as clinical authority.</div>
+        </div>
+        <div class="sample-dim">
+          <div class="sample-dim-label">Answer Readiness</div>
+          <div class="sample-dim-bars">
+            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:62%"></div></div><span class="sample-score-n a">62</span></div>
+            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:68%"></div></div><span class="sample-score-n b">68</span></div>
+          </div>
+          <div class="sample-insight">Hackensack deploys structured data across service lines with FAQ content on condition pages. Patients searching AI for specific conditions are more likely to receive Hackensack as a direct answer.</div>
+        </div>
+        </div>
+        <div class="sample-gap">
+          <div class="sample-gap-label">// Discoverability Gap</div>
+          <div class="sample-gap-text">Hackensack holds a 13-point AI visibility advantage over Valley. For a health system where patient acquisition begins with an AI search, that gap has direct volume implications.</div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-slide" data-index="3">
+      <div class="sample-report">
+        <div class="sample-report-header">
+          <div class="sample-report-label">// Sample · Waypoint AI Discoverability Report</div>
+          <div class="sample-report-pair">Mel's Butcher Box <span>vs</span> 80/20 · Specialty Butcher · Westwood, NJ</div>
+        </div>
+        <div class="sample-scores">
+          <div class="sample-score-card a">
+            <div class="sample-score-name">Mel's Butcher Box</div>
+            <div class="sample-score-num">38</div>
+            <div class="sample-score-label">Waypoint Score™</div>
+          </div>
+          <div class="sample-compass"><svg width="80" height="80" viewBox="0 0 80 80">
+              <circle cx="40" cy="40" r="36" fill="none" stroke="rgba(245,242,236,0.1)" stroke-width="1"/>
+              <circle cx="40" cy="40" r="26" fill="none" stroke="rgba(245,242,236,0.06)" stroke-width="0.8"/>
+              <line x1="40" y1="4" x2="40" y2="10" stroke="rgba(245,242,236,0.5)" stroke-width="1.5"/>
+              <line x1="40" y1="70" x2="40" y2="76" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
+              <line x1="4" y1="40" x2="10" y2="40" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
+              <line x1="70" y1="40" x2="76" y2="40" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
+              <text x="40" y="17" text-anchor="middle" font-family="DM Mono,monospace" font-size="7" fill="rgba(245,242,236,0.6)">N</text>
+              <polygon points="40,12 37.5,40 40,44 42.5,40" fill="#c8502a" transform="rotate(20,40,40)"/>
+              <polygon points="40,44 37.5,40 40,66 42.5,40" fill="rgba(245,242,236,0.15)" transform="rotate(20,40,40)"/>
+              <polygon points="40,12 37.5,40 40,44 42.5,40" fill="rgba(245,242,236,0.3)" transform="rotate(200,40,40)"/>
+              <polygon points="40,44 37.5,40 40,66 42.5,40" fill="rgba(245,242,236,0.08)" transform="rotate(200,40,40)"/>
+              <circle cx="40" cy="40" r="4" fill="#0e0d0b" stroke="rgba(245,242,236,0.3)" stroke-width="1"/>
+            </svg></div>
+          <div class="sample-score-card b">
+            <div class="sample-score-name">80/20</div>
+            <div class="sample-score-num">52</div>
+            <div class="sample-score-label">Waypoint Score™</div>
+          </div>
+        </div>
+        <div class="sample-dims">
+        <div class="sample-dim">
+          <div class="sample-dim-label">Prompt Alignment</div>
+          <div class="sample-dim-bars">
+            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:32%"></div></div><span class="sample-score-n a">32</span></div>
+            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:38%"></div></div><span class="sample-score-n b">38</span></div>
+          </div>
+          <div class="sample-insight">80/20’s online presence uses the language buyers search — “dry aged beef Westwood,” “custom cuts NJ,” “grass fed butcher near me.” Mel’s website leads with brand story rather than buyer queries.</div>
+        </div>
+        <div class="sample-dim">
+          <div class="sample-dim-label">Citation Presence</div>
+          <div class="sample-dim-bars">
+            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:35%"></div></div><span class="sample-score-n a">35</span></div>
+            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:41%"></div></div><span class="sample-score-n b">41</span></div>
+          </div>
+          <div class="sample-insight">80/20 has accumulated Yelp reviews, Google Business Profile activity, and local food blog coverage that AI engines treat as community validation. Mel’s third-party footprint is thinner.</div>
+        </div>
+        <div class="sample-dim">
+          <div class="sample-dim-label">Answer Readiness</div>
+          <div class="sample-dim-bars">
+            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:36%"></div></div><span class="sample-score-n a">36</span></div>
+            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:44%"></div></div><span class="sample-score-n b">44</span></div>
+          </div>
+          <div class="sample-insight">Neither brand has robust structured content for AI extraction — both have room to grow. 80/20’s product descriptions and pricing transparency give it a narrow edge in direct information queries.</div>
+        </div>
+        </div>
+        <div class="sample-gap">
+          <div class="sample-gap-label">// Discoverability Gap</div>
+          <div class="sample-gap-text">Both brands are below the category average for specialty food retail. The gap is closeable — and the brand that moves first owns the AI conversation in Westwood.</div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-slide" data-index="4">
+      <div class="sample-report">
+        <div class="sample-report-header">
+          <div class="sample-report-label">// Sample · Waypoint AI Discoverability Report</div>
+          <div class="sample-report-pair">Bose <span>vs</span> Beats · Premium Audio · United States</div>
+        </div>
+        <div class="sample-scores">
+          <div class="sample-score-card a">
+            <div class="sample-score-name">Bose</div>
+            <div class="sample-score-num">79</div>
+            <div class="sample-score-label">Waypoint Score™</div>
+          </div>
+          <div class="sample-compass"><svg width="80" height="80" viewBox="0 0 80 80">
+              <circle cx="40" cy="40" r="36" fill="none" stroke="rgba(245,242,236,0.1)" stroke-width="1"/>
+              <circle cx="40" cy="40" r="26" fill="none" stroke="rgba(245,242,236,0.06)" stroke-width="0.8"/>
+              <line x1="40" y1="4" x2="40" y2="10" stroke="rgba(245,242,236,0.5)" stroke-width="1.5"/>
+              <line x1="40" y1="70" x2="40" y2="76" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
+              <line x1="4" y1="40" x2="10" y2="40" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
+              <line x1="70" y1="40" x2="76" y2="40" stroke="rgba(245,242,236,0.2)" stroke-width="1"/>
+              <text x="40" y="17" text-anchor="middle" font-family="DM Mono,monospace" font-size="7" fill="rgba(245,242,236,0.6)">N</text>
+              <polygon points="40,12 37.5,40 40,44 42.5,40" fill="#c8502a" transform="rotate(-45,40,40)"/>
+              <polygon points="40,44 37.5,40 40,66 42.5,40" fill="rgba(245,242,236,0.15)" transform="rotate(-45,40,40)"/>
+              <polygon points="40,12 37.5,40 40,44 42.5,40" fill="rgba(245,242,236,0.3)" transform="rotate(135,40,40)"/>
+              <polygon points="40,44 37.5,40 40,66 42.5,40" fill="rgba(245,242,236,0.08)" transform="rotate(135,40,40)"/>
+              <circle cx="40" cy="40" r="4" fill="#0e0d0b" stroke="rgba(245,242,236,0.3)" stroke-width="1"/>
+            </svg></div>
+          <div class="sample-score-card b">
+            <div class="sample-score-name">Beats</div>
+            <div class="sample-score-num">61</div>
+            <div class="sample-score-label">Waypoint Score™</div>
+          </div>
+        </div>
+        <div class="sample-dims">
+        <div class="sample-dim">
+          <div class="sample-dim-label">Prompt Alignment</div>
+          <div class="sample-dim-bars">
+            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:77%"></div></div><span class="sample-score-n a">77</span></div>
+            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:83%"></div></div><span class="sample-score-n b">83</span></div>
+          </div>
+          <div class="sample-insight">Bose content answers the questions buyers ask AI — “best noise cancelling headphones,” “headphones for travel.” Beats content leads with culture and celebrity, which AI does not cite for product queries.</div>
+        </div>
+        <div class="sample-dim">
+          <div class="sample-dim-label">Citation Presence</div>
+          <div class="sample-dim-bars">
+            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:74%"></div></div><span class="sample-score-n a">74</span></div>
+            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:80%"></div></div><span class="sample-score-n b">80</span></div>
+          </div>
+          <div class="sample-insight">Bose is cited across audio engineering publications, travel media, and consumer tech review sites. Beats’ citation network is stronger in entertainment media, which carries less weight for product recommendation queries.</div>
+        </div>
+        <div class="sample-dim">
+          <div class="sample-dim-label">Answer Readiness</div>
+          <div class="sample-dim-bars">
+            <div class="sample-bar-row"><span class="sample-engine a">Claude</span><div class="sample-track"><div class="sample-bar a" style="width:72%"></div></div><span class="sample-score-n a">72</span></div>
+            <div class="sample-bar-row"><span class="sample-engine b">GPT</span><div class="sample-track"><div class="sample-bar b" style="width:78%"></div></div><span class="sample-score-n b">78</span></div>
+          </div>
+          <div class="sample-insight">Bose deploys structured comparison content and FAQ schema across its product lines. AI engines can extract specific answers to buyer questions. Beats’ product pages are visually rich but light on structured, extractable content.</div>
+        </div>
+        </div>
+        <div class="sample-gap">
+          <div class="sample-gap-label">// Discoverability Gap</div>
+          <div class="sample-gap-text">Bose holds an 18-point AI visibility advantage over Beats in product recommendation queries. For a category where AI search shapes the consideration set, that structural lead compounds over time.</div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-arrow" onclick="prevSlide()" aria-label="Previous">←</button>
+      <div class="carousel-dots"><button class="carousel-dot active" onclick="goToSlide(0)" aria-label="Example 1"></button><button class="carousel-dot" onclick="goToSlide(1)" aria-label="Example 2"></button><button class="carousel-dot" onclick="goToSlide(2)" aria-label="Example 3"></button><button class="carousel-dot" onclick="goToSlide(3)" aria-label="Example 4"></button><button class="carousel-dot" onclick="goToSlide(4)" aria-label="Example 5"></button></div>
+      <button class="carousel-arrow" onclick="nextSlide()" aria-label="Next">→</button>
+    </div>
+  </div><a href="/waypoint.html" class="sample-cta">Run your own Waypoint Scan — free →</a>
     </div>
   </div>
 
-  <!-- COMPARISON TABLE -->
-  <div class="comparison-wrap">
-    <div class="comparison-eyebrow">// How Waypoint Compares</div>
-    <div class="comparison-table" role="table" aria-label="Waypoint vs enterprise AI visibility platforms">
-      <div class="comparison-row comparison-header" role="row">
-        <div class="comparison-cell label" role="columnheader"></div>
-        <div class="comparison-cell col-waypoint" role="columnheader">Waypoint™<br><span>Open Road Analytics</span></div>
-        <div class="comparison-cell col-other" role="columnheader">Profound<br><span>Enterprise SaaS Platform</span></div>
-        <div class="comparison-cell col-other" role="columnheader">SEMrush AI Toolkit<br><span>SEO Suite with AI Module</span></div>
-      </div>
-      <div class="comparison-row" role="row">
-        <div class="comparison-cell label" role="rowheader">Who it’s for</div>
-        <div class="comparison-cell col-waypoint">Mid-market companies that need expert judgment, not another dashboard</div>
-        <div class="comparison-cell col-other">Fortune 500 teams with dedicated AEO staff</div>
-        <div class="comparison-cell col-other">Existing SEMrush customers who want AI visibility alongside traditional SEO</div>
-      </div>
-      <div class="comparison-row" role="row">
-        <div class="comparison-cell label" role="rowheader">Investment</div>
-        <div class="comparison-cell col-waypoint highlight">From $25,000 · fixed fee</div>
-        <div class="comparison-cell col-other">Enterprise pricing · custom contracts</div>
-        <div class="comparison-cell col-other">$139/mo + $99/mo AI add-on</div>
-      </div>
-      <div class="comparison-row" role="row">
-        <div class="comparison-cell label" role="rowheader">What you get</div>
-        <div class="comparison-cell col-waypoint highlight">Expert-interpreted audit · written findings · sequenced playbook · Kevin’s senior judgment</div>
-        <div class="comparison-cell col-other">Dashboard · raw data · requires your team to interpret and act</div>
-        <div class="comparison-cell col-other">Weekly score updates · brand mentions · no implementation guidance</div>
-      </div>
-      <div class="comparison-row" role="row">
-        <div class="comparison-cell label" role="rowheader">Engines tracked</div>
-        <div class="comparison-cell col-waypoint">Claude + GPT-4o · 40 real buyer queries per scan</div>
-        <div class="comparison-cell col-other">10+ engines · 400M+ prompts · continuous monitoring</div>
-        <div class="comparison-cell col-other">ChatGPT, Perplexity, Google AI Overviews · weekly refresh</div>
-      </div>
-      <div class="comparison-row" role="row">
-        <div class="comparison-cell label" role="rowheader">Implementation</div>
-        <div class="comparison-cell col-waypoint highlight">Included · expert implementation guidance alongside the findings</div>
-        <div class="comparison-cell col-other">Not included · platform only</div>
-        <div class="comparison-cell col-other">Not included · platform only</div>
-      </div>
-    </div>
-    <p class="comparison-note">Profound and SEMrush are excellent platforms for organizations with dedicated AEO teams. Waypoint exists for organizations that don’t have that team — and don’t need to build one.</p>
-  </div>
-</section>
+  </section>
 
 <!-- PROBLEMS WE SOLVE -->
 <section id="problems" aria-labelledby="problems-heading">
@@ -1591,51 +1864,61 @@ footer {
       <div>
         <div class="eyebrow">Problems We Solve</div>
         <h2 class="section-h" id="problems-heading">
-          If this sounds familiar,<br>time to <em>talk.</em>
+          The questions<br><em>we answer.</em>
         </h2>
       </div>
-      <p class="problems-intro">These are the questions that keep marketing leaders up at night. They're also the ones Open Road Analytics has spent a career answering.</p>
+      <p class="problems-intro">These are the measurement gaps that show up in boardrooms, budget reviews, and Monday morning standups. They're solvable — with the right framework and someone who's solved them before.</p>
     </div>
     <div class="problems-grid" role="list">
 
-      <article class="problem-card reveal" role="listitem">
-        <div class="problem-q">"Our CMO asks what's working and it takes two weeks to answer."</div>
-        <p class="problem-a">Disconnected platforms, conflicting metrics, and manual reporting mean decisions get made on last quarter's data — or gut feel. By the time the answer arrives, the market has moved.</p>
-        <div class="problem-tag">Measurement Architecture</div>
+      <!-- AI VISIBILITY PROBLEMS -->
+      <article class="problem-card problem-card-ai reveal" role="listitem">
+        <div class="problem-tag">// AI Visibility</div>
+        <div class="problem-q">"When someone asks AI for a recommendation in our category, our competitor shows up. We don't."</div>
+        <div class="problem-a">AI engines cite the brands with the right content structure, third-party signals, and buyer-aligned language. This is measurable — and fixable. Waypoint tells you exactly where the gap is and what to do first.</div>
+        <div class="problem-area">AI Search Visibility · Waypoint Audit</div>
       </article>
 
+      <article class="problem-card problem-card-ai reveal" role="listitem">
+        <div class="problem-tag">// AI Visibility</div>
+        <div class="problem-q">"We're investing in content and SEO but have no idea how any of it translates to AI search."</div>
+        <div class="problem-a">Traditional SEO and AI visibility are related but not the same. A brand can rank on Google and be invisible in ChatGPT. Understanding the gap — and measuring improvement over time — requires a different diagnostic entirely.</div>
+        <div class="problem-area">AI Visibility Measurement · Waypoint Score™</div>
+      </article>
+
+      <!-- DIVIDER -->
+      <div class="problems-divider" aria-hidden="true">
+        <span class="problems-divider-line"></span>
+        <span class="problems-divider-label">// Analytics & Measurement</span>
+        <span class="problems-divider-line"></span>
+      </div>
+
+      <!-- ANALYTICS PROBLEMS -->
       <article class="problem-card reveal" role="listitem">
-        <div class="problem-q">"Sales ignores our leads. Marketing says they're qualified. Nobody agrees."</div>
-        <p class="problem-a">Without a shared MQL definition, a lead scoring algorithm, and data connecting behavior to intent, marketing and sales will always argue. The disconnect costs pipeline — and trust.</p>
-        <div class="problem-tag">Lead Scoring · Alignment</div>
+        <div class="problem-q">"Our CMO asks what's working and it takes two weeks to answer."</div>
+        <div class="problem-a">Disconnected platforms, conflicting metrics, and manual reporting mean decisions get made on last quarter's data — or gut feel. By the time the answer arrives, the moment has passed.</div>
+        <div class="problem-area">Measurement Architecture</div>
       </article>
 
       <article class="problem-card reveal" role="listitem">
         <div class="problem-q">"We can't tell the board which channels are actually driving revenue."</div>
-        <p class="problem-a">Last-click attribution is lying to you. Multi-touch models, marketing mix modeling, and proper data infrastructure are how organizations move from reporting activity to proving impact.</p>
-        <div class="problem-tag">Attribution · ROI</div>
+        <div class="problem-a">Last-click attribution is lying to you. Multi-touch models, marketing mix modeling, and proper data infrastructure are how organizations move from reporting activity to proving impact.</div>
+        <div class="problem-area">Attribution · ROI</div>
+      </article>
+
+      <article class="problem-card reveal" role="listitem">
+        <div class="problem-q">"Sales ignores our leads. Marketing says they're qualified. Nobody agrees."</div>
+        <div class="problem-a">Without a shared MQL definition, a lead scoring algorithm, and data connecting behavior to intent, marketing and sales will always argue. The disconnect costs pipeline — and trust.</div>
+        <div class="problem-area">Lead Scoring · Alignment</div>
       </article>
 
       <article class="problem-card reveal" role="listitem">
         <div class="problem-q">"Our data lives in six platforms and none of them talk to each other."</div>
-        <p class="problem-a">GA4, Marketo, Salesforce, your CDP, your BI tool — each with different definitions, different numbers, different truths. A unified data strategy ends the argument once and for all.</p>
-        <div class="problem-tag">Data Infrastructure · CDP</div>
+        <div class="problem-a">GA4, your CRM, your CDP, your BI tool — each with different definitions, different numbers, different truths. A unified data strategy ends the argument and makes every downstream decision cleaner.</div>
+        <div class="problem-area">Data Infrastructure · CDP</div>
       </article>
 
-      <article class="problem-card reveal" role="listitem">
-        <div class="problem-q">"We're running ABM programs but have no idea if they're moving pipeline."</div>
-        <p class="problem-a">Account-based marketing without account-level measurement is expensive guesswork. Territory performance, intent signal integration, and pipeline influence attribution are what make ABM defensible.</p>
-        <div class="problem-tag">ABM · Pipeline Analytics</div>
-      </article>
-
-      <article class="problem-card reveal" role="listitem">
-        <div class="problem-q">"We're investing in AI across marketing but can't prove any of it is working."</div>
-        <p class="problem-a">AI agents are running. Content is being generated. Media is being bought autonomously. But without a measurement framework — KPIs, attribution, governance standards — you're flying blind at scale.</p>
-        <div class="problem-tag">AI Performance · AEO</div>
-      </article>
-
-    </div>
-  </div>
+    </div></div>
 </section>
 
 <!-- ENGAGEMENT MODEL -->
@@ -1645,10 +1928,10 @@ footer {
       <div>
         <div class="eyebrow">How We Work</div>
         <h2 class="section-h" id="engagement-heading">
-          A clear path from<br><em>diagnosis to momentum.</em>
+          Three phases.<br><em>Each one builds on the last.</em>
         </h2>
       </div>
-      <p class="section-intro">Every engagement follows a three-phase model — designed to deliver value immediately and build toward lasting capability. You can start at any phase, but most clients begin with the Audit.</p>
+      <p class="section-intro">The Audit tells you what's true. The Build fixes it. The Fractional Director makes it last. Most clients start with the Audit — because you can't build what you haven't diagnosed.</p>
     </div>
     <div class="engagement-steps" role="list">
 
@@ -1656,7 +1939,7 @@ footer {
         <div class="step-num">1</div>
         <div class="step-phase">Phase One</div>
         <div class="step-name">The Audit</div>
-        <p class="step-desc">A comprehensive 6-week diagnostic across 7 areas of marketing measurement. Maps what exists, identifies what's broken, and prioritizes what to fix. You receive a written findings report, gap analysis, 90-day roadmap, and executive presentation deck — everything needed to act.</p>
+        <p class="step-desc">A focused 6-week diagnostic across your measurement infrastructure. You leave with a written findings report, gap analysis, 90-day roadmap, and an executive deck — everything you need to know what to fix and in what order.</p>
         <div class="step-detail">Fixed Fee · Starting at $25,000 · 6 Weeks</div>
       </div>
 
@@ -1664,7 +1947,7 @@ footer {
         <div class="step-num">2</div>
         <div class="step-phase">Phase Two</div>
         <div class="step-name">The Build</div>
-        <p class="step-desc">Open Road Analytics implements the roadmap. KPI architecture, attribution modeling, data infrastructure, dashboard delivery, CRM and marketing automation integration. The measurement system that should have existed. Built to last. Not bolted on.</p>
+        <p class="step-desc">The roadmap gets built. KPI architecture, attribution modeling, data infrastructure, dashboard delivery, CRM and marketing automation integration. Built to last — not patched together.</p>
         <div class="step-detail">Fixed Fee · Scoped on Engagement · 6–8 Weeks</div>
       </div>
 
@@ -1672,7 +1955,7 @@ footer {
         <div class="step-num">3</div>
         <div class="step-phase">Phase Three</div>
         <div class="step-name">Fractional Analytics Director</div>
-        <p class="step-desc">Ongoing embedded analytics leadership on a monthly retainer — reporting to the CMO, owning measurement strategy, guiding technology decisions, and developing internal teams. Senior leadership without the full-time hire.</p>
+        <p class="step-desc">Embedded analytics leadership on retainer. Strategy, technology decisions, team development — senior judgment, available when you need it, without the full-time overhead.</p>
         <div class="step-detail">Monthly Retainer · Scoped to Need</div>
       </div>
 
@@ -1688,10 +1971,10 @@ footer {
         <div class="eyebrow">Services</div>
         <!-- H2 — keyword rich -->
         <h2 class="section-h" id="services-heading">
-          AI visibility and analytics<br>consulting that <em>performs.</em>
+          We answer three questions<br>every client <em>needs answered.</em>
         </h2>
       </div>
-      <p class="section-intro">From AI search visibility diagnostics to marketing measurement frameworks — senior analytics expertise for organizations that need senior analytics expertise scaled to the size of the engagement.</p>
+      <p class="section-intro">Can AI discover your business? Can it verify you're trustworthy? Can it recommend you with confidence? From there, the engagement is scoped to what actually needs to change.</p>
     </div>
 
     <!-- GEO answer capsule — invisible to visitors, cited by AI engines -->
@@ -1705,49 +1988,37 @@ footer {
         <div class="svc-badge">Waypoint™</div>
         <div class="svc-n">01</div>
         <h3 class="svc-name">AI Search Visibility & Waypoint Audit</h3>
-        <p class="svc-desc">The only expert-interpreted AI visibility diagnostic built for mid-market companies. Waypoint measures exactly how ChatGPT, Claude, and Perplexity see your brand — across 40 buyer queries, 2 engines, 3 dimensions — and delivers a written audit with a sequenced playbook. Not a dashboard. A decision.</p>
+        <p class="svc-desc">Waypoint measures how ChatGPT, Claude, and Perplexity see your brand — across real buyer queries, two engines, three dimensions. The output is a written audit with a sequenced playbook. Expert-interpreted findings you can act on immediately.</p>
       </article>
 
       <article class="svc reveal" role="listitem">
         <div class="svc-n">02</div>
-        <h3 class="svc-name">Agentic AI Performance Audit</h3>
-        <p class="svc-desc">Your AI programs are running. Do you know if they're working? This audit covers AI attribution, output quality governance, AEO visibility across ChatGPT and Perplexity, and ROI modeling for autonomous marketing systems. Research shows nearly 90% of organizations deploying AI in marketing have no measurement framework. That gap is the opportunity.</p>
-      </article>
-
-      <article class="svc reveal" role="listitem">
-        <div class="svc-n">03</div>
         <h3 class="svc-name">Measurement Strategy & KPI Design</h3>
         <p class="svc-desc">End-to-end KPI frameworks, attribution modeling, and reporting architecture that connects every marketing dollar to a business outcome.</p>
       </article>
 
       <article class="svc reveal" role="listitem">
-        <div class="svc-n">04</div>
+        <div class="svc-n">03</div>
         <h3 class="svc-name">ABM & B2B Pipeline Analytics</h3>
         <p class="svc-desc">Account-based measurement, territory and pipeline influence reporting, lead scoring algorithm design, and ABM platform evaluation including DemandBase and 6Sense.</p>
       </article>
 
       <article class="svc reveal" role="listitem">
-        <div class="svc-n">05</div>
+        <div class="svc-n">04</div>
         <h3 class="svc-name">Marketing Data Infrastructure</h3>
         <p class="svc-desc">CDP selection, data layer design, tagging governance, and pipeline architecture that makes clean, trusted data the default — not the exception.</p>
       </article>
 
       <article class="svc reveal" role="listitem">
-        <div class="svc-n">06</div>
+        <div class="svc-n">05</div>
         <h3 class="svc-name">Executive Reporting & BI</h3>
         <p class="svc-desc">Power BI, Domo, and GA4 implementations with CMO-ready storytelling — including AI program performance dashboards that translate agent activity into board-level decisions.</p>
       </article>
 
       <article class="svc reveal" role="listitem">
-        <div class="svc-n">07</div>
-        <h3 class="svc-name">Analytics Practice Build</h3>
-        <p class="svc-desc">Org design, hiring frameworks, and capability roadmaps for building or scaling in-house analytics teams — built to scale from day one.</p>
-      </article>
-
-      <article class="svc reveal" role="listitem">
-        <div class="svc-n">08</div>
+        <div class="svc-n">06</div>
         <h3 class="svc-name">Fractional Analytics Director</h3>
-        <p class="svc-desc">Analytics leadership on retainer — reporting to the CMO, owning measurement strategy, guiding technology decisions, and developing internal teams. Without the full-time hire.</p>
+        <p class="svc-desc">Senior analytics leadership on retainer. Strategy ownership, technology guidance, team development — embedded in your organization, scoped to what you need.</p>
       </article>
 
     </div>
@@ -1842,10 +2113,10 @@ footer {
       <div>
         <div class="eyebrow">Selected Work</div>
         <h2 class="section-h" id="work-heading">
-          Results that<br><em>speak for themselves.</em>
+          Selected work.<br><em>Real outcomes.</em>
         </h2>
       </div>
-      <div class="work-count">5 Case Studies</div>
+      <div class="work-count">5 Engagements</div>
     </div>
 
     <div class="cases" role="list">
@@ -1855,7 +2126,7 @@ footer {
         <div class="case-n">001</div>
         <div>
           <div class="case-client">Global Financial Services Firm</div>
-          <div class="case-scope">Marketing Data Strategy · GA4 · Marketo · Google Marketing Platform · Cvent · UTM Architecture · Americas · EMEA · APAC</div>
+          <div class="case-scope">Unified measurement infrastructure across three continents — one source of truth for Americas, EMEA, and APAC</div>
           <p class="case-desc">Three global regions. Four disconnected marketing platforms. Zero shared definition of what a conversion even meant. The CMO was walking into board meetings with numbers that marketing, finance, and sales all disputed — because each team was pulling from a different system with a different methodology. The fix required more than technology. It required building a single measurement architecture that every region agreed to operate within — standardized UTM taxonomy, unified event tracking, and an integrated data pipeline connecting GA4, Marketo, Google Marketing Platform, and Cvent for the first time. When it was done, the CMO had one number. Everyone trusted it.</p>
         </div>
         <div class="case-outcomes">
@@ -1871,7 +2142,7 @@ footer {
         <div class="case-n">002</div>
         <div>
           <div class="case-client">Fortune 50 Technology Enterprise</div>
-          <div class="case-scope">Global Analytics Practice Build · $1B+ Media · Campaign Attribution · Performance Reporting · 40+ Markets</div>
+          <div class="case-scope">Attribution framework for $1B+ in global media spend — campaign performance connected to revenue across 40+ markets</div>
           <p class="case-desc">A Fortune 50 technology company was spending over $1 billion annually on marketing across 40+ global markets with no consistent way to measure whether any of it was working. Different markets used different metrics. Different agencies reported different numbers. Leadership had no reliable view of global performance — and no framework to connect spend to outcomes. Starting with a small embedded team, built a full-service global analytics practice from the ground up — establishing standardized KPIs, a global data taxonomy, a unified performance reporting system, and an audience strategy integrated into planning and buying platforms. The organization went from arguing about data to making decisions with it.</p>
         </div>
         <div class="case-outcomes">
@@ -1887,7 +2158,7 @@ footer {
         <div class="case-n">003</div>
         <div>
           <div class="case-client">Global Financial Services Firm</div>
-          <div class="case-scope">Lead Scoring Algorithm · MQL/SQL Definition · Marketo · GA4 · Sales & Marketing Alignment</div>
+          <div class="case-scope">Lead scoring model that ended the sales and marketing alignment debate — MQL agreement reached in 6 weeks</div>
           <p class="case-desc">Sales wasn't following up on marketing leads — not because they were lazy, but because the leads weren't trustworthy. Marketing was passing anything that filled out a form. Sales had learned to ignore the queue. The underlying problem was structural: there was no shared definition of what a qualified lead actually meant, no behavioral scoring logic, and no integration between what people did on the website and how they were being prioritized in the CRM. Designed a lead scoring algorithm from scratch — combining GA4 behavioral signals with Marketo engagement data — and defined, for the first time, exactly what constituted an MQL versus an SQL. Implemented in production. Sales started working the leads.</p>
         </div>
         <div class="case-outcomes">
@@ -1903,7 +2174,7 @@ footer {
         <div class="case-n">004</div>
         <div>
           <div class="case-client">Global Financial Services Firm</div>
-          <div class="case-scope">ABM Measurement · Territory & Account Analytics · Pipeline Attribution · DemandBase · 6Sense Evaluation</div>
+          <div class="case-scope">ABM measurement program that made pipeline influence visible — territory performance tied to account-level intent signals</div>
           <p class="case-desc">The ABM program existed on paper. Budget was allocated. Campaigns were running. But when leadership asked whether it was working, nobody could answer. There was no account-level reporting, no territory performance view, no way to connect marketing activity to pipeline movement. The measurement infrastructure simply didn't exist. Built it from scratch — account and territory-level performance reporting, pipeline influence attribution, and intent signal integration. Also led the formal evaluation of DemandBase and 6Sense, assessing platform fit, integration requirements, and projected ROI to inform what would become a major technology investment decision.</p>
         </div>
         <div class="case-outcomes">
@@ -1919,7 +2190,7 @@ footer {
         <div class="case-n">005</div>
         <div>
           <div class="case-client">Leading Consumer Brands — B2C</div>
-          <div class="case-scope">Multi-Touch Attribution · Marketing Mix Modeling · Media Optimization · Competitive Intelligence</div>
+          <div class="case-scope">Multi-touch attribution and media mix model that redirected budget to what was actually driving revenue</div>
           <p class="case-desc">Consumer brands don't have the luxury of long sales cycles or clean CRM data. They have millions of touchpoints, fragmented media, and boards demanding proof that the marketing budget is working. Across engagements with several of America's most recognized consumer brands, the work spanned the full spectrum of B2C measurement challenges — building multi-touch attribution models using VisualIQ to connect media investment to sales, developing Marketing Mix Models that gave leadership a statistically defensible view of channel contribution to revenue, driving media optimization across complex multi-brand portfolios, and building competitive intelligence dashboard systems that turned reactive monitoring into a strategic advantage.</p>
         </div>
         <div class="case-outcomes">
@@ -1934,48 +2205,6 @@ footer {
   </div>
 </section>
 
-<!-- FAQ — GEO optimized with direct-answer formatting -->
-<section id="faq" aria-labelledby="faq-heading">
-  <div class="faq-wrap">
-    <div class="faq-inner">
-      <div>
-        <div class="eyebrow">FAQ</div>
-        <h2 class="section-h" id="faq-heading">
-          Questions worth<br>answering <em>directly.</em>
-        </h2>
-        <!-- GEO: supporting context paragraph AI engines can cite -->
-        <p style="margin-top:1.5rem; font-size:0.85rem; color:var(--body-mid); line-height:1.8; font-weight:300;">
-          Open Road Analytics is a premium marketing analytics consulting practice serving organizations across New York, New Jersey, and Connecticut. Expert analytics experience across Fortune 50 technology, global financial services, and leading B2B and B2C consumer brands. Engagements start at $25,000.
-        </p>
-      </div>
-      <div class="faq-list">
-        <details open>
-          <summary>What does a fractional marketing analytics consultant do?</summary>
-          <p>A fractional marketing analytics consultant builds the measurement infrastructure that connects marketing activity to revenue — KPI frameworks, attribution models, data pipelines, dashboards, and technology strategy — without the cost of a full-time hire. At the senior level this means embedding into the organization as an outsourced Head of Marketing Analytics, reporting directly to the CMO, and owning strategy, reporting, and team development on a retainer basis.</p>
-        </details>
-        <details>
-          <summary>How much does a marketing analytics audit cost?</summary>
-          <p>A Marketing Analytics Audit from Open Road Analytics starts from $25,000 — fixed fee, no hourly billing, 6-week engagement. The audit covers 7 areas including measurement architecture, attribution, data infrastructure, reporting, technology stack, team and process, and AI/AEO readiness. Deliverables include a written findings report, gap analysis, 90-day roadmap, tech stack recommendations, and a CMO-ready executive presentation deck. Every engagement is scoped to the specific problem — the conversation about investment happens after we understand what needs to be solved.</p>
-        </details>
-        <details>
-          <summary>Do you work with B2C consumer brands or only B2B?</summary>
-          <p>Both. Open Road Analytics has deep experience serving major B2C consumer brands across attribution modeling, marketing mix modeling, media optimization, and competitive intelligence — as well as B2B organizations including global financial services and Fortune 50 technology companies.</p>
-        </details>
-        <details>
-          <summary>What is ABM analytics and why does it matter?</summary>
-          <p>ABM analytics measures whether account-based marketing programs are actually influencing pipeline — territory and account-level performance reporting, attribution, intent signal integration, and lead scoring. Without it, B2B marketing teams spend significant budget on account targeting with no visibility into what's driving revenue. Open Road Analytics has built enterprise ABM measurement systems including lead scoring algorithm design and formal evaluation of DemandBase and 6Sense.</p>
-        </details>
-        <details>
-          <summary>How do you measure AI marketing program performance?</summary>
-          <p>By building KPI frameworks, attribution models, and governance standards specifically for AI-driven programs — demand gen agents, content automation, AI-powered media buying. Open Road Analytics also measures AEO: how often and accurately your brand appears in AI search engine responses from ChatGPT, Perplexity, and Google AI Overviews. Most organizations have no baseline for either. That's where the Agentic AI Performance Audit begins.</p>
-        </details>
-        <details>
-          <summary>Where are you based and do you work remotely?</summary>
-          <p>Open Road Analytics is based in the New York metro area and serves organizations across New York, New Jersey, and Connecticut in person — and is available nationwide for remote engagements. Most client work is a blend of both: discovery and key working sessions on-site, ongoing execution and reporting delivered remotely. Geography has never been a barrier to an engagement that's the right fit.</p>
-        </details>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- CONTACT -->
@@ -1983,11 +2212,11 @@ footer {
   <div class="contact-inner">
     <div class="contact-eyebrow">Ready when you are</div>
     <h2 class="contact-h" id="contact-heading">
-      Let's find out if<br>there's a <em>fit.</em>
+      Ready to know<br><em>where you stand?</em>
     </h2>
     <p class="contact-sub">
-      A 30-minute conversation is all it takes.<br>
-      No pitch. No proposal. Just an honest discussion about what's broken.
+      Run the free Waypoint scan and find out whether AI can discover, verify, and recommend your business. Or reach out directly — the first conversation is about your situation, not a pitch.
+      No pitch. Just an honest discussion about what's broken.
     </p>
     <a href="mailto:kevin@openroadanalytics.ai" class="btn-contact">Start the Conversation</a>
     <div class="contact-detail">kevin@openroadanalytics.ai · NY · NJ · CT · Remote Nationwide</div>
@@ -2047,6 +2276,32 @@ footer {
     });
   }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
   reveals.forEach(el => io.observe(el));
+
+var currentSlide=0,totalSlides=5;
+function goToSlide(n){
+  document.querySelectorAll('.carousel-slide').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.carousel-dot').forEach(function(d){d.classList.remove('active');});
+  document.querySelectorAll('.carousel-tab').forEach(function(t){t.classList.remove('active');});
+  var slides=document.querySelectorAll('.carousel-slide');
+  var dots=document.querySelectorAll('.carousel-dot');
+  var tabs=document.querySelectorAll('.carousel-tab');
+  if(slides[n])slides[n].classList.add('active');
+  if(dots[n])dots[n].classList.add('active');
+  if(tabs[n])tabs[n].classList.add('active');
+  currentSlide=n;
+}
+function nextSlide(){goToSlide((currentSlide+1)%totalSlides);}
+function prevSlide(){goToSlide((currentSlide-1+totalSlides)%totalSlides);}
+(function(){
+  var track=document.getElementById('carousel-track');
+  if(!track)return;
+  var sx=0;
+  track.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+  track.addEventListener('touchend',function(e){
+    var diff=sx-e.changedTouches[0].clientX;
+    if(Math.abs(diff)>50)diff>0?nextSlide():prevSlide();
+  },{passive:true});
+})();
 </script>
 </body>
 </html>

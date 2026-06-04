@@ -818,7 +818,7 @@ Return ONLY this JSON with no other text:
 // ── DIAGNOSTIC FRAMEWORK ─────────────────────────────────────────────────────
 const BUCKETS = {
   prompt: {
-    label: 'Primary Gap · Prompt Alignment',
+    label: 'Primary Gap · Discover',
     name: 'Your brand isn\'t speaking the language buyers use',
     desc: 'AI engines aren\'t connecting your brand to the queries buyers actually type. There\'s a vocabulary gap between how you describe yourself and how buyers search.',
     actions: [
@@ -826,11 +826,11 @@ const BUCKETS = {
       { text: '<strong>Rewrite your homepage and key landing pages</strong> to lead with buyer language, not brand language. If buyers ask "how do I fix [problem]" and your site talks about "delivering solutions," there\'s a gap AI engines can\'t bridge.' },
       { text: '<strong>Create content that mirrors the exact phrasing of the top 3 buyer queries</strong> — use those queries as H1 headings, article titles, and FAQ questions. AI engines learn to cite sources that match the vocabulary of the question.' }
     ],
-    measure: 'Re-run your Waypoint scan in 30 days. Target: +10-15 points on Prompt Alignment.',
+    measure: 'Re-run your Waypoint scan in 30 days. Target: +10-15 points on Discover.',
     threshold: 'prompt'
   },
   citation: {
-    label: 'Primary Gap · Citation Presence',
+    label: 'Primary Gap · Verify',
     name: 'AI engines lack third-party signals to cite you with confidence',
     desc: 'Your brand\'s own website accounts for only 5-10% of what AI engines reference. The other 90% comes from publishers, reviews, directories, and analyst coverage — and that\'s where you\'re underrepresented.',
     actions: [
@@ -838,11 +838,11 @@ const BUCKETS = {
       { text: '<strong>Identify which publications are citing your competitor</strong> and target them for coverage in the next 60 days. A single mention in a trusted industry publication can significantly increase your AI citation rate.' },
       { text: '<strong>Ensure your brand description is identical across all platforms</strong> — same name, category, and one-line description everywhere. Inconsistency creates uncertainty and reduces the confidence AI engines need to cite you.' }
     ],
-    measure: 'Re-run your Waypoint scan in 60 days. Citation presence takes time to build. Target: +10 points on Citation Presence.',
+    measure: 'Re-run your Waypoint scan in 60 days. Citation presence takes time to build. Target: +10 points on Verify.',
     threshold: 'citation'
   },
   answer: {
-    label: 'Primary Gap · Answer Readiness',
+    label: 'Primary Gap · Recommend',
     name: 'Your content isn\'t structured for AI extraction',
     desc: 'AI engines can only cite content they can reliably extract. Your current content structure isn\'t formatted in the way AI engines prefer to pull answers from.',
     actions: [
@@ -850,7 +850,7 @@ const BUCKETS = {
       { text: '<strong>Add FAQPage and HowTo schema markup</strong> to your highest-traffic pages. This signals to AI engines that your content is structured for direct extraction and significantly increases citation probability.' },
       { text: '<strong>Reformat your key content pages</strong> with question-based H2 headings and 40-80 word answer paragraphs that follow each heading. This is the format AI engines are trained to extract and cite as authoritative answers.' }
     ],
-    measure: 'Re-run your Waypoint scan in 30 days. Target: +10-15 points on Answer Readiness.',
+    measure: 'Re-run your Waypoint scan in 30 days. Target: +10-15 points on Recommend.',
     threshold: 'answer'
   }
 };
@@ -941,9 +941,9 @@ function renderResults(data,co,comp,openaiData,market){
   // Dimensions
   // Dimensions — dual bar (Claude + GPT)
   const DIMS=[
-    {id:'prompt_alignment',label:'Prompt Alignment',desc:'How well your brand language matches buyer queries'},
-    {id:'citation_presence',label:'Citation Presence',desc:'How often third parties reference your brand in AI'},
-    {id:'answer_readiness',label:'Answer Readiness',desc:'How well your content is structured for AI extraction'}
+    {id:'prompt_alignment',label:'Discover',desc:'Can AI find you when buyers search your category?'},
+    {id:'citation_presence',label:'Verify',desc:'Do independent sources validate your brand in AI searches?'},
+    {id:'answer_readiness',label:'Recommend',desc:'Can AI confidently answer questions about you?'}
   ];
   const container=document.getElementById('r-dims');
   container.innerHTML='';
@@ -1187,7 +1187,7 @@ function toggleFaq(header) {
         <div class="faq-scale-row"><span class="faq-scale-range low">25–49</span><span class="faq-scale-desc">AI has limited signals about your brand. Appears inconsistently, often with caveats.</span></div>
         <div class="faq-scale-row"><span class="faq-scale-range zero">0–24</span><span class="faq-scale-desc">AI rarely or never mentions your brand in relevant searches. Effectively invisible.</span></div>
       </div>
-      <p class="faq-p faq-method">The Waypoint Score™ is the average of three dimension scores: Prompt Alignment, Citation Presence, and Answer Readiness. Each dimension is equally weighted.</p>
+      <p class="faq-p faq-method">The Waypoint Score™ is the average of three dimension scores: Discover, Verify, and Recommend. Each dimension is equally weighted.</p>
     </div>
   </div>
 
@@ -1222,11 +1222,11 @@ function toggleFaq(header) {
   <div class="faq-item">
     <div class="faq-item-header" onclick="toggleFaq(this)">
       <div class="faq-item-label">// Section 03</div>
-      <div class="faq-item-title">Prompt Alignment — What It Measures</div>
+      <div class="faq-item-title">Discover — What It Measures</div>
       <div class="faq-item-toggle">+</div>
     </div>
     <div class="faq-item-body">
-      <p class="faq-p"><strong>Prompt Alignment measures whether your brand's language matches how buyers actually search.</strong> AI engines cite brands whose content vocabulary mirrors the queries buyers type. If buyers ask "best breakfast tacos Austin" and your website talks about "artisanal morning cuisine," AI can't connect the two.</p>
+      <p class="faq-p"><strong>Discover measures whether AI surfaces your brand when buyers search your category.</strong> AI engines cite brands whose content vocabulary mirrors the queries buyers type. If buyers ask "best breakfast tacos Austin" and your website talks about "artisanal morning cuisine," AI can't connect the two.</p>
       <div class="faq-dim-example">
         <div class="faq-dim-scores">
           <div class="faq-dim-score-row"><span class="faq-brand-a">Taco Tornado</span><span class="faq-dscore signal">68</span></div>
@@ -1242,11 +1242,11 @@ function toggleFaq(header) {
   <div class="faq-item">
     <div class="faq-item-header" onclick="toggleFaq(this)">
       <div class="faq-item-label">// Section 04</div>
-      <div class="faq-item-title">Citation Presence — What It Measures</div>
+      <div class="faq-item-title">Verify — What It Measures</div>
       <div class="faq-item-toggle">+</div>
     </div>
     <div class="faq-item-body">
-      <p class="faq-p"><strong>Citation Presence measures how much independent third-party evidence AI engines have to back up a mention of your brand.</strong> AI engines don't just repeat your website — they weight external sources like review platforms, press coverage, directories, and industry publications far more heavily than anything you publish yourself.</p>
+      <p class="faq-p"><strong>Verify measures how much independent third-party evidence AI engines have to back up a mention of your brand.</strong> AI engines don't just repeat your website — they weight external sources like review platforms, press coverage, directories, and industry publications far more heavily than anything you publish yourself.</p>
       <div class="faq-dim-example">
         <div class="faq-dim-scores">
           <div class="faq-dim-score-row"><span class="faq-brand-a">Taco Tornado</span><span class="faq-dscore signal">59</span></div>
@@ -1262,11 +1262,11 @@ function toggleFaq(header) {
   <div class="faq-item">
     <div class="faq-item-header" onclick="toggleFaq(this)">
       <div class="faq-item-label">// Section 05</div>
-      <div class="faq-item-title">Answer Readiness — What It Measures</div>
+      <div class="faq-item-title">Recommend — What It Measures</div>
       <div class="faq-item-toggle">+</div>
     </div>
     <div class="faq-item-body">
-      <p class="faq-p"><strong>Answer Readiness measures whether your content is structured so AI engines can actually extract and cite it.</strong> AI engines don't browse — they extract. Content that is formatted as direct answers to specific questions gets cited. Content that requires navigation, interpretation, or reading between the lines gets ignored.</p>
+      <p class="faq-p"><strong>Recommend measures whether your content is structured so AI engines can actually extract and cite it.</strong> AI engines don't browse — they extract. Content that is formatted as direct answers to specific questions gets cited. Content that requires navigation, interpretation, or reading between the lines gets ignored.</p>
       <div class="faq-dim-example">
         <div class="faq-dim-scores">
           <div class="faq-dim-score-row"><span class="faq-brand-a">Taco Tornado</span><span class="faq-dscore signal">56</span></div>
@@ -1299,7 +1299,7 @@ function toggleFaq(header) {
       <div class="faq-formula">
         <div class="faq-formula-line"><span class="faq-formula-label">Average</span><span class="faq-formula-val">Add up all 6 raw scores ÷ 6</span></div>
         <div class="faq-formula-line"><span class="faq-formula-label">Normalize</span><span class="faq-formula-val">(Average ÷ 10) × 100 = dimension score out of 100</span></div>
-        <div class="faq-formula-line total"><span class="faq-formula-label">Final Score</span><span class="faq-formula-val">(Prompt Alignment + Citation Presence + Answer Readiness) ÷ 3</span></div>
+        <div class="faq-formula-line total"><span class="faq-formula-label">Final Score</span><span class="faq-formula-val">(Discover + Verify + Recommend) ÷ 3</span></div>
       </div>
       <div class="faq-calc-example">
         <div class="faq-calc-row">Taco Tornado: (68 + 59 + 56) ÷ 3 = <strong>61</strong></div>
@@ -1318,7 +1318,7 @@ function toggleFaq(header) {
     <div class="faq-item-body">
       <p class="faq-p">After scoring, Waypoint identifies your single most impactful gap — the one dimension where improvement will move your score the most. It then gives you three specific actions to address it.</p>
       <p class="faq-p">The diagnostic looks at your three dimension scores and finds the weakest one. That becomes your primary gap. The actions are sequenced by impact — the highest-ROI change first.</p>
-      <p class="faq-p">For Burrito Rocket, the weakest dimension is Citation Presence (38). The primary gap diagnosis: <em>"AI engines lack the third-party signals to recommend you with confidence."</em> The first action: complete all directory profiles and request reviews — because one verified Yelp review carries more AI weight than any website update.</p>
+      <p class="faq-p">For Burrito Rocket, the weakest dimension is Verify (38). The primary gap diagnosis: <em>"AI engines lack the third-party signals to recommend you with confidence."</em> The first action: complete all directory profiles and request reviews — because one verified Yelp review carries more AI weight than any website update.</p>
       <p class="faq-p">The baseline date stamps when the scan ran. Re-run in 30 days to measure improvement.</p>
     </div>
   </div>

@@ -108,6 +108,15 @@ exports.handler = async (event) => {
     const anthropicKey = process.env.ANTHROPIC_API_KEY;
     const openaiKey = process.env.OPENAI_API_KEY;
 
+    // Guard: validate prompts arrived intact
+    if (!prompts || !Array.isArray(prompts.pa) || !Array.isArray(prompts.cp) || !Array.isArray(prompts.ar)) {
+      return {
+        statusCode: 400,
+        headers: corsHeaders,
+        body: JSON.stringify({ error: 'Scan could not generate queries. Please try again.' })
+      };
+    }
+
     const allPrompts = [...prompts.pa, ...prompts.cp, ...prompts.ar];
     const dimSize = prompts.pa.length;
 

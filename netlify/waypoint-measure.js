@@ -27,23 +27,34 @@ function parseResponse(text, company, competitor) {
   const coCited = coIdx !== -1;
   const compCited = compIdx !== -1;
 
-  // Strip markdown and extract clean snippet around brand mention
+  // Extract clean snippet centered on the brand mention
   function extractSnippet(fullText, idx) {
     if (idx === -1) return '';
-    // Strip markdown headers, bold, bullets before extracting
+    // Strip markdown and filler phrases
     const clean = fullText
-      .replace(/#{1,6}\s+[^\n]*/g, '')  // remove ## headings
-      .replace(/\*\*([^*]+)\*\*/g, '$1') // remove **bold**
-      .replace(/\*([^*]+)\*/g, '$1')      // remove *italic*
-      .replace(/^[-*]\s+/gm, '')           // remove bullet points
-      .replace(/\n{2,}/g, ' ')             // collapse newlines
+      .replace(/#{1,6}\s+[^\n]*/g, '')
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/\*([^*]+)\*/g, '$1')
+      .replace(/^[-*]\s+/gm, '')
+      .replace(/\n{2,}/g, ' ')
+      .replace(/^(That's a great question!?\s*|Great question!?\s*|Sure!?\s*|Of course!?\s*)/i, '')
       .trim();
-    // Recalculate idx in cleaned text
+    // Find brand in cleaned text
     const brand = fullText.substring(idx, idx + 30).toLowerCase();
     const cleanIdx = clean.toLowerCase().indexOf(brand.substring(0, 15));
     const useIdx = cleanIdx !== -1 ? cleanIdx : 0;
-    const start = Math.max(0, useIdx - 30);
-    const end = Math.min(clean.length, useIdx + 130);
+    // Start just before the brand mention, snapped to word boundary
+    let start = Math.max(0, useIdx - 25);
+    if (start > 0) {
+      const nextSpace = clean.indexOf(' ', start);
+      if (nextSpace !== -1 && nextSpace < useIdx) start = nextSpace + 1;
+    }
+    // End after brand mention, snapped to word boundary  
+    let end = Math.min(clean.length, useIdx + 150);
+    if (end < clean.length) {
+      const prevSpace = clean.lastIndexOf(' ', end);
+      if (prevSpace > useIdx) end = prevSpace;
+    }
     let snippet = clean.substring(start, end).trim();
     if (start > 0) snippet = '...' + snippet;
     if (end < clean.length) snippet = snippet + '...';

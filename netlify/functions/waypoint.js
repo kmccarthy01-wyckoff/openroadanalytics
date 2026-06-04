@@ -54,18 +54,21 @@ exports.handler = async (event) => {
       messages: [{ role: 'user', content: body.openaiMessage }]
     });
 
-    const [claudeRes, openaiRes] = await Promise.all([
-      callAPI('api.anthropic.com', '/v1/messages', {
-        'x-api-key': anthropicKey,
-        'anthropic-version': '2023-06-01'
-      }, anthropicPayload),
-      callAPI('api.openai.com', '/v1/chat/completions', {
-        'Authorization': `Bearer ${openaiKey}`
-      }, openaiPayload)
-    ]);
+    const claudePromise = callAPI('api.anthropic.com', '/v1/messages', {
+      'x-api-key': anthropicKey,
+      'anthropic-version': '2023-06-01'
+    }, anthropicPayload);
+
+    const openaiPromise = body.openaiMessage
+      ? callAPI('api.openai.com', '/v1/chat/completions', {
+          'Authorization': `Bearer ${openaiKey}`
+        }, openaiPayload)
+      : Promise.resolve(null);
+
+    const [claudeRes, openaiRes] = await Promise.all([claudePromise, openaiPromise]);
 
     const claudeText = claudeRes.content?.[0]?.text || '';
-    const openaiText = openaiRes.choices?.[0]?.message?.content || '';
+    const openaiText = openaiRes?.choices?.[0]?.message?.content || '';
 
     return {
       statusCode: 200,

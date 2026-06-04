@@ -182,6 +182,8 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
 .powered span{color:rgba(245,242,236,0.38);}
 
 .methodology-strip{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,242,236,0.3);padding:6px 0 10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.read-disclaimer{font-size:11px;line-height:1.6;color:rgba(245,242,236,0.5);background:rgba(200,80,42,0.06);border:1px solid rgba(200,80,42,0.2);border-left:2px solid #c8502a;border-radius:4px;padding:11px 14px;margin:0 0 1.2rem;}
+.read-disclaimer strong{color:rgba(245,242,236,0.85);font-weight:500;}
 .meth-dot{width:4px;height:4px;border-radius:50%;background:rgba(45,115,88,0.8);flex-shrink:0;}
 .meth-sep{color:rgba(245,242,236,0.15);}
 .full-report-bridge{background:rgba(200,80,42,0.08);border:1px solid rgba(200,80,42,0.25);border-radius:6px;padding:1rem 1.2rem;margin-bottom:0.9rem;}
@@ -460,7 +462,7 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
   <div class="scr hidden" id="s-results">
     <div class="r-hdr">
       <div>
-        <div class="r-title">Waypoint Report</div>
+        <div class="r-title">Waypoint Visibility Read</div>
         <div class="r-sub" id="r-names">— vs —</div>
       </div>
       <div class="r-badge">Scan Complete</div>
@@ -469,7 +471,7 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
     <div class="methodology-strip">
       <span class="meth-dot"></span>9 buyer queries · 2 engines · 18 real AI responses
       <span class="meth-sep">·</span>Citation detected · position + sentiment scored
-      <span class="meth-sep">·</span>3 dimensions equally weighted → Waypoint Score™
+      <span class="meth-sep">·</span>3 dimensions equally weighted → Visibility Read
       <span class="meth-sep">·</span>Proprietary methodology © Open Road Analytics
     </div>
 
@@ -513,6 +515,8 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
       </div>
     </div>
 
+    <div class="read-disclaimer">This is your <strong>Visibility Read</strong> — a directional estimate based on live AI responses, generated in seconds. The full <strong>Waypoint Audit</strong> measures your actual review, directory, and press signals against our scoring rubric — analyst-verified, not inferred.</div>
+
     <div class="dims" id="r-dims"></div>
 
     <!-- TOP PROMPTS -->
@@ -554,14 +558,14 @@ body{background:#0e0d0b;font-family:'DM Sans',sans-serif;font-weight:300;min-hei
       </div>
       <div class="tease-block-overlay">
         <div style="text-align:center;">
-          <div class="tease-block-lock" style="margin-bottom:8px;">Your score is live. Here’s what’s driving it.</div>
+          <div class="tease-block-lock" style="margin-bottom:8px;">Your Visibility Read is live. The Audit verifies it against real evidence.</div>
           <button class="tease-cta-btn" onclick="showLeadModal()">Get the Full Waypoint Audit →</button>
         </div>
       </div>
     </div>
 
     <div class="full-report-bridge">
-      <div class="bridge-score-line">Score: <span id="bridge-score">—</span>/100 · <span id="bridge-market">—</span></div>
+      <div class="bridge-score-line">Visibility Read: <span id="bridge-score">—</span>/100 · <span id="bridge-market">—</span></div>
       <div class="bridge-copy">Waypoint delivers expert-interpreted findings and a clear path to act on them.</div>
       <button class="cta" onclick="showLeadModal()">Get Your Full Waypoint Report →</button>
     </div>
@@ -1154,7 +1158,7 @@ function toggleFaq(header) {
 
   <div class="faq-header">
     <div class="faq-eyebrow">// How Waypoint Works</div>
-    <h2 class="faq-title">Understanding Your<br><em>Waypoint Score™</em></h2>
+    <h2 class="faq-title">Understanding Your<br><em>Visibility Read</em></h2>
     <p class="faq-sub">A plain-English explanation of every number, every section, and exactly how the score was calculated — using a fictional example so the math is clear.</p>
   </div>
 
@@ -1179,11 +1183,11 @@ function toggleFaq(header) {
   <div class="faq-item">
     <div class="faq-item-header" onclick="toggleFaq(this)">
       <div class="faq-item-label">// Section 01</div>
-      <div class="faq-item-title">The Waypoint Score™</div>
+      <div class="faq-item-title">The Visibility Read</div>
       <div class="faq-item-toggle">+</div>
     </div>
     <div class="faq-item-body">
-      <p class="faq-p">The Waypoint Score™ is a single number from 0 to 100 that measures how visible and credible your brand is when real buyers ask AI assistants about your category.</p>
+      <p class="faq-p">The Visibility Read is a single number from 0 to 100 that estimates how visible your brand is when real buyers ask AI assistants about your category. It is a directional read generated in seconds from live AI responses — not the analyst-verified Waypoint Score™ that comes with the full Audit.</p>
       <p class="faq-p">A score of <strong>61</strong> means: when someone asks Claude or ChatGPT about fast casual restaurants in Austin, Taco Tornado appears in roughly 6 out of 10 relevant AI responses — and when it does appear, it's usually mentioned positively and relatively early in the answer.</p>
       <p class="faq-p">A score of <strong>44</strong> means: Burrito Rocket appears in fewer than half of relevant AI responses, and when it does appear, it's often mentioned with less confidence or later in the response than its competitor.</p>
       <div class="faq-score-scale">
@@ -1192,7 +1196,7 @@ function toggleFaq(header) {
         <div class="faq-scale-row"><span class="faq-scale-range low">25–49</span><span class="faq-scale-desc">AI has limited signals about your brand. Appears inconsistently, often with caveats.</span></div>
         <div class="faq-scale-row"><span class="faq-scale-range zero">0–24</span><span class="faq-scale-desc">AI rarely or never mentions your brand in relevant searches. Effectively invisible.</span></div>
       </div>
-      <p class="faq-p faq-method">The Waypoint Score™ is the average of three dimension scores: Discover, Verify, and Recommend. Each dimension is equally weighted.</p>
+      <p class="faq-p faq-method">The Visibility Read is the average of three dimension scores: Discover, Verify, and Recommend, each equally weighted. The full Waypoint Audit scores these same three dimensions against measured evidence — your actual review volume, directory listings, and press coverage — rather than inferring them from AI responses.</p>
     </div>
   </div>
 
@@ -1209,7 +1213,7 @@ function toggleFaq(header) {
         <div class="faq-step"><span class="faq-step-n">01</span><div><strong>Claude generates 9 buyer queries</strong> — real questions a person would actually type into an AI assistant when researching your category. Some are unbranded category searches. Some mention your brand directly. All are written the way a real buyer searches, not the way a marketer describes their product.</div></div>
         <div class="faq-step"><span class="faq-step-n">02</span><div><strong>All 9 queries are fired at two AI engines simultaneously</strong> — Claude (Anthropic) and GPT-4o (OpenAI). That produces 18 real AI responses, each answered independently.</div></div>
         <div class="faq-step"><span class="faq-step-n">03</span><div><strong>Each response is analyzed for three things:</strong> Was your brand mentioned? Where in the response (first or buried)? Was the context positive, neutral, or negative?</div></div>
-        <div class="faq-step"><span class="faq-step-n">04</span><div><strong>Scores are calculated per dimension</strong> and averaged across both engines. The three dimension scores are averaged to produce the final Waypoint Score™.</div></div>
+        <div class="faq-step"><span class="faq-step-n">04</span><div><strong>Scores are calculated per dimension</strong> and averaged across both engines. The three dimension scores are averaged to produce your final Visibility Read.</div></div>
       </div>
       <div class="faq-example-box">
         <div class="faq-ex-label">Example query generated for Taco Tornado scan:</div>
@@ -1351,7 +1355,7 @@ function toggleFaq(header) {
   <!-- TRADEMARK NOTE -->
   <div class="faq-trademark">
     <div class="faq-tm-label">// Methodology</div>
-    <p class="faq-tm-text">The Waypoint Score™ is a proprietary AI visibility measurement methodology developed by Open Road Analytics. Scores are derived from live AI engine responses at the time of the scan and may vary on re-scan as AI model behavior evolves. The scoring algorithm — measuring citation detection, mention position, sentiment context, and third-party signal presence across multiple AI engines — is the intellectual property of Open Road Analytics.</p>
+    <p class="faq-tm-text">The Visibility Read is a directional estimate derived from live AI engine responses at the time of the scan and may vary on re-scan as AI model behavior evolves. The analyst-verified Waypoint Score™, delivered with the full Waypoint Audit, additionally measures review, directory, and press signals against a documented scoring rubric. The scoring algorithm — measuring citation detection, mention position, sentiment context, and third-party signal presence across multiple AI engines — is the intellectual property of Open Road Analytics.</p>
   </div>
 
 </div>
